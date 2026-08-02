@@ -18,12 +18,13 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as HiringRouteImport } from './routes/hiring'
 import { Route as LearningRouteImport } from './routes/learning'
-import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as NewsroomRouteImport } from './routes/newsroom'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SalunnnRouteImport } from './routes/salunnn'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as MarketplaceIndexRouteImport } from './routes/marketplace.index'
+import { Route as MarketplaceSlugRouteImport } from './routes/marketplace.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,11 +71,6 @@ const LearningRoute = LearningRouteImport.update({
   path: '/learning',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MarketplaceRoute = MarketplaceRouteImport.update({
-  id: '/marketplace',
-  path: '/marketplace',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const NewsroomRoute = NewsroomRouteImport.update({
   id: '/newsroom',
   path: '/newsroom',
@@ -100,6 +96,16 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketplaceIndexRoute = MarketplaceIndexRouteImport.update({
+  id: '/marketplace/',
+  path: '/marketplace/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketplaceSlugRoute = MarketplaceSlugRouteImport.update({
+  id: '/marketplace/$slug',
+  path: '/marketplace/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -111,12 +117,13 @@ export interface FileRoutesByFullPath {
   '/faqs': typeof FaqsRoute
   '/hiring': typeof HiringRoute
   '/learning': typeof LearningRoute
-  '/marketplace': typeof MarketplaceRoute
   '/newsroom': typeof NewsroomRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/salunnn': typeof SalunnnRoute
   '/terms': typeof TermsRoute
+  '/marketplace/$slug': typeof MarketplaceSlugRoute
+  '/marketplace/': typeof MarketplaceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -128,12 +135,13 @@ export interface FileRoutesByTo {
   '/faqs': typeof FaqsRoute
   '/hiring': typeof HiringRoute
   '/learning': typeof LearningRoute
-  '/marketplace': typeof MarketplaceRoute
   '/newsroom': typeof NewsroomRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/salunnn': typeof SalunnnRoute
   '/terms': typeof TermsRoute
+  '/marketplace/$slug': typeof MarketplaceSlugRoute
+  '/marketplace': typeof MarketplaceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -146,12 +154,13 @@ export interface FileRoutesById {
   '/faqs': typeof FaqsRoute
   '/hiring': typeof HiringRoute
   '/learning': typeof LearningRoute
-  '/marketplace': typeof MarketplaceRoute
   '/newsroom': typeof NewsroomRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/salunnn': typeof SalunnnRoute
   '/terms': typeof TermsRoute
+  '/marketplace/$slug': typeof MarketplaceSlugRoute
+  '/marketplace/': typeof MarketplaceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -165,12 +174,13 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/hiring'
     | '/learning'
-    | '/marketplace'
     | '/newsroom'
     | '/pricing'
     | '/privacy'
     | '/salunnn'
     | '/terms'
+    | '/marketplace/$slug'
+    | '/marketplace/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -182,12 +192,13 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/hiring'
     | '/learning'
-    | '/marketplace'
     | '/newsroom'
     | '/pricing'
     | '/privacy'
     | '/salunnn'
     | '/terms'
+    | '/marketplace/$slug'
+    | '/marketplace'
   id:
     | '__root__'
     | '/'
@@ -199,12 +210,13 @@ export interface FileRouteTypes {
     | '/faqs'
     | '/hiring'
     | '/learning'
-    | '/marketplace'
     | '/newsroom'
     | '/pricing'
     | '/privacy'
     | '/salunnn'
     | '/terms'
+    | '/marketplace/$slug'
+    | '/marketplace/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -217,12 +229,13 @@ export interface RootRouteChildren {
   FaqsRoute: typeof FaqsRoute
   HiringRoute: typeof HiringRoute
   LearningRoute: typeof LearningRoute
-  MarketplaceRoute: typeof MarketplaceRoute
   NewsroomRoute: typeof NewsroomRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   SalunnnRoute: typeof SalunnnRoute
   TermsRoute: typeof TermsRoute
+  MarketplaceSlugRoute: typeof MarketplaceSlugRoute
+  MarketplaceIndexRoute: typeof MarketplaceIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -290,13 +303,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearningRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/marketplace': {
-      id: '/marketplace'
-      path: '/marketplace'
-      fullPath: '/marketplace'
-      preLoaderRoute: typeof MarketplaceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/newsroom': {
       id: '/newsroom'
       path: '/newsroom'
@@ -332,6 +338,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketplace/': {
+      id: '/marketplace/'
+      path: '/marketplace'
+      fullPath: '/marketplace/'
+      preLoaderRoute: typeof MarketplaceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketplace/$slug': {
+      id: '/marketplace/$slug'
+      path: '/marketplace/$slug'
+      fullPath: '/marketplace/$slug'
+      preLoaderRoute: typeof MarketplaceSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -345,12 +365,13 @@ const rootRouteChildren: RootRouteChildren = {
   FaqsRoute: FaqsRoute,
   HiringRoute: HiringRoute,
   LearningRoute: LearningRoute,
-  MarketplaceRoute: MarketplaceRoute,
   NewsroomRoute: NewsroomRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   SalunnnRoute: SalunnnRoute,
   TermsRoute: TermsRoute,
+  MarketplaceSlugRoute: MarketplaceSlugRoute,
+  MarketplaceIndexRoute: MarketplaceIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
