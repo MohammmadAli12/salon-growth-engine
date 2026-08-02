@@ -10,7 +10,7 @@ export const primaryNav = [
   { to: "/community", label: "Community" },
   { to: "/learning", label: "Learning" },
   { to: "/hiring", label: "Hiring" },
-  { to: "/salunnn", label: "Salunnn App" },
+
 ] as const;
 
 export const moreNav = [
