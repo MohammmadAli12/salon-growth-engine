@@ -79,7 +79,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
         { label: "Blog / offers section", cells: ["no", "no", "yes"] },
         { label: "On-page SEO setup", cells: ["Basic", "Standard", "Advanced + schema"] },
         { label: "WhatsApp + call buttons", cells: ["yes", "yes", "yes"] },
-        { label: "Analytics setup", cells: ["yes", "yes", "yes + goals"] },
+        { label: "Analytics setup", cells: ["yes", "yes", "Advanced + goals"] },
         { label: "Price", cells: ["Shared on consultation", "Shared on consultation", "Shared on consultation"] },
       ],
     },
