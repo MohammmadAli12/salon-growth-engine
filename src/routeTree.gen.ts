@@ -24,6 +24,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SalunnnRouteImport } from './routes/salunnn'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as MarketplaceIndexRouteImport } from './routes/marketplace.index'
+import { Route as MarketplaceSlugRouteImport } from './routes/marketplace.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -100,6 +101,11 @@ const MarketplaceIndexRoute = MarketplaceIndexRouteImport.update({
   path: '/marketplace/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketplaceSlugRoute = MarketplaceSlugRouteImport.update({
+  id: '/marketplace/$slug',
+  path: '/marketplace/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/salunnn': typeof SalunnnRoute
   '/terms': typeof TermsRoute
+  '/marketplace/$slug': typeof MarketplaceSlugRoute
   '/marketplace/': typeof MarketplaceIndexRoute
 }
 export interface FileRoutesByTo {
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/salunnn': typeof SalunnnRoute
   '/terms': typeof TermsRoute
+  '/marketplace/$slug': typeof MarketplaceSlugRoute
   '/marketplace': typeof MarketplaceIndexRoute
 }
 export interface FileRoutesById {
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/salunnn': typeof SalunnnRoute
   '/terms': typeof TermsRoute
+  '/marketplace/$slug': typeof MarketplaceSlugRoute
   '/marketplace/': typeof MarketplaceIndexRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/salunnn'
     | '/terms'
+    | '/marketplace/$slug'
     | '/marketplace/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/salunnn'
     | '/terms'
+    | '/marketplace/$slug'
     | '/marketplace'
   id:
     | '__root__'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/salunnn'
     | '/terms'
+    | '/marketplace/$slug'
     | '/marketplace/'
   fileRoutesById: FileRoutesById
 }
@@ -222,6 +234,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SalunnnRoute: typeof SalunnnRoute
   TermsRoute: typeof TermsRoute
+  MarketplaceSlugRoute: typeof MarketplaceSlugRoute
   MarketplaceIndexRoute: typeof MarketplaceIndexRoute
 }
 
@@ -332,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketplace/$slug': {
+      id: '/marketplace/$slug'
+      path: '/marketplace/$slug'
+      fullPath: '/marketplace/$slug'
+      preLoaderRoute: typeof MarketplaceSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -350,18 +370,9 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SalunnnRoute: SalunnnRoute,
   TermsRoute: TermsRoute,
+  MarketplaceSlugRoute: MarketplaceSlugRoute,
   MarketplaceIndexRoute: MarketplaceIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

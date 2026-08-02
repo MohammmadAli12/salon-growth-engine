@@ -5,11 +5,13 @@ import { GhostButton, GradientButton } from "@/components/layout/buttons";
 import { ServiceIcon } from "@/components/sections/ServicesGrid";
 import { PackageComparison } from "@/components/sections/PackageComparison";
 import { services } from "@/lib/site-data";
+import type { ServiceItem } from "@/lib/site-data";
 import { serviceDetails } from "@/lib/marketplace-data";
+import type { ServiceDetail } from "@/lib/marketplace-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/marketplace/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { service: ServiceItem; detail: ServiceDetail } => {
     const service = services.find((s) => s.slug === params.slug);
     const detail = serviceDetails[params.slug];
     if (!service || !detail) throw notFound();
@@ -55,7 +57,10 @@ function ServiceNotFound() {
 }
 
 function ServiceDetailPage() {
-  const { service, detail } = Route.useLoaderData();
+  const { service, detail } = Route.useLoaderData() as {
+    service: ServiceItem;
+    detail: ServiceDetail;
+  };
 
   return (
     <>
