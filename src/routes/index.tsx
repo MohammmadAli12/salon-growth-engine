@@ -1,24 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PageShell } from "@/components/layout/PageShell";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Salunnn — Grow Your Salon with AI & Marketing" },
+      {
+        name: "description",
+        content:
+          "AI-powered salon growth platform: websites, Google SEO, local SEO, Instagram and Google Ads, WhatsApp API and automation for salon owners.",
+      },
+      { property: "og:title", content: "Salunnn — Grow Your Salon with AI & Marketing" },
+      {
+        property: "og:description",
+        content:
+          "AI-powered salon growth platform: websites, SEO, ads, WhatsApp API and automation for salon owners.",
+      },
+      { property: "og:url", content: "/" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <PageShell
+      eyebrow="AI powered salon growth platform"
+      title="Grow Your Salon with AI & Marketing"
+      description="We help salons get more clients, increase revenue, build their brand and automate their business. Home sections are being built one at a time — the Navbar is next."
+    />
   );
 }
