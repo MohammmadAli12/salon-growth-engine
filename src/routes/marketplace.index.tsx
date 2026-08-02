@@ -41,12 +41,13 @@ function MarketplaceIndex() {
         description="Start with the outcome you need. Open a service to see how it works, what you get and how the packages compare."
       />
 
+      <Section className="space-y-14 md:space-y-16">
       {serviceCategories.map((category) => {
         const items = services.filter((s) => serviceDetails[s.slug]?.category === category.id);
         if (items.length === 0) return null;
 
         return (
-          <Section key={category.id} className="py-10 md:py-12">
+          <div key={category.id}>
             <header className="flex flex-col gap-1.5 md:flex-row md:items-baseline md:justify-between">
               <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">
                 {category.label}
@@ -101,9 +102,10 @@ function MarketplaceIndex() {
                 </article>
               ))}
             </div>
-          </Section>
+          </div>
         );
       })}
+      </Section>
 
       <CtaBand />
     </>
