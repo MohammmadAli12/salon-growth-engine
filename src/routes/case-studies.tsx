@@ -1,19 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout/PageShell";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { CaseStudyList } from "@/components/sections/CaseStudyList";
+import { CtaBand } from "@/components/sections/CtaBand";
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
-      { title: "Salon Case Studies — Real Revenue Growth | Salunnn" },
+      { title: "Salon Case Studies — Real Growth Results | Salunnn" },
       {
         name: "description",
         content:
-          "See how salons grew revenue with Salunnn: Xing Salon went from ₹2.4L to ₹8L per month through websites, SEO and paid ads.",
+          "See how salons grew bookings, revenue and repeat clients with Salunnn websites, local SEO, ads and WhatsApp automation.",
       },
-      { property: "og:title", content: "Salon Case Studies — Real Revenue Growth | Salunnn" },
+      { property: "og:title", content: "Salon Case Studies — Real Growth Results | Salunnn" },
       {
         property: "og:description",
-        content: "Documented salon growth stories, marketing process and client reviews.",
+        content: "Bookings, cost per lead and retention numbers from real salon engagements.",
       },
       { property: "og:url", content: "/case-studies" },
     ],
@@ -24,10 +26,14 @@ export const Route = createFileRoute("/case-studies")({
 
 function CaseStudies() {
   return (
-    <PageShell
-      eyebrow="Case studies"
-      title="Proof, not promises"
-      description="Success stories, client results, our marketing process, before vs after numbers and revenue growth."
-    />
+    <>
+      <PageHeader
+        eyebrow="Case studies"
+        title="Growth we can show you the numbers for"
+        description="Each engagement below is reported against bookings, cost per lead and repeat visits — the only metrics that pay salon bills."
+      />
+      <CaseStudyList heading={false} />
+      <CtaBand />
+    </>
   );
 }

@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout/PageShell";
+import { Hero } from "@/components/sections/Hero";
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { WhySalunnn } from "@/components/sections/WhySalunnn";
+import { CaseStudyList } from "@/components/sections/CaseStudyList";
+import { AppPreview } from "@/components/sections/AppPreview";
+import { CommunityPreview, LearningPreview } from "@/components/sections/CommunityLearning";
+import { HiringPreview } from "@/components/sections/HiringPreview";
+import { CtaBand } from "@/components/sections/CtaBand";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,16 +26,35 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Salunnn",
+          description: "AI-powered salon growth platform.",
+          url: "/",
+          areaServed: "IN",
+        }),
+      },
+    ],
   }),
   component: Index,
 });
 
 function Index() {
   return (
-    <PageShell
-      eyebrow="AI powered salon growth platform"
-      title="Grow Your Salon with AI & Marketing"
-      description="We help salons get more clients, increase revenue, build their brand and automate their business. Home sections are being built one at a time — the Navbar is next."
-    />
+    <>
+      <Hero />
+      <ServicesGrid />
+      <WhySalunnn />
+      <CaseStudyList limit={3} />
+      <AppPreview />
+      <CommunityPreview />
+      <LearningPreview />
+      <HiringPreview />
+      <CtaBand />
+    </>
   );
 }
