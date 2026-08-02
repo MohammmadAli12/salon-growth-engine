@@ -30,8 +30,8 @@ export function Section({
   id,
 }: {
   children: ReactNode;
-  className?: string;
-  id?: string;
+  className?: string | undefined;
+  id?: string | undefined;
 }) {
   return (
     <section id={id} className={cn("px-5 py-section md:px-10 lg:py-section-lg", className)}>
@@ -40,7 +40,7 @@ export function Section({
   );
 }
 
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
+export function Eyebrow({ children, className }: { children: ReactNode; className?: string | undefined }) {
   return (
     <p
       className={cn(
@@ -64,7 +64,7 @@ export function SectionHeading({
   title: ReactNode;
   description?: ReactNode;
   align?: "left" | "center";
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <header
@@ -93,7 +93,7 @@ export function SurfaceCard({
   interactive = true,
 }: {
   children: ReactNode;
-  className?: string;
+  className?: string | undefined;
   interactive?: boolean;
 }) {
   return (
@@ -117,7 +117,7 @@ export function Pill({
 }: {
   children: ReactNode;
   accent?: AccentName;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <span

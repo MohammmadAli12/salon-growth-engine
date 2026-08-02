@@ -5,9 +5,9 @@ import { Section, SectionHeading, accentSoftBg, accentText } from "@/components/
 import { services } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
-type IconMap = Record<string, React.ComponentType<{ className?: string }>>;
+type IconMap = Record<string, React.ComponentType<{ className?: string | undefined }>>;
 
-export function ServiceIcon({ name, className }: { name: string; className?: string }) {
+export function ServiceIcon({ name, className }: { name: string; className?: string | undefined }) {
   const Icon = (Icons as unknown as IconMap)[name] ?? Icons.Sparkles;
   return <Icon className={className} />;
 }

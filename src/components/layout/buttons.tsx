@@ -9,7 +9,7 @@ export function GradientButton({
 }: {
   to: string;
   children: React.ReactNode;
-  className?: string;
+  className?: string | undefined;
   size?: "sm" | "md";
 }) {
   return (
@@ -34,7 +34,7 @@ export function GhostButton({
 }: {
   to: string;
   children: React.ReactNode;
-  className?: string;
+  className?: string | undefined;
   size?: "sm" | "md";
 }) {
   return (
