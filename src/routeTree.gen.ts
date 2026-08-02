@@ -10,33 +10,219 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as HiringRouteImport } from './routes/hiring'
+import { Route as LearningRouteImport } from './routes/learning'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as NewsroomRouteImport } from './routes/newsroom'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SalunnnRouteImport } from './routes/salunnn'
+import { Route as TermsRouteImport } from './routes/terms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HiringRoute = HiringRouteImport.update({
+  id: '/hiring',
+  path: '/hiring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningRoute = LearningRouteImport.update({
+  id: '/learning',
+  path: '/learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsroomRoute = NewsroomRouteImport.update({
+  id: '/newsroom',
+  path: '/newsroom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalunnnRoute = SalunnnRouteImport.update({
+  id: '/salunnn',
+  path: '/salunnn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
+  '/hiring': typeof HiringRoute
+  '/learning': typeof LearningRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/newsroom': typeof NewsroomRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/salunnn': typeof SalunnnRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
+  '/hiring': typeof HiringRoute
+  '/learning': typeof LearningRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/newsroom': typeof NewsroomRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/salunnn': typeof SalunnnRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/case-studies': typeof CaseStudiesRoute
+  '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
+  '/hiring': typeof HiringRoute
+  '/learning': typeof LearningRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/newsroom': typeof NewsroomRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/salunnn': typeof SalunnnRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/case-studies'
+    | '/community'
+    | '/contact'
+    | '/faqs'
+    | '/hiring'
+    | '/learning'
+    | '/marketplace'
+    | '/newsroom'
+    | '/pricing'
+    | '/privacy'
+    | '/salunnn'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/case-studies'
+    | '/community'
+    | '/contact'
+    | '/faqs'
+    | '/hiring'
+    | '/learning'
+    | '/marketplace'
+    | '/newsroom'
+    | '/pricing'
+    | '/privacy'
+    | '/salunnn'
+    | '/terms'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/case-studies'
+    | '/community'
+    | '/contact'
+    | '/faqs'
+    | '/hiring'
+    | '/learning'
+    | '/marketplace'
+    | '/newsroom'
+    | '/pricing'
+    | '/privacy'
+    | '/salunnn'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CareersRoute: typeof CareersRoute
+  CaseStudiesRoute: typeof CaseStudiesRoute
+  CommunityRoute: typeof CommunityRoute
+  ContactRoute: typeof ContactRoute
+  FaqsRoute: typeof FaqsRoute
+  HiringRoute: typeof HiringRoute
+  LearningRoute: typeof LearningRoute
+  MarketplaceRoute: typeof MarketplaceRoute
+  NewsroomRoute: typeof NewsroomRoute
+  PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SalunnnRoute: typeof SalunnnRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +234,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hiring': {
+      id: '/hiring'
+      path: '/hiring'
+      fullPath: '/hiring'
+      preLoaderRoute: typeof HiringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learning': {
+      id: '/learning'
+      path: '/learning'
+      fullPath: '/learning'
+      preLoaderRoute: typeof LearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsroom': {
+      id: '/newsroom'
+      path: '/newsroom'
+      fullPath: '/newsroom'
+      preLoaderRoute: typeof NewsroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salunnn': {
+      id: '/salunnn'
+      path: '/salunnn'
+      fullPath: '/salunnn'
+      preLoaderRoute: typeof SalunnnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CareersRoute: CareersRoute,
+  CaseStudiesRoute: CaseStudiesRoute,
+  CommunityRoute: CommunityRoute,
+  ContactRoute: ContactRoute,
+  FaqsRoute: FaqsRoute,
+  HiringRoute: HiringRoute,
+  LearningRoute: LearningRoute,
+  MarketplaceRoute: MarketplaceRoute,
+  NewsroomRoute: NewsroomRoute,
+  PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
+  SalunnnRoute: SalunnnRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
