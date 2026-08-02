@@ -10,7 +10,7 @@ export function GradientButton({
   to: string;
   children: React.ReactNode;
   className?: string | undefined;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | undefined;
 }) {
   return (
     <Link
@@ -35,7 +35,7 @@ export function GhostButton({
   to: string;
   children: React.ReactNode;
   className?: string | undefined;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | undefined;
 }) {
   return (
     <Link

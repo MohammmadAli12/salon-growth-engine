@@ -60,10 +60,10 @@ export function SectionHeading({
   align = "left",
   className,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: ReactNode;
-  description?: ReactNode;
-  align?: "left" | "center";
+  description?: ReactNode | undefined;
+  align?: "left" | "center" | undefined;
   className?: string | undefined;
 }) {
   return (
@@ -94,7 +94,7 @@ export function SurfaceCard({
 }: {
   children: ReactNode;
   className?: string | undefined;
-  interactive?: boolean;
+  interactive?: boolean | undefined;
 }) {
   return (
     <div
@@ -116,7 +116,7 @@ export function Pill({
   className,
 }: {
   children: ReactNode;
-  accent?: AccentName;
+  accent?: AccentName | undefined;
   className?: string | undefined;
 }) {
   return (
