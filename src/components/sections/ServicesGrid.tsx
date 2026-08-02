@@ -33,7 +33,8 @@ export function ServicesGrid({
         {services.map((service, index) => (
           <Link
             key={service.slug}
-            to="/marketplace"
+            to="/marketplace/$slug"
+            params={{ slug: service.slug }}
             className={cn(
               "group flex flex-col rounded-lg border border-border/70 bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-card",
               index === 0 && "lg:col-span-2",
@@ -53,10 +54,11 @@ export function ServicesGrid({
             <h3 className="mt-4 font-display text-lg font-bold text-foreground">{service.title}</h3>
             <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">{service.blurb}</p>
             <span className="mt-4 flex items-center justify-between text-sm font-semibold text-foreground">
-              {service.price}
+              View packages
               <ArrowRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary" />
             </span>
           </Link>
+
         ))}
       </div>
     </Section>
