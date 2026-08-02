@@ -83,7 +83,7 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="absolute -bottom-6 -left-4 hidden rounded-xl border border-border/70 bg-card p-4 shadow-card sm:block">
+            <div className="absolute -bottom-10 -left-4 hidden rounded-xl border border-border/70 bg-card p-4 shadow-card lg:block">
               <p className="text-xs font-semibold text-teal">WhatsApp automation</p>
               <p className="mt-1 text-sm text-foreground">27 reminders sent today</p>
             </div>
