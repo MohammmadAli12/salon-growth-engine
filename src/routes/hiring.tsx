@@ -1,22 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageShell } from "@/components/layout/PageShell";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { HiringPreview } from "@/components/sections/HiringPreview";
+import { Section, SectionHeading } from "@/components/layout/primitives";
+import { CtaBand } from "@/components/sections/CtaBand";
 
 export const Route = createFileRoute("/hiring")({
   head: () => ({
     meta: [
-      { title: "Salon Hiring — Find Stylists, Beauticians & Managers | Salunnn" },
+      { title: "Salon Jobs & Hiring — Stylists, Therapists, Managers | Salunnn" },
       {
         name: "description",
         content:
-          "Post jobs, search a salon resume database and hire stylists, beauticians, receptionists and managers with an employer dashboard.",
+          "Salon job openings across India and hiring support for salon owners: role scoping, pay benchmarks and candidate screening.",
       },
       {
         property: "og:title",
-        content: "Salon Hiring — Find Stylists, Beauticians & Managers | Salunnn",
+        content: "Salon Jobs & Hiring — Stylists, Therapists, Managers | Salunnn",
       },
       {
         property: "og:description",
-        content: "Hiring tools built for salons: post a job, review applicants, hire faster.",
+        content: "Open roles at salons on Salunnn, plus hiring support for owners.",
       },
       { property: "og:url", content: "/hiring" },
     ],
@@ -27,10 +30,33 @@ export const Route = createFileRoute("/hiring")({
 
 function Hiring() {
   return (
-    <PageShell
-      eyebrow="Hiring"
-      title="Staff your salon with the right people"
-      description="Find staff, post jobs, browse resumes and manage applicants from one dashboard."
-    />
+    <>
+      <PageHeader
+        eyebrow="Hiring"
+        title="Staffing is a growth problem too"
+        description="A great campaign is wasted if there's no chair free. We help salons write roles, benchmark pay and screen candidates who actually show up."
+      />
+      <HiringPreview heading={false} />
+      <Section className="bg-card">
+        <SectionHeading
+          eyebrow="For owners"
+          title="Hiring support, not a job board dump"
+          description="We publish your role to the Salunnn network, screen applicants against your service mix, and hand over a shortlist with trial-day notes."
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          {[
+            { t: "Role & pay scoping", b: "Benchmarks by city, service mix and experience band." },
+            { t: "Screening calls", b: "We speak to every applicant before you see them." },
+            { t: "Trial-day structure", b: "A scorecard so trials compare fairly across candidates." },
+          ].map((item) => (
+            <article key={item.t} className="rounded-lg border border-border/70 bg-background p-5">
+              <h3 className="font-display text-base font-bold text-foreground">{item.t}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.b}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
+      <CtaBand />
+    </>
   );
 }
