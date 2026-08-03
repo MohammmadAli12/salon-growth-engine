@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Check, ChevronDown, Minus, Plus, ShoppingCart, X } from "lucide-react";
 import { Section, accentSoftBg, accentText } from "@/components/layout/primitives";
 import { ServiceIcon } from "@/components/sections/ServicesGrid";
-import { services, type Service } from "@/lib/site-data";
+import { services, type ServiceItem } from "@/lib/site-data";
 import { serviceCategories, serviceDetails, type PackageTable } from "@/lib/marketplace-data";
 import { cn } from "@/lib/utils";
 
@@ -121,7 +121,7 @@ function ServiceRow({
   cart,
   onAdd,
 }: {
-  service: Service;
+  service: ServiceItem;
   open: boolean;
   onToggle: () => void;
   cart: CartItem[];
