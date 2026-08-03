@@ -172,7 +172,7 @@
 
   /* Abril Fatface is reserved for main titles; sub-headings stay on Inter. */
   h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-brand);
     font-weight: 400;
     letter-spacing: -0.01em;
   }
