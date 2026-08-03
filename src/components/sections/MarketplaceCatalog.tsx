@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ChevronDown, Minus, Plus, ShoppingCart, X } from "lucide-react";
+import { Check, ChevronDown, Minus, ShoppingCart, X } from "lucide-react";
 import { Section, accentSoftBg, accentText } from "@/components/layout/primitives";
 import { ServiceIcon } from "@/components/sections/ServicesGrid";
 import { services, type AccentName, type ServiceItem } from "@/lib/site-data";
@@ -63,7 +63,7 @@ export function MarketplaceCatalog() {
     <>
       <Section className="pb-28">
         {/* Category switcher */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
           {serviceCategories.map((category) => {
             const meta = categoryMeta[category.id] ?? { icon: "Sparkles", accent: "indigo" as AccentName };
             const count = services.filter((s) => serviceDetails[s.slug]?.category === category.id).length;
@@ -75,31 +75,31 @@ export function MarketplaceCatalog() {
                 onClick={() => selectCategory(category.id)}
                 aria-pressed={active}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg border bg-card px-4 py-3 text-left transition-all duration-300",
+                  "flex flex-col items-center gap-1.5 rounded-lg border bg-card px-1.5 py-2.5 text-center transition-all duration-300 sm:flex-row sm:items-center sm:gap-3 sm:px-4 sm:py-3 sm:text-left",
                   active
-                    ? "border-primary/30 shadow-card"
+                    ? "border-primary/40 shadow-card"
                     : "border-border/70 shadow-soft hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-card",
                 )}
               >
                 <span
                   className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-md",
+                    "flex size-7 shrink-0 items-center justify-center rounded-md sm:size-9",
                     accentSoftBg[meta.accent],
                   )}
                 >
-                  <ServiceIcon name={meta.icon} className={cn("size-4", accentText[meta.accent])} />
+                  <ServiceIcon name={meta.icon} className={cn("size-3.5 sm:size-4", accentText[meta.accent])} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold text-foreground">
+                  <span className="block text-[10px] font-semibold leading-tight text-foreground sm:truncate sm:text-sm">
                     {category.label}
                   </span>
-                  <span className="block text-xs text-muted-foreground">
+                  <span className="mt-0.5 block text-[9px] text-muted-foreground sm:mt-0 sm:text-xs">
                     {count} service{count === 1 ? "" : "s"}
                   </span>
                 </span>
                 <ChevronDown
                   className={cn(
-                    "size-4 shrink-0 text-muted-foreground transition-transform duration-300",
+                    "hidden size-4 shrink-0 text-muted-foreground transition-transform duration-300 sm:block",
                     active && "rotate-180 text-primary",
                   )}
                 />
@@ -108,36 +108,39 @@ export function MarketplaceCatalog() {
           })}
         </div>
 
+
         {/* Single shared content area */}
-        <div className="mt-5 overflow-hidden rounded-lg border border-primary/25 bg-card shadow-card">
-          <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-7">
+        <div className="mt-4 overflow-hidden rounded-lg border border-primary/25 bg-card shadow-card sm:mt-5">
+          <div className="flex items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5 md:px-7">
             <span className="flex min-w-0 items-center gap-3">
               <span
                 className={cn(
-                  "flex size-10 shrink-0 items-center justify-center rounded-md",
+                  "flex size-9 shrink-0 items-center justify-center rounded-md sm:size-10",
                   accentSoftBg[categoryMeta[openCategory]?.accent ?? "indigo"],
                 )}
               >
                 <ServiceIcon
                   name={categoryMeta[openCategory]?.icon ?? "Sparkles"}
-                  className={cn("size-5", accentText[categoryMeta[openCategory]?.accent ?? "indigo"])}
+                  className={cn("size-4 sm:size-5", accentText[categoryMeta[openCategory]?.accent ?? "indigo"])}
                 />
               </span>
               <span className="min-w-0">
-                <span className="block font-display text-lg font-bold text-foreground md:text-xl">
+                <span className="block font-display text-base font-bold text-foreground sm:text-lg md:text-xl">
                   {activeCategory?.label}
                 </span>
-                <span className="mt-0.5 block text-sm text-muted-foreground">
+                <span className="mt-0.5 block text-xs text-muted-foreground sm:text-sm">
                   {activeCategory?.description}
                 </span>
               </span>
             </span>
+            <ChevronDown className="size-4 shrink-0 rotate-180 text-primary" />
           </div>
 
           <div
             key={openCategory}
-            className="animate-fade-in space-y-4 border-t border-border/70 bg-background px-5 py-6 md:px-7"
+            className="animate-fade-in space-y-3 border-t border-border/70 bg-background px-3 py-4 sm:space-y-4 sm:px-5 sm:py-6 md:px-7"
           >
+
             {activeServices.map((service) => (
               <ServiceRow
                 key={service.slug}
@@ -188,45 +191,51 @@ function ServiceRow({
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-start gap-4 p-5 text-left"
+        className="w-full p-4 text-left sm:p-5"
       >
-        <span
-          className={cn(
-            "flex size-11 shrink-0 items-center justify-center rounded-md",
-            accentSoftBg[service.accent],
-          )}
-        >
-          <ServiceIcon name={service.icon} className={cn("size-5", accentText[service.accent])} />
+        <span className="flex items-start gap-3 sm:gap-4">
+          <span
+            className={cn(
+              "flex size-10 shrink-0 items-center justify-center rounded-md sm:size-11",
+              accentSoftBg[service.accent],
+            )}
+          >
+            <ServiceIcon name={service.icon} className={cn("size-4 sm:size-5", accentText[service.accent])} />
+          </span>
+
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-sm font-bold leading-tight text-foreground sm:text-lg">
+              {service.title}
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6">
+              {service.blurb}
+            </span>
+          </span>
+
+          <span
+            className={cn(
+              "inline-flex h-8 shrink-0 items-center gap-1 rounded-md border border-border bg-background px-2 text-[10px] leading-none font-semibold transition-colors sm:h-10 sm:gap-1.5 sm:px-3 sm:text-sm",
+              open ? "border-primary/40 text-primary" : "text-foreground",
+            )}
+          >
+            {open ? "Hide packages" : "Choose package"}
+            <ChevronDown className={cn("size-3.5 transition-transform duration-300 sm:size-4", open && "rotate-180")} />
+          </span>
         </span>
 
-        <span className="min-w-0 flex-1">
-          <span className="font-display text-lg font-bold text-foreground">{service.title}</span>
-          <span className="mt-1 block text-sm leading-6 text-muted-foreground">
-            {service.blurb}
-          </span>
-          <span className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-            {service.deliverables.slice(0, 3).map((d) => (
-              <span
-                key={d}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
-              >
-                <Check className={cn("size-3.5", accentText[service.accent])} />
-                {d}
-              </span>
-            ))}
-          </span>
-        </span>
-
-        <span
-          className={cn(
-            "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-sm font-semibold transition-colors",
-            open ? "border-primary/40 text-primary" : "text-foreground",
-          )}
-        >
-          {open ? "Hide packages" : "Choose package"}
-          <ChevronDown className={cn("size-4 transition-transform duration-300", open && "rotate-180")} />
+        <span className="mt-3 flex flex-wrap gap-2 sm:gap-x-4 sm:gap-y-1.5">
+          {service.deliverables.slice(0, 3).map((d) => (
+            <span
+              key={d}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border/70 px-2 py-1 text-[11px] font-medium text-muted-foreground sm:border-0 sm:px-0 sm:py-0 sm:text-xs"
+            >
+              <Check className={cn("size-3.5", accentText[service.accent])} />
+              {d}
+            </span>
+          ))}
         </span>
       </button>
+
 
       <div
         className={cn(
@@ -235,9 +244,9 @@ function ServiceRow({
         )}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-border/70 bg-background px-5 py-6">
+          <div className="border-t border-border/70 bg-background px-3 py-4 sm:px-5 sm:py-6">
             {cards.length === 3 ? (
-              <div className="grid gap-4 lg:grid-cols-3">
+              <div className="grid gap-3 sm:gap-4 lg:grid-cols-3">
                 {cards.map((card, i) => {
                   const id = `${service.slug}:${card.name}`;
                   const inCart = cart.some((item) => item.id === id);
@@ -247,13 +256,18 @@ function ServiceRow({
                       key={card.name}
                       style={open ? { animationDelay: `${i * 70}ms` } : undefined}
                       className={cn(
-                        "flex flex-col rounded-lg border bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card",
+                        "flex flex-col rounded-lg border bg-card p-4 shadow-soft transition-all duration-300 sm:p-5 sm:hover:-translate-y-1 sm:hover:shadow-card",
                         card.popular ? "border-primary/30" : "border-border/70",
                         open && "animate-fade-in",
                       )}
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <h4 className="font-display text-base font-bold text-foreground">
+                        <h4
+                          className={cn(
+                            "font-display text-sm font-bold sm:text-base",
+                            accentText[service.accent],
+                          )}
+                        >
                           {card.name}
                         </h4>
                         {card.popular ? (
@@ -268,21 +282,21 @@ function ServiceRow({
                           </span>
                         ) : null}
                       </div>
-                      <p className="mt-3 font-display text-2xl font-extrabold text-foreground numeric">
+                      <p className="mt-2 font-display text-xl font-extrabold text-foreground numeric sm:mt-3 sm:text-2xl">
                         {card.price}
                         {card.period ? (
-                          <span className="text-sm font-semibold text-muted-foreground">
+                          <span className="text-xs font-semibold text-muted-foreground sm:text-sm">
                             {card.period}
                           </span>
                         ) : null}
                       </p>
-                      <ul className="mt-4 flex-1 space-y-2">
+                      <ul className="mt-3 flex-1 space-y-1.5 sm:mt-4 sm:space-y-2">
                         {card.features.map((f) => (
                           <li
                             key={f}
-                            className="flex items-start gap-2 text-sm leading-6 text-muted-foreground"
+                            className="flex items-start gap-2 text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6"
                           >
-                            <Check className={cn("mt-1 size-3.5 shrink-0", accentText[service.accent])} />
+                            <Check className={cn("mt-0.5 size-3.5 shrink-0 sm:mt-1", accentText[service.accent])} />
                             {f}
                           </li>
                         ))}
@@ -291,10 +305,12 @@ function ServiceRow({
                         type="button"
                         onClick={() => onAdd({ id, service: service.title, pkg: card.name, price: priceLabel })}
                         className={cn(
-                          "mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md text-sm font-semibold transition-all duration-300",
+                          "mt-4 inline-flex h-10 w-full items-center justify-center gap-2 rounded-md text-xs font-semibold transition-all duration-300 sm:mt-5 sm:h-11 sm:text-sm",
                           inCart
                             ? "border border-border bg-background text-muted-foreground"
-                            : "bg-gradient-button text-primary-foreground shadow-soft hover:brightness-110",
+                            : card.popular
+                              ? "bg-gradient-button text-primary-foreground shadow-soft hover:brightness-110"
+                              : cn("border border-border bg-background hover:bg-accent/40", accentText[service.accent]),
                         )}
                       >
                         {inCart ? (
@@ -303,12 +319,13 @@ function ServiceRow({
                           </>
                         ) : (
                           <>
-                            <Plus className="size-4" /> Add to cart
+                            <ShoppingCart className="size-4" /> Add to cart
                           </>
                         )}
                       </button>
                     </div>
                   );
+
                 })}
               </div>
             ) : (
