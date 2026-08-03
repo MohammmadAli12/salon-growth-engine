@@ -244,9 +244,9 @@ function ServiceRow({
         )}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-border/70 bg-background px-5 py-6">
+          <div className="border-t border-border/70 bg-background px-3 py-4 sm:px-5 sm:py-6">
             {cards.length === 3 ? (
-              <div className="grid gap-4 lg:grid-cols-3">
+              <div className="grid gap-3 sm:gap-4 lg:grid-cols-3">
                 {cards.map((card, i) => {
                   const id = `${service.slug}:${card.name}`;
                   const inCart = cart.some((item) => item.id === id);
@@ -256,13 +256,18 @@ function ServiceRow({
                       key={card.name}
                       style={open ? { animationDelay: `${i * 70}ms` } : undefined}
                       className={cn(
-                        "flex flex-col rounded-lg border bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card",
+                        "flex flex-col rounded-lg border bg-card p-4 shadow-soft transition-all duration-300 sm:p-5 sm:hover:-translate-y-1 sm:hover:shadow-card",
                         card.popular ? "border-primary/30" : "border-border/70",
                         open && "animate-fade-in",
                       )}
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <h4 className="font-display text-base font-bold text-foreground">
+                        <h4
+                          className={cn(
+                            "font-display text-sm font-bold sm:text-base",
+                            accentText[service.accent],
+                          )}
+                        >
                           {card.name}
                         </h4>
                         {card.popular ? (
@@ -277,21 +282,21 @@ function ServiceRow({
                           </span>
                         ) : null}
                       </div>
-                      <p className="mt-3 font-display text-2xl font-extrabold text-foreground numeric">
+                      <p className="mt-2 font-display text-xl font-extrabold text-foreground numeric sm:mt-3 sm:text-2xl">
                         {card.price}
                         {card.period ? (
-                          <span className="text-sm font-semibold text-muted-foreground">
+                          <span className="text-xs font-semibold text-muted-foreground sm:text-sm">
                             {card.period}
                           </span>
                         ) : null}
                       </p>
-                      <ul className="mt-4 flex-1 space-y-2">
+                      <ul className="mt-3 flex-1 space-y-1.5 sm:mt-4 sm:space-y-2">
                         {card.features.map((f) => (
                           <li
                             key={f}
-                            className="flex items-start gap-2 text-sm leading-6 text-muted-foreground"
+                            className="flex items-start gap-2 text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6"
                           >
-                            <Check className={cn("mt-1 size-3.5 shrink-0", accentText[service.accent])} />
+                            <Check className={cn("mt-0.5 size-3.5 shrink-0 sm:mt-1", accentText[service.accent])} />
                             {f}
                           </li>
                         ))}
@@ -300,10 +305,12 @@ function ServiceRow({
                         type="button"
                         onClick={() => onAdd({ id, service: service.title, pkg: card.name, price: priceLabel })}
                         className={cn(
-                          "mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md text-sm font-semibold transition-all duration-300",
+                          "mt-4 inline-flex h-10 w-full items-center justify-center gap-2 rounded-md text-xs font-semibold transition-all duration-300 sm:mt-5 sm:h-11 sm:text-sm",
                           inCart
                             ? "border border-border bg-background text-muted-foreground"
-                            : "bg-gradient-button text-primary-foreground shadow-soft hover:brightness-110",
+                            : card.popular
+                              ? "bg-gradient-button text-primary-foreground shadow-soft hover:brightness-110"
+                              : cn("border border-border bg-background hover:bg-accent/40", accentText[service.accent]),
                         )}
                       >
                         {inCart ? (
@@ -312,12 +319,13 @@ function ServiceRow({
                           </>
                         ) : (
                           <>
-                            <Plus className="size-4" /> Add to cart
+                            <ShoppingCart className="size-4" /> Add to cart
                           </>
                         )}
                       </button>
                     </div>
                   );
+
                 })}
               </div>
             ) : (
