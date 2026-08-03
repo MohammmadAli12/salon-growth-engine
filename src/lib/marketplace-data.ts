@@ -29,6 +29,17 @@ export interface PackageTable {
   prices?: string[] | undefined;
 }
 
+export interface PackageCard {
+  /** Package name, verbatim from the owner pricing sheet. */
+  name: string;
+  /** Price, verbatim. */
+  price: string;
+  /** Optional billing suffix, e.g. "/month". */
+  period?: string | undefined;
+  features: string[];
+  popular?: boolean | undefined;
+}
+
 export interface ServiceDetail {
   slug: string;
   category: string;
@@ -39,6 +50,8 @@ export interface ServiceDetail {
   process: { title: string; body: string }[];
   faqs: { q: string; a: string }[];
   packages?: PackageTable | undefined;
+  /** Owner-supplied pricing cards. Takes precedence over the table. */
+  cards?: PackageCard[] | undefined;
 }
 
 export const serviceDetails: Record<string, ServiceDetail> = {
@@ -106,6 +119,26 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     faqs: [
       { q: "Do I keep ownership of the profile?", a: "Always. We work as a manager on your listing." },
       { q: "Can you remove bad reviews?", a: "Only policy-violating ones can be reported. We focus on out-reviewing them." },
+    ],
+    cards: [
+      {
+        name: "Setup",
+        price: "₹5,000",
+        features: ["Google Profile Setup", "Verification", "Basic Optimization"],
+      },
+      {
+        name: "Monthly Management",
+        price: "₹7,000",
+        period: "/month",
+        popular: true,
+        features: ["10 Creatives", "10 Posts", "Optimization"],
+      },
+      {
+        name: "Premium Monthly",
+        price: "₹10,000",
+        period: "/month",
+        features: ["20 Creatives", "20 Posts", "Full Optimization"],
+      },
     ],
     packages: {
       columns: ["Essential", "Growth", "Multi-Outlet"],

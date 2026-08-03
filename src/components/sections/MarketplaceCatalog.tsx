@@ -2,22 +2,43 @@ import { useState } from "react";
 import { Check, ChevronDown, Minus, Plus, ShoppingCart, X } from "lucide-react";
 import { Section, accentSoftBg, accentText } from "@/components/layout/primitives";
 import { ServiceIcon } from "@/components/sections/ServicesGrid";
-import { services, type ServiceItem } from "@/lib/site-data";
-import { serviceCategories, serviceDetails, type PackageTable } from "@/lib/marketplace-data";
+import { services, type AccentName, type ServiceItem } from "@/lib/site-data";
+import {
+  serviceCategories,
+  serviceDetails,
+  type PackageCard,
+  type PackageTable,
+} from "@/lib/marketplace-data";
 import { cn } from "@/lib/utils";
 
 type CartItem = { id: string; service: string; pkg: string; price: string };
 
-/** Turns a comparison table column into card deliverables. */
-function deliverablesFor(table: PackageTable, index: number): string[] {
-  return table.rows
-    .map((row) => {
-      const cell = row.cells[index] ?? "";
-      if (cell === "no" || cell === "-" || cell === "") return null;
-      if (cell === "yes") return row.label;
-      return `${row.label}: ${cell}`;
-    })
-    .filter((v): v is string => v !== null);
+const categoryMeta: Record<string, { icon: string; accent: AccentName }> = {
+  web: { icon: "Globe", accent: "indigo" },
+  search: { icon: "Search", accent: "teal" },
+  ads: { icon: "Target", accent: "magenta" },
+  automation: { icon: "Sparkles", accent: "lime" },
+  brand: { icon: "Palette", accent: "amber" },
+};
+
+/** Falls back to the comparison table when no owner pricing cards exist. */
+function cardsFor(detail: { cards?: PackageCard[] | undefined; packages?: PackageTable | undefined }): PackageCard[] {
+  if (detail.cards?.length) return detail.cards;
+  const table = detail.packages;
+  if (!table || table.columns.length !== 3) return [];
+  return table.columns.map((name, i) => ({
+    name,
+    price: table.prices?.[i] ?? "Price on consultation",
+    popular: i === 1,
+    features: table.rows
+      .map((row) => {
+        const cell = row.cells[i] ?? "";
+        if (cell === "no" || cell === "-" || cell === "") return null;
+        if (cell === "yes") return row.label;
+        return `${row.label}: ${cell}`;
+      })
+      .filter((v): v is string => v !== null),
+  }));
 }
 
 export function MarketplaceCatalog() {
@@ -25,8 +46,9 @@ export function MarketplaceCatalog() {
   const [openService, setOpenService] = useState<string | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const toggleCategory = (id: string) => {
-    setOpenCategory((prev) => (prev === id ? "" : id));
+  const selectCategory = (id: string) => {
+    if (id === openCategory) return;
+    setOpenCategory(id);
     setOpenService(null);
   };
 
@@ -34,76 +56,101 @@ export function MarketplaceCatalog() {
     setCart((prev) => (prev.some((i) => i.id === item.id) ? prev : [...prev, item]));
   };
 
+  const activeCategory = serviceCategories.find((c) => c.id === openCategory);
+  const activeServices = services.filter((s) => serviceDetails[s.slug]?.category === openCategory);
+
   return (
     <>
       <Section className="pb-28">
-        <div className="space-y-4">
+        {/* Category switcher */}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {serviceCategories.map((category) => {
-            const items = services.filter((s) => serviceDetails[s.slug]?.category === category.id);
-            if (items.length === 0) return null;
-            const expanded = openCategory === category.id;
-
+            const meta = categoryMeta[category.id] ?? { icon: "Sparkles", accent: "indigo" as AccentName };
+            const count = services.filter((s) => serviceDetails[s.slug]?.category === category.id).length;
+            const active = openCategory === category.id;
             return (
-              <div
+              <button
                 key={category.id}
+                type="button"
+                onClick={() => selectCategory(category.id)}
+                aria-pressed={active}
                 className={cn(
-                  "overflow-hidden rounded-lg border bg-card transition-all duration-300",
-                  expanded ? "border-primary/25 shadow-card" : "border-border/70 shadow-soft",
+                  "flex items-center gap-3 rounded-lg border bg-card px-4 py-3 text-left transition-all duration-300",
+                  active
+                    ? "border-primary/30 shadow-card"
+                    : "border-border/70 shadow-soft hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-card",
                 )}
               >
-                <button
-                  type="button"
-                  onClick={() => toggleCategory(category.id)}
-                  aria-expanded={expanded}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left md:px-7"
-                >
-                  <span className="min-w-0">
-                    <span className="block font-display text-lg font-bold text-foreground md:text-xl">
-                      {category.label}
-                    </span>
-                    <span className="mt-0.5 block text-sm text-muted-foreground">
-                      {category.description}
-                    </span>
-                  </span>
-                  <span className="flex items-center gap-3 shrink-0">
-                    <span className="hidden text-xs font-semibold text-muted-foreground sm:inline">
-                      {items.length} service{items.length > 1 ? "s" : ""}
-                    </span>
-                    <ChevronDown
-                      className={cn(
-                        "size-5 text-muted-foreground transition-transform duration-300",
-                        expanded && "rotate-180 text-primary",
-                      )}
-                    />
-                  </span>
-                </button>
-
-                <div
+                <span
                   className={cn(
-                    "grid transition-all duration-500 ease-out",
-                    expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+                    "flex size-9 shrink-0 items-center justify-center rounded-md",
+                    accentSoftBg[meta.accent],
                   )}
                 >
-                  <div className="overflow-hidden">
-                    <div className="space-y-4 border-t border-border/70 bg-background px-5 py-6 md:px-7">
-                      {items.map((service) => (
-                        <ServiceRow
-                          key={service.slug}
-                          service={service}
-                          open={openService === service.slug}
-                          onToggle={() =>
-                            setOpenService((prev) => (prev === service.slug ? null : service.slug))
-                          }
-                          cart={cart}
-                          onAdd={addToCart}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  <ServiceIcon name={meta.icon} className={cn("size-4", accentText[meta.accent])} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-semibold text-foreground">
+                    {category.label}
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    {count} service{count === 1 ? "" : "s"}
+                  </span>
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "size-4 shrink-0 text-muted-foreground transition-transform duration-300",
+                    active && "rotate-180 text-primary",
+                  )}
+                />
+              </button>
             );
           })}
+        </div>
+
+        {/* Single shared content area */}
+        <div className="mt-5 overflow-hidden rounded-lg border border-primary/25 bg-card shadow-card">
+          <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-7">
+            <span className="flex min-w-0 items-center gap-3">
+              <span
+                className={cn(
+                  "flex size-10 shrink-0 items-center justify-center rounded-md",
+                  accentSoftBg[categoryMeta[openCategory]?.accent ?? "indigo"],
+                )}
+              >
+                <ServiceIcon
+                  name={categoryMeta[openCategory]?.icon ?? "Sparkles"}
+                  className={cn("size-5", accentText[categoryMeta[openCategory]?.accent ?? "indigo"])}
+                />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-display text-lg font-bold text-foreground md:text-xl">
+                  {activeCategory?.label}
+                </span>
+                <span className="mt-0.5 block text-sm text-muted-foreground">
+                  {activeCategory?.description}
+                </span>
+              </span>
+            </span>
+          </div>
+
+          <div
+            key={openCategory}
+            className="animate-fade-in space-y-4 border-t border-border/70 bg-background px-5 py-6 md:px-7"
+          >
+            {activeServices.map((service) => (
+              <ServiceRow
+                key={service.slug}
+                service={service}
+                open={openService === service.slug}
+                onToggle={() =>
+                  setOpenService((prev) => (prev === service.slug ? null : service.slug))
+                }
+                cart={cart}
+                onAdd={addToCart}
+              />
+            ))}
+          </div>
         </div>
       </Section>
 
@@ -128,7 +175,7 @@ function ServiceRow({
   onAdd: (item: CartItem) => void;
 }) {
   const detail = serviceDetails[service.slug];
-  const table = detail?.packages;
+  const cards = detail ? cardsFor(detail) : [];
 
   return (
     <article
@@ -158,7 +205,7 @@ function ServiceRow({
             {service.blurb}
           </span>
           <span className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-            {service.deliverables.slice(0, 4).map((d) => (
+            {service.deliverables.slice(0, 3).map((d) => (
               <span
                 key={d}
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
@@ -176,40 +223,40 @@ function ServiceRow({
             open ? "border-primary/40 text-primary" : "text-foreground",
           )}
         >
-          {open ? "Hide" : "View packages"}
+          {open ? "Hide packages" : "Choose package"}
           <ChevronDown className={cn("size-4 transition-transform duration-300", open && "rotate-180")} />
         </span>
       </button>
 
       <div
         className={cn(
-          "grid transition-all duration-500 ease-out",
+          "grid transition-all duration-[350ms] ease-in-out",
           open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         )}
       >
         <div className="overflow-hidden">
           <div className="border-t border-border/70 bg-background px-5 py-6">
-            <p className="max-w-3xl text-sm leading-7 text-muted-foreground">
-              {detail?.intro ?? service.blurb}
-            </p>
-
-            {table && table.columns.length === 3 ? (
-              <div className="mt-6 grid gap-4 lg:grid-cols-3">
-                {table.columns.map((col, i) => {
-                  const price = table.prices?.[i] ?? "Price on consultation";
-                  const id = `${service.slug}:${col}`;
+            {cards.length === 3 ? (
+              <div className="grid gap-4 lg:grid-cols-3">
+                {cards.map((card, i) => {
+                  const id = `${service.slug}:${card.name}`;
                   const inCart = cart.some((item) => item.id === id);
+                  const priceLabel = `${card.price}${card.period ?? ""}`;
                   return (
                     <div
-                      key={col}
+                      key={card.name}
+                      style={open ? { animationDelay: `${i * 70}ms` } : undefined}
                       className={cn(
                         "flex flex-col rounded-lg border bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card",
-                        i === 1 ? "border-primary/30" : "border-border/70",
+                        card.popular ? "border-primary/30" : "border-border/70",
+                        open && "animate-fade-in",
                       )}
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <h4 className="font-display text-base font-bold text-foreground">{col}</h4>
-                        {i === 1 ? (
+                        <h4 className="font-display text-base font-bold text-foreground">
+                          {card.name}
+                        </h4>
+                        {card.popular ? (
                           <span
                             className={cn(
                               "rounded-sm px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
@@ -222,24 +269,27 @@ function ServiceRow({
                         ) : null}
                       </div>
                       <p className="mt-3 font-display text-2xl font-extrabold text-foreground numeric">
-                        {price}
+                        {card.price}
+                        {card.period ? (
+                          <span className="text-sm font-semibold text-muted-foreground">
+                            {card.period}
+                          </span>
+                        ) : null}
                       </p>
                       <ul className="mt-4 flex-1 space-y-2">
-                        {deliverablesFor(table, i).map((d) => (
+                        {card.features.map((f) => (
                           <li
-                            key={d}
+                            key={f}
                             className="flex items-start gap-2 text-sm leading-6 text-muted-foreground"
                           >
                             <Check className={cn("mt-1 size-3.5 shrink-0", accentText[service.accent])} />
-                            {d}
+                            {f}
                           </li>
                         ))}
                       </ul>
                       <button
                         type="button"
-                        onClick={() =>
-                          onAdd({ id, service: service.title, pkg: col, price })
-                        }
+                        onClick={() => onAdd({ id, service: service.title, pkg: card.name, price: priceLabel })}
                         className={cn(
                           "mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md text-sm font-semibold transition-all duration-300",
                           inCart
@@ -262,7 +312,7 @@ function ServiceRow({
                 })}
               </div>
             ) : (
-              <div className="mt-6 rounded-lg border border-dashed border-border p-6">
+              <div className="rounded-lg border border-dashed border-border p-6">
                 <p className="font-display text-base font-bold text-foreground">
                   Scoped on consultation
                 </p>
