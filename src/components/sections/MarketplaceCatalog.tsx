@@ -63,7 +63,7 @@ export function MarketplaceCatalog() {
     <>
       <Section className="pb-28">
         {/* Category switcher */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-5">
           {serviceCategories.map((category) => {
             const meta = categoryMeta[category.id] ?? { icon: "Sparkles", accent: "indigo" as AccentName };
             const count = services.filter((s) => serviceDetails[s.slug]?.category === category.id).length;
@@ -75,31 +75,31 @@ export function MarketplaceCatalog() {
                 onClick={() => selectCategory(category.id)}
                 aria-pressed={active}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg border bg-card px-4 py-3 text-left transition-all duration-300",
+                  "flex flex-col items-center gap-1.5 rounded-lg border bg-card px-1.5 py-2.5 text-center transition-all duration-300 sm:flex-row sm:items-center sm:gap-3 sm:px-4 sm:py-3 sm:text-left",
                   active
-                    ? "border-primary/30 shadow-card"
+                    ? "border-primary/40 shadow-card"
                     : "border-border/70 shadow-soft hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-card",
                 )}
               >
                 <span
                   className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-md",
+                    "flex size-7 shrink-0 items-center justify-center rounded-md sm:size-9",
                     accentSoftBg[meta.accent],
                   )}
                 >
-                  <ServiceIcon name={meta.icon} className={cn("size-4", accentText[meta.accent])} />
+                  <ServiceIcon name={meta.icon} className={cn("size-3.5 sm:size-4", accentText[meta.accent])} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold text-foreground">
+                  <span className="block text-[10px] font-semibold leading-tight text-foreground sm:truncate sm:text-sm">
                     {category.label}
                   </span>
-                  <span className="block text-xs text-muted-foreground">
+                  <span className="mt-0.5 block text-[9px] text-muted-foreground sm:mt-0 sm:text-xs">
                     {count} service{count === 1 ? "" : "s"}
                   </span>
                 </span>
                 <ChevronDown
                   className={cn(
-                    "size-4 shrink-0 text-muted-foreground transition-transform duration-300",
+                    "hidden size-4 shrink-0 text-muted-foreground transition-transform duration-300 sm:block",
                     active && "rotate-180 text-primary",
                   )}
                 />
@@ -107,6 +107,7 @@ export function MarketplaceCatalog() {
             );
           })}
         </div>
+
 
         {/* Single shared content area */}
         <div className="mt-5 overflow-hidden rounded-lg border border-primary/25 bg-card shadow-card">
