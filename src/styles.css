@@ -5,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Salunnn design system.
+ * Salunnn design system — "Golden Honey".
  *
- * Palette is locked: paper-white background, white cards, ink/slate text and
- * eight accents. Never introduce a colour outside these tokens.
+ * Warm cream-gold surfaces, rust primary action colour and a desaturated teal
+ * secondary. Never introduce a colour outside these tokens.
  *
  * The @theme inline block maps CSS custom properties to Tailwind utilities
  * (e.g. --color-primary -> bg-primary, text-primary).
@@ -17,7 +17,10 @@
 
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Abril Fatface is reserved for main titles (H1) only. */
+  --font-brand: "Abril Fatface", Georgia, "Times New Roman", serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+
 
   /* Radius scale: buttons 18px, cards 24px, images 28px, floating 32px */
   --radius-sm: 12px;
@@ -89,60 +92,67 @@
 :root {
   --radius: 24px;
 
-  /* Surfaces — white-coffee warm neutrals */
-  --background: oklch(0.955 0.014 85); /* #F6F0E8 white coffee */
-  --foreground: oklch(0.255 0.017 50); /* #2B211C roasted coffee ink */
-  --card: oklch(0.993 0.004 90); /* #FFFDFA */
-  --card-foreground: oklch(0.255 0.017 50);
-  --popover: oklch(0.993 0.004 90);
-  --popover-foreground: oklch(0.255 0.017 50);
+  /* Surfaces — cream-gold */
+  --background: oklch(0.963 0.018 95); /* #F5F0E1 → cream gold */
+  --background-soft: oklch(0.979 0.008 95); /* #FAF8F2 */
+  --foreground: oklch(0.325 0.008 55); /* #333333 dark brown-charcoal */
+  --card: oklch(0.987 0.009 90); /* #FFFBF4 warm off-white */
+  --card-foreground: oklch(0.325 0.008 55);
+  --popover: oklch(0.987 0.009 90);
+  --popover-foreground: oklch(0.325 0.008 55);
 
-  /* Three soft-tone accents: clay, mocha, sage.
-     Legacy accent names are aliased onto these three so no component breaks. */
-  --clay: oklch(0.635 0.072 55); /* soft terracotta */
-  --mocha: oklch(0.565 0.045 30); /* muted rosewood brown */
-  --sage: oklch(0.66 0.038 142); /* soft sage green */
+  /* Three tones: rust (primary), honey-brown, teal (secondary).
+     Legacy accent names are aliased so no component breaks. */
+  --rust: oklch(0.535 0.113 40); /* #B8583B */
+  --brown: oklch(0.43 0.062 48); /* deep honey brown */
+  --teal: oklch(0.72 0.05 178); /* #78B5AA */
+  --honey: oklch(0.79 0.11 78); /* golden honey */
 
-  --indigo: var(--clay);
-  --violet: var(--mocha);
-  --magenta: var(--mocha);
-  --coral: var(--clay);
-  --amber: var(--clay);
-  --lime: var(--sage);
-  --teal: var(--sage);
-  --sky: var(--mocha);
-  --indigo-tint: oklch(0.932 0.021 80); /* #EFE7DB warm tint */
+  --clay: var(--rust);
+  --mocha: var(--brown);
+  --sage: var(--teal);
 
-  --primary: var(--clay);
-  --primary-foreground: oklch(0.993 0.004 90);
-  --secondary: oklch(0.993 0.004 90);
-  --secondary-foreground: oklch(0.255 0.017 50);
-  --muted: oklch(0.932 0.021 80);
-  --muted-foreground: oklch(0.53 0.021 55); /* #7A6A60 warm slate */
-  --accent: oklch(0.932 0.021 80);
-  --accent-foreground: var(--clay);
-  --destructive: var(--mocha);
-  --destructive-foreground: oklch(0.993 0.004 90);
-  --border: oklch(0.888 0.018 80);
-  --input: oklch(0.888 0.018 80);
-  --ring: var(--clay);
+  --indigo: var(--rust);
+  --violet: var(--brown);
+  --magenta: var(--rust);
+  --coral: var(--rust);
+  --amber: var(--honey);
+  --lime: var(--teal);
+  --sky: var(--teal);
+  --indigo-tint: oklch(0.945 0.022 92); /* warm cream tint */
 
-  --sidebar: oklch(0.993 0.004 90);
-  --sidebar-foreground: oklch(0.255 0.017 50);
-  --sidebar-primary: var(--clay);
-  --sidebar-primary-foreground: oklch(0.993 0.004 90);
-  --sidebar-accent: oklch(0.932 0.021 80);
-  --sidebar-accent-foreground: var(--clay);
-  --sidebar-border: oklch(0.888 0.018 80);
-  --sidebar-ring: var(--clay);
+  --primary: var(--rust);
+  --primary-foreground: oklch(0.993 0.005 90);
+  --secondary: oklch(0.987 0.009 90);
+  --secondary-foreground: oklch(0.325 0.008 55);
+  --muted: oklch(0.945 0.022 92);
+  --muted-foreground: oklch(0.525 0.014 60);
+  --accent: oklch(0.945 0.022 92);
+  --accent-foreground: var(--rust);
+  --destructive: var(--rust);
+  --destructive-foreground: oklch(0.993 0.005 90);
+  --border: oklch(0.9 0.019 92);
+  --input: oklch(0.9 0.019 92);
+  --ring: var(--rust);
 
-  /* Gradient system — soft, low-contrast warm blends */
-  --gradient-hero: linear-gradient(135deg, var(--mocha) 0%, var(--clay) 60%, oklch(0.71 0.055 65) 100%);
-  --gradient-button: linear-gradient(135deg, var(--clay) 0%, var(--mocha) 100%);
+  --sidebar: oklch(0.987 0.009 90);
+  --sidebar-foreground: oklch(0.325 0.008 55);
+  --sidebar-primary: var(--rust);
+  --sidebar-primary-foreground: oklch(0.993 0.005 90);
+  --sidebar-accent: oklch(0.945 0.022 92);
+  --sidebar-accent-foreground: var(--rust);
+  --sidebar-border: oklch(0.9 0.019 92);
+  --sidebar-ring: var(--rust);
+
+  /* Gradient system — warm, low-contrast honey blends */
+  --gradient-hero: linear-gradient(135deg, var(--brown) 0%, var(--rust) 60%, var(--honey) 100%);
+  --gradient-button: linear-gradient(135deg, var(--rust) 0%, var(--brown) 100%);
   --gradient-card-hover: linear-gradient(180deg, var(--card) 0%, var(--indigo-tint) 100%);
-  --gradient-marketplace: linear-gradient(135deg, var(--sage) 0%, var(--clay) 100%);
-  --gradient-success: linear-gradient(135deg, var(--sage) 0%, oklch(0.72 0.045 120) 100%);
+  --gradient-marketplace: linear-gradient(135deg, var(--teal) 0%, var(--rust) 100%);
+  --gradient-success: linear-gradient(135deg, var(--teal) 0%, oklch(0.78 0.06 170) 100%);
+  --gradient-surface: linear-gradient(180deg, var(--background) 0%, var(--background-soft) 100%);
 }
+
 
 
 @layer base {
@@ -152,20 +162,30 @@
 
   body {
     background-color: var(--color-background);
+    background-image: var(--gradient-surface);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  h1,
+  /* Abril Fatface is reserved for main titles; sub-headings stay on Inter. */
+  h1 {
+    font-family: var(--font-brand);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
   h2,
   h3,
   h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.015em;
   }
 }
+
 
 /* Gradient utilities — the only sanctioned gradients in the project */
 @utility bg-gradient-hero {
