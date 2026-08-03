@@ -191,45 +191,51 @@ function ServiceRow({
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-start gap-4 p-5 text-left"
+        className="w-full p-4 text-left sm:p-5"
       >
-        <span
-          className={cn(
-            "flex size-11 shrink-0 items-center justify-center rounded-md",
-            accentSoftBg[service.accent],
-          )}
-        >
-          <ServiceIcon name={service.icon} className={cn("size-5", accentText[service.accent])} />
+        <span className="flex items-start gap-3 sm:gap-4">
+          <span
+            className={cn(
+              "flex size-10 shrink-0 items-center justify-center rounded-md sm:size-11",
+              accentSoftBg[service.accent],
+            )}
+          >
+            <ServiceIcon name={service.icon} className={cn("size-4 sm:size-5", accentText[service.accent])} />
+          </span>
+
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-base font-bold text-foreground sm:text-lg">
+              {service.title}
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6">
+              {service.blurb}
+            </span>
+          </span>
+
+          <span
+            className={cn(
+              "inline-flex h-8 shrink-0 items-center gap-1 rounded-md border border-border bg-background px-2 text-[11px] font-semibold transition-colors sm:h-10 sm:gap-1.5 sm:px-3 sm:text-sm",
+              open ? "border-primary/40 text-primary" : "text-foreground",
+            )}
+          >
+            {open ? "Hide packages" : "Choose package"}
+            <ChevronDown className={cn("size-3.5 transition-transform duration-300 sm:size-4", open && "rotate-180")} />
+          </span>
         </span>
 
-        <span className="min-w-0 flex-1">
-          <span className="font-display text-lg font-bold text-foreground">{service.title}</span>
-          <span className="mt-1 block text-sm leading-6 text-muted-foreground">
-            {service.blurb}
-          </span>
-          <span className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-            {service.deliverables.slice(0, 3).map((d) => (
-              <span
-                key={d}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
-              >
-                <Check className={cn("size-3.5", accentText[service.accent])} />
-                {d}
-              </span>
-            ))}
-          </span>
-        </span>
-
-        <span
-          className={cn(
-            "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-sm font-semibold transition-colors",
-            open ? "border-primary/40 text-primary" : "text-foreground",
-          )}
-        >
-          {open ? "Hide packages" : "Choose package"}
-          <ChevronDown className={cn("size-4 transition-transform duration-300", open && "rotate-180")} />
+        <span className="mt-3 flex flex-wrap gap-2 sm:gap-x-4 sm:gap-y-1.5">
+          {service.deliverables.slice(0, 3).map((d) => (
+            <span
+              key={d}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border/70 px-2 py-1 text-[11px] font-medium text-muted-foreground sm:border-0 sm:px-0 sm:py-0 sm:text-xs"
+            >
+              <Check className={cn("size-3.5", accentText[service.accent])} />
+              {d}
+            </span>
+          ))}
         </span>
       </button>
+
 
       <div
         className={cn(
