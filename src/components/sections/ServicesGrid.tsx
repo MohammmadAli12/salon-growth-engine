@@ -33,8 +33,7 @@ export function ServicesGrid({
         {services.map((service, index) => (
           <Link
             key={service.slug}
-            to="/marketplace/$slug"
-            params={{ slug: service.slug }}
+            to="/marketplace"
             className={cn(
               "group flex flex-col rounded-lg border border-border/70 bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-card",
               index === 0 && "lg:col-span-2",
