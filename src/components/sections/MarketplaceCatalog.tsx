@@ -110,35 +110,37 @@ export function MarketplaceCatalog() {
 
 
         {/* Single shared content area */}
-        <div className="mt-5 overflow-hidden rounded-lg border border-primary/25 bg-card shadow-card">
-          <div className="flex items-center justify-between gap-4 px-5 py-5 md:px-7">
+        <div className="mt-4 overflow-hidden rounded-lg border border-primary/25 bg-card shadow-card sm:mt-5">
+          <div className="flex items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5 md:px-7">
             <span className="flex min-w-0 items-center gap-3">
               <span
                 className={cn(
-                  "flex size-10 shrink-0 items-center justify-center rounded-md",
+                  "flex size-9 shrink-0 items-center justify-center rounded-md sm:size-10",
                   accentSoftBg[categoryMeta[openCategory]?.accent ?? "indigo"],
                 )}
               >
                 <ServiceIcon
                   name={categoryMeta[openCategory]?.icon ?? "Sparkles"}
-                  className={cn("size-5", accentText[categoryMeta[openCategory]?.accent ?? "indigo"])}
+                  className={cn("size-4 sm:size-5", accentText[categoryMeta[openCategory]?.accent ?? "indigo"])}
                 />
               </span>
               <span className="min-w-0">
-                <span className="block font-display text-lg font-bold text-foreground md:text-xl">
+                <span className="block font-display text-base font-bold text-foreground sm:text-lg md:text-xl">
                   {activeCategory?.label}
                 </span>
-                <span className="mt-0.5 block text-sm text-muted-foreground">
+                <span className="mt-0.5 block text-xs text-muted-foreground sm:text-sm">
                   {activeCategory?.description}
                 </span>
               </span>
             </span>
+            <ChevronDown className="size-4 shrink-0 rotate-180 text-primary" />
           </div>
 
           <div
             key={openCategory}
-            className="animate-fade-in space-y-4 border-t border-border/70 bg-background px-5 py-6 md:px-7"
+            className="animate-fade-in space-y-3 border-t border-border/70 bg-background px-3 py-4 sm:space-y-4 sm:px-5 sm:py-6 md:px-7"
           >
+
             {activeServices.map((service) => (
               <ServiceRow
                 key={service.slug}
