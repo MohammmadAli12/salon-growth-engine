@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ChevronDown, Minus, Plus, ShoppingCart, X } from "lucide-react";
+import { Check, ChevronDown, Minus, ShoppingCart, X } from "lucide-react";
 import { Section, accentSoftBg, accentText } from "@/components/layout/primitives";
 import { ServiceIcon } from "@/components/sections/ServicesGrid";
 import { services, type AccentName, type ServiceItem } from "@/lib/site-data";
