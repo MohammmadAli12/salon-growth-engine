@@ -5,10 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Salunnn design system.
+ * Salunnn design system — "Golden Honey".
  *
- * Palette is locked: paper-white background, white cards, ink/slate text and
- * eight accents. Never introduce a colour outside these tokens.
+ * Warm cream-gold surfaces, rust primary action colour and a desaturated teal
+ * secondary. Never introduce a colour outside these tokens.
  *
  * The @theme inline block maps CSS custom properties to Tailwind utilities
  * (e.g. --color-primary -> bg-primary, text-primary).
@@ -17,7 +17,8 @@
 
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Abril Fatface", Georgia, "Times New Roman", serif;
+
 
   /* Radius scale: buttons 18px, cards 24px, images 28px, floating 32px */
   --radius-sm: 12px;
