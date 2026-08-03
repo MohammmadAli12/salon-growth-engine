@@ -23,7 +23,7 @@ export function PageHeader({
       />
       <div className="relative mx-auto w-full max-w-6xl">
         <Eyebrow className="text-primary">{eyebrow}</Eyebrow>
-        <h1 className="mt-4 max-w-3xl text-[34px] font-extrabold leading-[1.08] tracking-tight text-foreground md:text-[56px]">
+        <h1 className="mt-4 max-w-3xl text-[34px] leading-[1.1] tracking-tight text-foreground md:text-[56px]">
           {title}
         </h1>
         {description ? (

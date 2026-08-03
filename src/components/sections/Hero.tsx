@@ -22,7 +22,7 @@ export function Hero() {
               AI-powered salon growth platform
             </span>
 
-            <h1 className="mt-6 text-[38px] font-extrabold leading-[1.06] tracking-tight text-foreground md:text-[64px]">
+            <h1 className="mt-6 text-[38px] leading-[1.08] tracking-tight text-foreground md:text-[64px]">
               Grow your salon with{" "}
               <span className="text-gradient-hero">AI &amp; marketing</span>
             </h1>
