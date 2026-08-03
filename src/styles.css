@@ -17,7 +17,9 @@
 
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Abril Fatface", Georgia, "Times New Roman", serif;
+  /* Abril Fatface is reserved for main titles (H1) only. */
+  --font-brand: "Abril Fatface", Georgia, "Times New Roman", serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
 
 
   /* Radius scale: buttons 18px, cards 24px, images 28px, floating 32px */
