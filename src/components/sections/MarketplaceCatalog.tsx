@@ -204,7 +204,7 @@ function ServiceRow({
           </span>
 
           <span className="min-w-0 flex-1">
-            <span className="block font-display text-base font-bold text-foreground sm:text-lg">
+            <span className="block font-display text-sm font-bold leading-tight text-foreground sm:text-lg">
               {service.title}
             </span>
             <span className="mt-1 block text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6">
@@ -214,7 +214,7 @@ function ServiceRow({
 
           <span
             className={cn(
-              "inline-flex h-8 shrink-0 items-center gap-1 rounded-md border border-border bg-background px-2 text-[11px] font-semibold transition-colors sm:h-10 sm:gap-1.5 sm:px-3 sm:text-sm",
+              "inline-flex h-8 shrink-0 items-center gap-1 rounded-md border border-border bg-background px-2 text-[10px] leading-none font-semibold transition-colors sm:h-10 sm:gap-1.5 sm:px-3 sm:text-sm",
               open ? "border-primary/40 text-primary" : "text-foreground",
             )}
           >
