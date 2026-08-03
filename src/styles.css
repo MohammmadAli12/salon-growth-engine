@@ -89,60 +89,61 @@
 :root {
   --radius: 24px;
 
-  /* Surfaces */
-  --background: oklch(0.985 0.004 91.4); /* #FBFAF7 paper white */
-  --foreground: oklch(0.177 0.011 260.6); /* #0E1116 ink */
-  --card: oklch(1 0 0); /* #FFFFFF */
-  --card-foreground: oklch(0.177 0.011 260.6);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.177 0.011 260.6);
+  /* Surfaces — white-coffee warm neutrals */
+  --background: oklch(0.955 0.014 85); /* #F6F0E8 white coffee */
+  --foreground: oklch(0.255 0.017 50); /* #2B211C roasted coffee ink */
+  --card: oklch(0.993 0.004 90); /* #FFFDFA */
+  --card-foreground: oklch(0.255 0.017 50);
+  --popover: oklch(0.993 0.004 90);
+  --popover-foreground: oklch(0.255 0.017 50);
 
-  /* Accents */
-  --indigo: oklch(0.511 0.23 277); /* #4F46E5 */
-  --violet: oklch(0.606 0.219 292.7); /* #8B5CF6 */
-  --magenta: oklch(0.656 0.212 354.3); /* #EC4899 */
-  --coral: oklch(0.709 0.17 26.5); /* #F97066 */
-  --amber: oklch(0.769 0.165 70.1); /* #F59E0B */
-  --lime: oklch(0.768 0.204 130.8); /* #84CC16 */
-  --teal: oklch(0.704 0.123 182.5); /* #14B8A6 */
-  --sky: oklch(0.685 0.148 237.3); /* #0EA5E9 */
-  --indigo-tint: oklch(0.962 0.018 272.3); /* #EEF2FF */
+  /* Three soft-tone accents: clay, mocha, sage.
+     Legacy accent names are aliased onto these three so no component breaks. */
+  --clay: oklch(0.635 0.072 55); /* soft terracotta */
+  --mocha: oklch(0.565 0.045 30); /* muted rosewood brown */
+  --sage: oklch(0.66 0.038 142); /* soft sage green */
 
-  --primary: var(--indigo);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(1 0 0);
-  --secondary-foreground: oklch(0.177 0.011 260.6);
-  --muted: oklch(0.962 0.018 272.3);
-  --muted-foreground: oklch(0.491 0.018 260.7); /* #5B616B slate */
-  --accent: oklch(0.962 0.018 272.3);
-  --accent-foreground: oklch(0.511 0.23 277);
-  --destructive: oklch(0.709 0.17 26.5);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.925 0.007 88.6);
-  --input: oklch(0.925 0.007 88.6);
-  --ring: oklch(0.511 0.23 277);
+  --indigo: var(--clay);
+  --violet: var(--mocha);
+  --magenta: var(--mocha);
+  --coral: var(--clay);
+  --amber: var(--clay);
+  --lime: var(--sage);
+  --teal: var(--sage);
+  --sky: var(--mocha);
+  --indigo-tint: oklch(0.932 0.021 80); /* #EFE7DB warm tint */
 
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.177 0.011 260.6);
-  --sidebar-primary: oklch(0.511 0.23 277);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.962 0.018 272.3);
-  --sidebar-accent-foreground: oklch(0.511 0.23 277);
-  --sidebar-border: oklch(0.925 0.007 88.6);
-  --sidebar-ring: oklch(0.511 0.23 277);
+  --primary: var(--clay);
+  --primary-foreground: oklch(0.993 0.004 90);
+  --secondary: oklch(0.993 0.004 90);
+  --secondary-foreground: oklch(0.255 0.017 50);
+  --muted: oklch(0.932 0.021 80);
+  --muted-foreground: oklch(0.53 0.021 55); /* #7A6A60 warm slate */
+  --accent: oklch(0.932 0.021 80);
+  --accent-foreground: var(--clay);
+  --destructive: var(--mocha);
+  --destructive-foreground: oklch(0.993 0.004 90);
+  --border: oklch(0.888 0.018 80);
+  --input: oklch(0.888 0.018 80);
+  --ring: var(--clay);
 
-  /* Gradient system */
-  --gradient-hero: linear-gradient(
-    135deg,
-    var(--indigo) 0%,
-    var(--violet) 52%,
-    var(--magenta) 100%
-  );
-  --gradient-button: linear-gradient(135deg, var(--indigo) 0%, var(--violet) 100%);
-  --gradient-card-hover: linear-gradient(180deg, oklch(1 0 0) 0%, var(--indigo-tint) 100%);
-  --gradient-marketplace: linear-gradient(135deg, var(--sky) 0%, var(--teal) 100%);
-  --gradient-success: linear-gradient(135deg, var(--lime) 0%, var(--teal) 100%);
+  --sidebar: oklch(0.993 0.004 90);
+  --sidebar-foreground: oklch(0.255 0.017 50);
+  --sidebar-primary: var(--clay);
+  --sidebar-primary-foreground: oklch(0.993 0.004 90);
+  --sidebar-accent: oklch(0.932 0.021 80);
+  --sidebar-accent-foreground: var(--clay);
+  --sidebar-border: oklch(0.888 0.018 80);
+  --sidebar-ring: var(--clay);
+
+  /* Gradient system — soft, low-contrast warm blends */
+  --gradient-hero: linear-gradient(135deg, var(--mocha) 0%, var(--clay) 60%, oklch(0.71 0.055 65) 100%);
+  --gradient-button: linear-gradient(135deg, var(--clay) 0%, var(--mocha) 100%);
+  --gradient-card-hover: linear-gradient(180deg, var(--card) 0%, var(--indigo-tint) 100%);
+  --gradient-marketplace: linear-gradient(135deg, var(--sage) 0%, var(--clay) 100%);
+  --gradient-success: linear-gradient(135deg, var(--sage) 0%, oklch(0.72 0.045 120) 100%);
 }
+
 
 @layer base {
   * {
