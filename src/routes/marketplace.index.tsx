@@ -31,8 +31,8 @@ function MarketplaceIndex() {
     <>
       <PageHeader
         eyebrow="Marketplace"
-        title="Browse services built for salons"
-        description="Open a category, open a service, compare packages and add what you need — all on this page."
+        title="Identify the solution for your salon marketing problem"
+        description="Let us manage your complete digital marketing for you — so you can focus on running your salon."
       />
 
       <MarketplaceCatalog />
