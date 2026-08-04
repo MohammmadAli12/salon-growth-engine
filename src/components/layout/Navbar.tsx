@@ -1,13 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronDown, Menu, Sparkles, X } from "lucide-react";
+import { ChevronDown, Heart, Menu, ShoppingBag, Sparkles, X } from "lucide-react";
 import { moreNav, primaryNav } from "@/lib/site-data";
 import { GradientButton } from "./buttons";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/lib/cart-store";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { cart, wishlist, setCartOpen, setWishOpen } = useCart();
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -77,9 +80,38 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <GradientButton to="/contact" size="sm" className="hidden sm:inline-flex">
-            Book consultation
-          </GradientButton>
+          <button
+            type="button"
+            aria-label="Saved services"
+            onClick={() => {
+              setOpen(false);
+              setWishOpen(true);
+            }}
+            className="relative flex size-10 items-center justify-center rounded-md border border-border bg-secondary text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            <Heart className="size-[17px]" />
+            {wishlist.length > 0 ? (
+              <span className="absolute -right-1.5 -top-1.5 flex size-[18px] items-center justify-center rounded-full border-[1.5px] border-background bg-rust text-[9.5px] font-bold text-primary-foreground">
+                {wishlist.length}
+              </span>
+            ) : null}
+          </button>
+          <button
+            type="button"
+            aria-label="Cart"
+            onClick={() => {
+              setOpen(false);
+              setCartOpen(true);
+            }}
+            className="relative flex size-10 items-center justify-center rounded-md border border-border bg-secondary text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            <ShoppingBag className="size-[17px]" />
+            {cart.length > 0 ? (
+              <span className="absolute -right-1.5 -top-1.5 flex size-[18px] items-center justify-center rounded-full border-[1.5px] border-background bg-rust text-[9.5px] font-bold text-primary-foreground">
+                {cart.length}
+              </span>
+            ) : null}
+          </button>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -90,6 +122,7 @@ export function Navbar() {
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
+
       </nav>
 
       {open ? (
