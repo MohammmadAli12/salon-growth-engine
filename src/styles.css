@@ -2,6 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 @import "./marketplace.css";
+@import "./home.css";
 
 @custom-variant dark (&:is(.dark *));
 
