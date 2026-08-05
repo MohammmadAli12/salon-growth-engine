@@ -40,5 +40,3 @@ export const Route = createFileRoute("/")({
 function Index() {
   return <SalunnnHome />;
 }
-
-}
