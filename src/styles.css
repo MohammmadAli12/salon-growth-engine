@@ -133,9 +133,9 @@
 
   /* Semantic surfaces */
   --background: var(--cream);
-  --background-soft: oklch(0.978 0.012 86);
+  --background-soft: oklch(1 0 0);
   --foreground: var(--espresso);
-  --card: oklch(0.994 0.007 88.6); /* #FFFDF8 */
+  --card: oklch(1 0 0); /* pure white */
   --card-foreground: var(--espresso);
   --popover: var(--card);
   --popover-foreground: var(--espresso);
@@ -156,7 +156,7 @@
   --indigo-tint: var(--sage);
 
   --primary: var(--forest-deep);
-  --primary-foreground: oklch(0.994 0.007 88.6);
+  --primary-foreground: oklch(1 0 0);
   --secondary: var(--cream-deep);
   --secondary-foreground: var(--espresso);
   --muted: var(--cream-deep);
@@ -164,7 +164,7 @@
   --accent: var(--sage);
   --accent-foreground: var(--forest-deep);
   --destructive: var(--rust);
-  --destructive-foreground: oklch(0.994 0.007 88.6);
+  --destructive-foreground: oklch(1 0 0);
   --border: var(--line);
   --input: var(--line);
   --ring: var(--forest);
@@ -172,17 +172,17 @@
   --sidebar: var(--card);
   --sidebar-foreground: var(--espresso);
   --sidebar-primary: var(--forest-deep);
-  --sidebar-primary-foreground: oklch(0.994 0.007 88.6);
+  --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: var(--sage);
   --sidebar-accent-foreground: var(--forest-deep);
   --sidebar-border: var(--line);
   --sidebar-ring: var(--forest);
 
-  /* Gradient system — cream + forest, gold used sparingly */
-  --gradient-hero: radial-gradient(120% 140% at 15% -10%, oklch(0.47 0.082 161) 0%, var(--forest) 45%, var(--forest-deep) 100%);
+  /* Gradient system — neutral white/grey shades only */
+  --gradient-hero: radial-gradient(120% 140% at 15% -10%, oklch(0.5 0 0) 0%, var(--forest) 45%, var(--forest-deep) 100%);
   --gradient-button: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
   --gradient-card-hover: linear-gradient(180deg, var(--card) 0%, var(--sage) 100%);
-  --gradient-marketplace: linear-gradient(135deg, var(--forest) 0%, var(--teal) 100%);
+  --gradient-marketplace: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
   --gradient-success: linear-gradient(135deg, var(--forest-light) 0%, var(--forest-deep) 100%);
   --gradient-surface: linear-gradient(180deg, var(--background) 0%, var(--background-soft) 100%);
 }
