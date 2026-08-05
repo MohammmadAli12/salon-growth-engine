@@ -15,7 +15,7 @@
 .badge-dot{position:absolute;top:-5px;right:-5px;background:var(--rust);color:#fff;font-size:9.5px;font-weight:700;border-radius:50%;width:17px;height:17px;display:none;align-items:center;justify-content:center;border:1.5px solid var(--cream)}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;background:radial-gradient(120% 140% at 15% -10%,#2C7452 0%,var(--forest) 45%,var(--forest-deep) 100%);padding:36px 24px 46px;text-align:center;color:var(--cream)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(120% 140% at 15% -10%,#4A4A4A 0%,var(--forest) 45%,var(--forest-deep) 100%);padding:36px 24px 46px;text-align:center;color:var(--cream)}
 .hero-particle{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),rgba(255,255,255,0) 70%);filter:blur(.5px);animation:drift 14s ease-in-out infinite}
 @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
 .hero-inner{position:relative;z-index:2}
@@ -46,7 +46,7 @@
 .search-box{display:flex;align-items:center;gap:9px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:11px 15px}
 .search-box svg{width:15px;height:15px;color:var(--espresso-soft);flex-shrink:0}
 .search-box input{border:none;outline:none;font-size:13.5px;flex:1;font-family:inherit;color:var(--espresso);background:transparent}
-.search-box input::placeholder{color:#b6a98d}
+.search-box input::placeholder{color:#9A9A9A}
 .search-suggest{position:absolute;left:20px;right:20px;top:calc(100% - 2px);background:var(--card);border:1.5px solid var(--line);border-radius:14px;box-shadow:0 14px 30px var(--shadow);z-index:120;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .18s}
 .search-suggest.show{opacity:1;pointer-events:all;transform:translateY(0)}
 .suggest-item{display:flex;align-items:center;gap:10px;padding:10px 14px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--cream-deep)}
@@ -73,7 +73,7 @@
 .svc-icon svg{width:22px;height:22px}
 .svc-name{font-family:'Fraunces',serif;font-size:14.5px;font-weight:600;color:var(--espresso);margin-bottom:4px;line-height:1.3}
 .svc-desc{font-size:11px;color:var(--espresso-soft);line-height:1.5;margin-bottom:10px;min-height:32px}
-.bundle-chip{display:inline-block;font-size:9.5px;font-weight:700;color:var(--gold-deep);background:#F6EAD1;border:1px solid #E7CE9A;border-radius:99px;padding:2px 8px;margin-bottom:8px}
+.bundle-chip{display:inline-block;font-size:9.5px;font-weight:700;color:var(--gold-deep);background:#F1F1F1;border:1px solid #DDDDDD;border-radius:99px;padding:2px 8px;margin-bottom:8px}
 .svc-from{font-size:11.5px;font-weight:500;color:var(--espresso-soft);margin-bottom:10px}
 .svc-from b{color:var(--forest-deep);font-weight:700}
 .svc-btn{width:100%;border:1.5px solid var(--forest-deep);background:transparent;color:var(--forest-deep);border-radius:10px;padding:8px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;pointer-events:none}
@@ -107,7 +107,7 @@
 .tier-card{border:1.5px solid var(--line);border-radius:16px;padding:24px 11px 13px;cursor:pointer;transition:all .2s;position:relative;background:var(--card)}
 .tier-card:hover{border-color:var(--forest-light)}
 .tier-card.selected{border-color:var(--forest-deep);background:var(--sage)}
-.popular-tag{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#2B2015;font-size:9px;font-weight:800;padding:3px 9px;border-radius:99px;white-space:nowrap;box-shadow:0 3px 8px var(--shadow)}
+.popular-tag{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#1A1A1A;font-size:9px;font-weight:800;padding:3px 9px;border-radius:99px;white-space:nowrap;box-shadow:0 3px 8px var(--shadow)}
 .tier-dots{display:flex;gap:3px;margin-bottom:8px}
 .tdot{width:6px;height:6px;border-radius:50%;background:var(--line)}
 .tdot.on{background:var(--forest-deep)}
@@ -131,7 +131,7 @@
 .compare-table thead th{font-family:'Fraunces',serif;font-weight:600;color:var(--espresso);background:var(--cream-deep)}
 .cth-price{font-size:10px;font-weight:400;color:var(--espresso-soft)}
 .chk{color:var(--forest-deep);font-weight:700}
-.dash{color:#c9bda0}
+.dash{color:#B5B5B5}
 
 /* ALSO ADD */
 .also-add{display:none;padding:14px 16px 0}
@@ -145,8 +145,8 @@
 .add-to-cart-btn{display:block;margin:16px;background:var(--forest-deep);color:#fff;border:none;border-radius:14px;padding:15px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;width:calc(100% - 32px);transition:all .2s}
 .add-to-cart-btn:hover{background:var(--forest)}
 .add-to-cart-btn.update{background:var(--gold-deep)}
-.add-to-cart-btn.success{background:#2F7A55}
-.add-to-cart-btn:disabled{background:#d8cdb2;color:#8a7c5e;cursor:not-allowed}
+.add-to-cart-btn.success{background:#3A3A3A}
+.add-to-cart-btn:disabled{background:#E0E0E0;color:#8A8A8A;cursor:not-allowed}
 
 /* CART / WISHLIST SHEET */
 .cart-item{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--cream-deep)}
@@ -156,15 +156,15 @@
 .cart-item-name{font-size:13px;font-weight:600;color:var(--espresso);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cart-item-tier{font-size:11px;color:var(--espresso-soft);margin-top:2px}
 .cart-item-price{font-size:13.5px;font-weight:700;color:var(--forest-deep);flex-shrink:0}
-.remove-btn{background:#FBEAE5;border:none;border-radius:8px;width:28px;height:28px;cursor:pointer;color:var(--rust);font-size:14px;flex-shrink:0}
+.remove-btn{background:#F1F1F1;border:none;border-radius:8px;width:28px;height:28px;cursor:pointer;color:var(--rust);font-size:14px;flex-shrink:0}
 .wish-remove{background:none;border:none;color:var(--rust);cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
 .wish-remove svg{width:16px;height:16px;fill:var(--rust)}
-.upsell-banner{margin:12px 20px 0;background:#F6EAD1;border:1.5px dashed #D8B466;border-radius:14px;padding:12px 14px;font-size:12px;color:#5A431A;line-height:1.5;display:flex;align-items:center;gap:10px}
+.upsell-banner{margin:12px 20px 0;background:#F1F1F1;border:1.5px dashed #CFCFCF;border-radius:14px;padding:12px 14px;font-size:12px;color:#4A4A4A;line-height:1.5;display:flex;align-items:center;gap:10px}
 .upsell-btn{background:var(--gold-deep);color:#fff;border:none;border-radius:99px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;flex-shrink:0;white-space:nowrap}
 .cart-savings-row{display:none;justify-content:space-between;padding:10px 20px 0;font-size:12px;font-weight:600;color:var(--forest-deep)}
 .cart-total-row{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-top:2px solid var(--line);margin-top:6px}
 .checkout-btn{display:block;margin:8px 20px 0;background:var(--forest-deep);color:#fff;border:none;border-radius:14px;padding:15px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;width:calc(100% - 40px)}
-.checkout-btn:disabled{background:#d8cdb2;color:#8a7c5e;cursor:not-allowed}
+.checkout-btn:disabled{background:#E0E0E0;color:#8A8A8A;cursor:not-allowed}
 .rec-row{display:flex;gap:10px;padding:6px 20px 4px;overflow-x:auto;scrollbar-width:none}
 .rec-card{flex-shrink:0;width:130px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px}
 .rec-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
@@ -184,8 +184,8 @@
 .view-cart-btn{background:var(--forest-deep);color:#fff;border:none;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
 
 /* EMPTY STATE */
-.empty-state{text-align:center;padding:44px 24px 20px;color:#b6a98d}
-.empty-state .ei{margin-bottom:12px;display:flex;justify-content:center;color:#d8cdb2}
+.empty-state{text-align:center;padding:44px 24px 20px;color:#9A9A9A}
+.empty-state .ei{margin-bottom:12px;display:flex;justify-content:center;color:#E0E0E0}
 .empty-state .ei svg{width:42px;height:42px}
 .empty-state div:nth-child(2){color:var(--espresso);font-weight:600;font-size:13.5px}
 
