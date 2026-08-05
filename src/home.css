@@ -238,5 +238,6 @@
   .home .preview-card:active::after{opacity:1}
   .home .preview-card:active .metric-pill{transform:translateY(-4px);background:rgba(255,255,255,.18)}
   .home .preview-card:active .preview-cta{background:rgba(255,255,255,.22)}
+  .home .preview-head{flex-direction:column;align-items:flex-start;gap:10px}
   .home .bento,.home .bento-row3{overflow:visible}
 }
