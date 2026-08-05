@@ -38,17 +38,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return (
-    <>
-      <Hero />
-      <ServicesGrid />
-      <WhySalunnn />
-      <CaseStudyList limit={3} />
-      <AppPreview />
-      <CommunityPreview />
-      <LearningPreview />
-      <HiringPreview />
-      <CtaBand />
-    </>
-  );
+  return <SalunnnHome />;
+}
+
 }
