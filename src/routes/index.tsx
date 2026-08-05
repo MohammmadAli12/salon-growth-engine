@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Hero } from "@/components/sections/Hero";
-import { ServicesGrid } from "@/components/sections/ServicesGrid";
-import { WhySalunnn } from "@/components/sections/WhySalunnn";
-import { CaseStudyList } from "@/components/sections/CaseStudyList";
-import { AppPreview } from "@/components/sections/AppPreview";
-import { CommunityPreview, LearningPreview } from "@/components/sections/CommunityLearning";
-import { HiringPreview } from "@/components/sections/HiringPreview";
-import { CtaBand } from "@/components/sections/CtaBand";
+import { SalunnnHome } from "@/components/sections/SalunnnHome";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
