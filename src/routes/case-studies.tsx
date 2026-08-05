@@ -26,5 +26,3 @@ export const Route = createFileRoute("/case-studies")({
 function CaseStudies() {
   return <CaseStudiesShowcase />;
 }
-
-}
