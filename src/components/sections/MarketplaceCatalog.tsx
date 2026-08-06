@@ -12,6 +12,7 @@ import {
   Star,
   Users,
   Search,
+  ChevronDown,
   Check,
   ShoppingBag,
   Heart,
@@ -44,6 +45,7 @@ function ServiceIcon({ name, className }: { name: string; className?: string }) 
 export function MarketplaceCatalog() {
   const [activeId, setActiveId] = useState<string>("home");
   const [query, setQuery] = useState("");
+  const [navOpen, setNavOpen] = useState(false);
   const { cart, wishlist, addItem, toggleWish, showToast, setCartOpen, total } = useCart();
 
   const results = useMemo(() => {
@@ -58,6 +60,11 @@ export function MarketplaceCatalog() {
   }, [query]);
 
   const active = SIMPLE_SERVICES.find((s) => s.id === activeId) ?? null;
+
+  const pickItem = (id: string) => {
+    setActiveId(id);
+    setNavOpen(false);
+  };
 
   const handleAdd = (service: SimpleService, tier: SimpleTier) => {
     addItem({
@@ -195,7 +202,7 @@ export function MarketplaceCatalog() {
                 toggleWish={toggleWish}
               />
             ) : (
-              <OverviewPanel onPick={setActiveId} />
+              <OverviewPanel onPick={pickItem} />
             )}
 
             {/* Bottom CTA */}
