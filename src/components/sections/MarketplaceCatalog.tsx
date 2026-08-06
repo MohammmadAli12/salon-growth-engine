@@ -346,8 +346,8 @@ function OverviewPanel({ onPick }: { onPick: (id: string) => void }) {
             onClick={() => onPick(s.id)}
             className="group flex items-start gap-3 rounded-md border border-border bg-background p-4 text-left transition-all duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card"
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent text-primary">
-              <ServiceIcon name={s.icon} className="h-5 w-5" />
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent/80 ring-1 ring-border ring-inset backdrop-blur">
+              <ServiceIcon name={s.icon} className={`h-5 w-5 ${ICON_TINT[s.icon] ?? "text-primary"}`} />
             </span>
             <span className="min-w-0">
               <span className="block text-sm font-semibold text-foreground">{s.navLabel}</span>
@@ -383,8 +383,8 @@ function ServicePanel({
       <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
         <div className="bg-gradient-hero-soft p-6 sm:p-9">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-soft">
-              <ServiceIcon name={service.icon} className="h-7 w-7" />
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-border bg-card/70 shadow-soft backdrop-blur-md">
+              <ServiceIcon name={service.icon} className={`h-7 w-7 ${ICON_TINT[service.icon] ?? "text-primary"}`} />
             </span>
             <div className="min-w-0">
               <h2 className="text-2xl leading-tight sm:text-4xl">{service.heroTitle}</h2>
