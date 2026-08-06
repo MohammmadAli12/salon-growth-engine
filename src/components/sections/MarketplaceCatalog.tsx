@@ -553,6 +553,10 @@ function ServicePanel({
       <div
         ref={trackRef}
         onScroll={onScroll}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
+        onFocusCapture={() => setPaused(true)}
         className="no-scrollbar -mx-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-5 pb-4 sm:mx-0 sm:px-0">
         {service.tiers.map((t, i) => {
           const key = `${service.id}:${t.id}`;
