@@ -192,19 +192,22 @@ export function MarketplaceCatalog() {
                     </div>
                   </div>
                   <div className="mb-1 h-px bg-primary-foreground/15" />
-                  <div className="mt-2 rounded-md bg-primary-foreground/10 p-3">
-                    <p className="text-xs font-medium text-primary-foreground/80">Need Help?</p>
+                  <div className="mt-2 rounded-md border border-primary-foreground/15 bg-primary-foreground/10 p-3 backdrop-blur">
+                    <p className="flex items-center gap-1.5 text-xs font-medium text-primary-foreground/80">
+                      <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={2} /> Need Help?
+                    </p>
                     <p className="mt-1 text-[11px] leading-snug text-primary-foreground/60">
                       Not sure what to pick? We will guide you in 10 minutes.
                     </p>
                     <a
                       href="/contact"
-                      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card text-xs font-semibold text-primary transition hover:-translate-y-0.5 hover:shadow-card"
+                      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card/90 text-xs font-semibold text-primary backdrop-blur transition hover:-translate-y-0.5 hover:shadow-card"
                     >
-                      <HeadphonesIcon className="h-4 w-4" strokeWidth={1.8} />
+                      <HeadphonesIcon className="h-4 w-4 text-teal" strokeWidth={1.8} />
                       Talk to Expert
                     </a>
                   </div>
+
                 </div>
               </div>
             </nav>
