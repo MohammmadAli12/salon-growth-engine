@@ -56,7 +56,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-teal",
   },
   calls: {
-    label: "Advertisement",
+    label: "Get More Customers",
     desc: "Get more calls from nearby people",
     icon: Megaphone,
     tint: "text-gold",
@@ -68,7 +68,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-forest-light",
   },
   google: {
-    label: "Google Visibility",
+    label: "Show My Salon on Google",
     desc: "Show your salon on Google Maps",
     icon: MapPin,
     tint: "text-teal",
@@ -80,7 +80,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-olive",
   },
   instagram: {
-    label: "Instagram Growth",
+    label: "Instagram Promotion",
     desc: "Posts and reels made for you",
     icon: Instagram,
     tint: "text-plum",
@@ -104,7 +104,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-forest",
   },
   reviews: {
-    label: "Customer Reviews",
+    label: "Get More Reviews",
     desc: "More 5-star reviews on Google",
     icon: Star,
     tint: "text-gold",
@@ -119,8 +119,8 @@ const NAV_ORDER = [
   "google",
   "bookings",
   "instagram",
+  "reviews",
   "branding",
-  "records",
 ];
 
 function metaFor(id: string): NavMeta {
