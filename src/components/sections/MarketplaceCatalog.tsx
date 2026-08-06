@@ -120,20 +120,23 @@ export function MarketplaceCatalog() {
         <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
           {/* Sidebar */}
           <aside className="sticky top-20 z-30 lg:top-24 lg:self-start">
-            <nav className="rounded-lg bg-primary p-3 shadow-float">
+            <nav className="rounded-lg border border-primary-foreground/15 bg-primary/85 p-3 shadow-float backdrop-blur-xl backdrop-saturate-150">
               {/* Mobile toggle — shows current choice, expands the menu */}
               <button
                 type="button"
                 onClick={() => setNavOpen((o) => !o)}
                 aria-expanded={navOpen}
                 aria-controls="marketplace-nav-list"
-                className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left lg:hidden"
+                className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors active:bg-primary-foreground/10 lg:hidden"
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-card text-primary">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border border-primary-foreground/20 bg-card/90 backdrop-blur">
                   {active ? (
-                    <ServiceIcon name={active.icon} className="h-4 w-4" />
+                    <ServiceIcon
+                      name={active.icon}
+                      className={`h-4 w-4 ${ICON_TINT[active.icon] ?? "text-primary"}`}
+                    />
                   ) : (
-                    <Home className="h-4 w-4" strokeWidth={1.8} />
+                    <Home className="h-4 w-4 text-forest" strokeWidth={1.8} />
                   )}
                 </span>
                 <span className="min-w-0 flex-1">
@@ -145,18 +148,23 @@ export function MarketplaceCatalog() {
                   </span>
                 </span>
                 <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-primary-foreground/70 transition-transform duration-200 ${navOpen ? "rotate-180" : ""}`}
+                  className={`h-5 w-5 shrink-0 text-primary-foreground/70 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${navOpen ? "rotate-180" : ""}`}
                   strokeWidth={1.8}
                 />
               </button>
 
               <div
                 id="marketplace-nav-list"
-                className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-200 ease-out lg:!grid-rows-[1fr] lg:opacity-100 ${
+                className={`grid overflow-hidden [transition:grid-template-rows_300ms_cubic-bezier(0.22,1,0.36,1),opacity_220ms_ease] will-change-[grid-template-rows] motion-reduce:transition-none lg:!grid-rows-[1fr] lg:opacity-100 ${
                   navOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 lg:opacity-100"
                 }`}
               >
-                <div className="min-h-0">
+                <div
+                  className={`min-h-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none lg:!translate-y-0 ${
+                    navOpen ? "translate-y-0" : "-translate-y-1"
+                  }`}
+                >
+
                   <div className="mt-2 h-px bg-primary-foreground/15 lg:mt-0" />
                   <div className="max-h-[55vh] overflow-y-auto py-2 lg:max-h-none lg:overflow-visible">
                     <SideItem
