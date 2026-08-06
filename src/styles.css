@@ -284,3 +284,26 @@
     transform: translateX(0);
   }
 }
+
+/* Continuous right-to-left service ribbon */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.service-marquee {
+  animation: marquee-left 32s linear infinite;
+}
+.service-marquee:hover,
+.service-marquee:focus-within {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-marquee {
+    animation: none;
+  }
+}
