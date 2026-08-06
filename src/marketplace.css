@@ -15,7 +15,7 @@
 .badge-dot{position:absolute;top:-5px;right:-5px;background:var(--rust);color:#fff;font-size:9.5px;font-weight:700;border-radius:50%;width:17px;height:17px;display:none;align-items:center;justify-content:center;border:1.5px solid var(--cream)}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;background:radial-gradient(120% 140% at 15% -10%,#2F6B4F 0%,var(--forest) 45%,var(--forest-deep) 100%);padding:36px 24px 46px;text-align:center;color:var(--cream)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(120% 140% at 15% -10%,var(--forest-light) 0%,var(--forest) 45%,var(--forest-deep) 100%);padding:36px 24px 46px;text-align:center;color:var(--cream)}
 .hero-particle{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),rgba(255,255,255,0) 70%);filter:blur(.5px);animation:drift 14s ease-in-out infinite}
 @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
 .hero-inner{position:relative;z-index:2}

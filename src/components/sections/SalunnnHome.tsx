@@ -815,7 +815,7 @@ export function SalunnnHome() {
               },
               {
                 logo: "L",
-                bg: "linear-gradient(135deg,#6B5B95,#C08B33)",
+                bg: "linear-gradient(135deg,var(--forest),var(--forest-light))",
                 type: "Full-time",
                 role: "Salon Manager",
                 salon: "Luxe Studio",
@@ -825,7 +825,7 @@ export function SalunnnHome() {
               },
               {
                 logo: "G",
-                bg: "linear-gradient(135deg,#B15A3E,#E0A446)",
+                bg: "linear-gradient(135deg,var(--forest-deep),var(--forest-light))",
                 type: "Part-time",
                 role: "Skin Therapist",
                 salon: "The Groom Room",
