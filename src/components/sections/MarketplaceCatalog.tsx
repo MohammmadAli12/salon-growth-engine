@@ -426,7 +426,7 @@ function ServicePanel({
         </p>
       </div>
 
-      <div className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0">
+      <div className="no-scrollbar -mx-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-5 pb-4 sm:mx-0 sm:px-0">
         {service.tiers.map((t, i) => {
           const key = `${service.id}:${t.id}`;
           const saved = wishlist.includes(key);
