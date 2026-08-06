@@ -98,50 +98,89 @@ export function MarketplaceCatalog() {
 
         <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
           {/* Sidebar */}
-          <aside className="lg:sticky lg:top-24 lg:self-start">
+          <aside className="sticky top-20 z-30 lg:top-24 lg:self-start">
             <nav className="rounded-lg bg-primary p-3 shadow-float">
-              <SideItem
-                icon={Home}
-                label="Marketplace"
-                active={activeId === "home"}
-                onClick={() => setActiveId("home")}
-              />
-              <div className="my-2 h-px bg-primary-foreground/15" />
-              <div
-                className="no-scrollbar flex gap-2 overflow-x-auto pb-1 lg:block lg:space-y-1 lg:overflow-visible lg:pb-0"
-                role="list"
+              {/* Mobile toggle — shows current choice, expands the menu */}
+              <button
+                type="button"
+                onClick={() => setNavOpen((o) => !o)}
+                aria-expanded={navOpen}
+                aria-controls="marketplace-nav-list"
+                className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left lg:hidden"
               >
-                {results.map((s) => (
-                  <SideItem
-                    key={s.id}
-                    iconName={s.icon}
-                    label={s.navLabel}
-                    active={activeId === s.id}
-                    onClick={() => setActiveId(s.id)}
-                  />
-                ))}
-                {results.length === 0 && (
-                  <p className="px-3 py-4 text-xs text-primary-foreground/70">
-                    Nothing matched. Try “website” or “Google”.
-                  </p>
-                )}
-              </div>
-              <div className="my-2 h-px bg-primary-foreground/15" />
-              <div className="rounded-md bg-primary-foreground/10 p-3">
-                <p className="text-xs font-medium text-primary-foreground/80">Need Help?</p>
-                <p className="mt-1 text-[11px] leading-snug text-primary-foreground/60">
-                  Not sure what to pick? We will guide you in 10 minutes.
-                </p>
-                <a
-                  href="/contact"
-                  className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card text-xs font-semibold text-primary transition hover:-translate-y-0.5 hover:shadow-card"
-                >
-                  <HeadphonesIcon className="h-4 w-4" strokeWidth={1.8} />
-                  Talk to Expert
-                </a>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-card text-primary">
+                  {active ? (
+                    <ServiceIcon name={active.icon} className="h-4 w-4" />
+                  ) : (
+                    <Home className="h-4 w-4" strokeWidth={1.8} />
+                  )}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[10px] tracking-wide text-primary-foreground/60 uppercase">
+                    Browse services
+                  </span>
+                  <span className="block truncate text-[13px] font-semibold text-primary-foreground">
+                    {active ? active.navLabel : "Marketplace"}
+                  </span>
+                </span>
+                <ChevronDown
+                  className={`h-5 w-5 shrink-0 text-primary-foreground/70 transition-transform duration-200 ${navOpen ? "rotate-180" : ""}`}
+                  strokeWidth={1.8}
+                />
+              </button>
+
+              <div
+                id="marketplace-nav-list"
+                className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-200 ease-out lg:!grid-rows-[1fr] lg:opacity-100 ${
+                  navOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 lg:opacity-100"
+                }`}
+              >
+                <div className="min-h-0">
+                  <div className="mt-2 h-px bg-primary-foreground/15 lg:mt-0" />
+                  <div className="max-h-[55vh] overflow-y-auto py-2 lg:max-h-none lg:overflow-visible">
+                    <SideItem
+                      icon={Home}
+                      label="Marketplace"
+                      active={activeId === "home"}
+                      onClick={() => pickItem("home")}
+                    />
+                    <div className="my-2 h-px bg-primary-foreground/15" />
+                    <div className="space-y-1" role="list">
+                      {results.map((s) => (
+                        <SideItem
+                          key={s.id}
+                          iconName={s.icon}
+                          label={s.navLabel}
+                          active={activeId === s.id}
+                          onClick={() => pickItem(s.id)}
+                        />
+                      ))}
+                      {results.length === 0 && (
+                        <p className="px-3 py-4 text-xs text-primary-foreground/70">
+                          Nothing matched. Try “website” or “Google”.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="mb-1 h-px bg-primary-foreground/15" />
+                  <div className="mt-2 rounded-md bg-primary-foreground/10 p-3">
+                    <p className="text-xs font-medium text-primary-foreground/80">Need Help?</p>
+                    <p className="mt-1 text-[11px] leading-snug text-primary-foreground/60">
+                      Not sure what to pick? We will guide you in 10 minutes.
+                    </p>
+                    <a
+                      href="/contact"
+                      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card text-xs font-semibold text-primary transition hover:-translate-y-0.5 hover:shadow-card"
+                    >
+                      <HeadphonesIcon className="h-4 w-4" strokeWidth={1.8} />
+                      Talk to Expert
+                    </a>
+                  </div>
+                </div>
               </div>
             </nav>
           </aside>
+
 
           {/* Right panel */}
           <section
