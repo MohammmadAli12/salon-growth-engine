@@ -37,6 +37,20 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Users,
 };
 
+/** Icon tint per service — stays inside the white/green family with gold + teal highlights. */
+const ICON_TINT: Record<string, string> = {
+  TrendingUp: "text-forest",
+  Globe: "text-teal",
+  CalendarCheck: "text-olive",
+  PhoneCall: "text-sage",
+  MessageCircle: "text-teal",
+  MapPin: "text-forest-light",
+  Instagram: "text-plum",
+  Palette: "text-gold",
+  Star: "text-gold-deep",
+  Users: "text-forest",
+};
+
 function ServiceIcon({ name, className }: { name: string; className?: string }) {
   const Icon = ICON_MAP[name] ?? Sparkles;
   return <Icon className={className} strokeWidth={1.7} />;
