@@ -283,12 +283,12 @@ export function MarketplaceCatalog() {
       >
         <div
           onClick={() => setDrawerOpen(false)}
-          className={`absolute inset-0 bg-foreground/40 backdrop-blur-sm transition-opacity duration-250 ${
+          className={`absolute inset-0 bg-foreground/40 backdrop-blur-sm transition-opacity duration-[250ms] ${
             drawerOpen ? "opacity-100" : "opacity-0"
           }`}
         />
         <div
-          className={`absolute inset-y-0 left-0 flex w-[86%] max-w-[320px] flex-col bg-primary shadow-float transition-transform duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+          className={`absolute inset-y-0 left-0 flex w-[86%] max-w-[320px] flex-col bg-primary shadow-float transition-transform duration-[250ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
             drawerOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -326,7 +326,7 @@ function SideItem({
       type="button"
       onClick={onClick}
       aria-current={active ? "true" : undefined}
-      className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-all duration-250 ${
+      className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-all duration-[250ms] ${
         active
           ? "bg-card text-primary shadow-soft"
           : "text-primary-foreground/85 hover:bg-primary-foreground/12 hover:text-primary-foreground"
@@ -521,4 +521,3 @@ function ServicePanel({
   );
 }
 
-export { inr };
