@@ -24,7 +24,7 @@ import {
   Truck,
   type LucideIcon,
 } from "lucide-react";
-import { useCart, inr } from "@/lib/cart-store";
+import { useCart } from "@/lib/cart-store";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
 import imgWebsite from "@/assets/mp-website.jpg";
 import imgAds from "@/assets/mp-ads.jpg";
