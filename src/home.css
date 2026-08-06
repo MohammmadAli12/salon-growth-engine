@@ -13,7 +13,7 @@
 .home .section-foot-link:hover span{transform:translateX(3px)}
 
 /* HERO */
-.home .home-hero{background:radial-gradient(120% 100% at 85% -10%,#EAF5EE 0%,var(--cream) 45%);padding:52px 0 60px;overflow:hidden;text-align:left;color:var(--espresso)}
+.home .home-hero{background:var(--gradient-hero-soft);padding:52px 0 60px;overflow:hidden;text-align:left;color:var(--espresso)}
 .home .hero-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
 @media(min-width:960px){.home .hero-grid{grid-template-columns:1.05fr .95fr}}
 .home .home-hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:11.5px;font-weight:700;color:var(--espresso-soft);margin-bottom:20px}
