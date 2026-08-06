@@ -427,6 +427,7 @@ function ServicePanel({
   const inCart = cart.map((c) => c.serviceId);
   const trackRef = useRef<HTMLDivElement>(null);
   const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     setSlide(0);
@@ -447,6 +448,21 @@ function ServicePanel({
     const card = el.children[i] as HTMLElement | undefined;
     if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
   };
+
+  // Gentle auto-slide through the plans; pauses on hover or touch.
+  useEffect(() => {
+    if (paused || service.tiers.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      const next = (slide + 1) % service.tiers.length;
+      const card = el.children[next] as HTMLElement | undefined;
+      if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+    }, 4200);
+    return () => window.clearInterval(id);
+  }, [paused, slide, service.tiers.length]);
+
 
   return (
     <div>
