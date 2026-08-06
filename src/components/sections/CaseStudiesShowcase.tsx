@@ -191,7 +191,7 @@ export function CaseStudiesShowcase() {
               loading="lazy"
               className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-active:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 transition-all duration-500 group-hover:via-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/45 to-forest-deep/20 transition-all duration-500 group-hover:via-forest-deep/35" />
 
             <div className="relative z-10 flex items-center justify-between">
               <div className="space-y-1">

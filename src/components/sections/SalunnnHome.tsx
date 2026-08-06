@@ -78,9 +78,9 @@ const SERVICE_CARDS = [
   {
     title: "Google Profile SEO",
     body: "Rank in the local map pack so nearby clients find you first.",
-    accent: "#2C6E6E",
+    accent: "#2F6B4F",
     chip: "#E4F0EF",
-    glow: "rgba(44,110,110,.35)",
+    glow: "rgba(47,107,79,.35)",
     icon: (
       <>
         <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" />
@@ -94,9 +94,9 @@ const SERVICE_CARDS_ROW2 = [
   {
     title: "Local SEO",
     body: 'Own every "salon near me" search across your service area.',
-    accent: "#6B5B95",
+    accent: "#123B29",
     chip: "#EBE7F3",
-    glow: "rgba(107,91,149,.35)",
+    glow: "rgba(18,59,41,.35)",
     icon: (
       <>
         <circle cx="11" cy="11" r="7" />
@@ -107,9 +107,9 @@ const SERVICE_CARDS_ROW2 = [
   {
     title: "Google Ads",
     body: "High-intent search campaigns with cost-per-booking tracked end to end.",
-    accent: "#C0703B",
+    accent: "#4E8C6C",
     chip: "#F5E7DD",
-    glow: "rgba(192,112,59,.35)",
+    glow: "rgba(78,140,108,.35)",
     icon: (
       <>
         <circle cx="12" cy="12" r="8.5" />
@@ -121,9 +121,9 @@ const SERVICE_CARDS_ROW2 = [
   {
     title: "Instagram Ads",
     body: "Creative-led campaigns that fill quiet weekdays and new services.",
-    accent: "#B14C7C",
+    accent: "#3D7A5C",
     chip: "#F3E4EC",
-    glow: "rgba(177,76,124,.35)",
+    glow: "rgba(61,122,92,.35)",
     icon: (
       <>
         <rect x="3" y="7" width="18" height="13" rx="2.5" />
@@ -138,17 +138,17 @@ const SERVICE_CARDS_ROW3 = [
   {
     title: "WhatsApp API",
     body: "Official WhatsApp automation for reminders, offers and rebooking.",
-    accent: "#9A7B1E",
+    accent: "#6BA687",
     chip: "#F3ECD8",
-    glow: "rgba(154,123,30,.35)",
+    glow: "rgba(107,166,135,.35)",
     icon: <path d="M4 12a8 8 0 1 1 3.2 6.4L4 19.5l1.3-3A7.9 7.9 0 0 1 4 12Z" />,
   },
   {
     title: "AI Automation",
     body: "An AI front desk that answers, qualifies and books while you work.",
-    accent: "#B15A3E",
+    accent: "#1E5940",
     chip: "#F5E7E0",
-    glow: "rgba(177,90,62,.35)",
+    glow: "rgba(30,89,64,.35)",
     icon: (
       <>
         <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
@@ -159,9 +159,9 @@ const SERVICE_CARDS_ROW3 = [
   {
     title: "Branding & Content",
     body: "Photo, reel and identity systems that make your salon look premium.",
-    accent: "#C08B33",
+    accent: "#2F6B4F",
     chip: "#F6EAD1",
-    glow: "rgba(192,139,51,.35)",
+    glow: "rgba(47,107,79,.35)",
     icon: (
       <>
         <circle cx="12" cy="12" r="8.5" />
@@ -815,7 +815,7 @@ export function SalunnnHome() {
               },
               {
                 logo: "L",
-                bg: "linear-gradient(135deg,#6B5B95,#C08B33)",
+                bg: "linear-gradient(135deg,var(--forest),var(--forest-light))",
                 type: "Full-time",
                 role: "Salon Manager",
                 salon: "Luxe Studio",
@@ -825,7 +825,7 @@ export function SalunnnHome() {
               },
               {
                 logo: "G",
-                bg: "linear-gradient(135deg,#B15A3E,#E0A446)",
+                bg: "linear-gradient(135deg,var(--forest-deep),var(--forest-light))",
                 type: "Part-time",
                 role: "Skin Therapist",
                 salon: "The Groom Room",
