@@ -30,6 +30,7 @@
   --color-forest-deep: var(--forest-deep);
   --color-forest-light: var(--forest-light);
   --color-sage: var(--sage);
+  --color-mint-wash: var(--mint-wash);
   --color-gold: var(--gold);
   --color-gold-deep: var(--gold-deep);
   --color-rust: var(--rust);
@@ -186,6 +187,9 @@
   --gradient-marketplace: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
   --gradient-success: linear-gradient(135deg, var(--forest-light) 0%, var(--forest-deep) 100%);
   --gradient-surface: linear-gradient(180deg, var(--background) 0%, var(--background-soft) 100%);
+  /* Soft green wash used for page/section backgrounds */
+  --mint-wash: oklch(0.965 0.022 158);
+  --gradient-hero-soft: radial-gradient(120% 100% at 85% -10%, var(--mint-wash) 0%, var(--background) 45%);
 }
 
 
@@ -239,6 +243,10 @@
 
 @utility bg-gradient-success {
   background-image: var(--gradient-success);
+}
+
+@utility bg-gradient-hero-soft {
+  background-image: var(--gradient-hero-soft);
 }
 
 @utility bg-gradient-card-hover {
