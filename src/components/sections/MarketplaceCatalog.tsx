@@ -37,6 +37,20 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Users,
 };
 
+/** Icon tint per service — stays inside the white/green family with gold + teal highlights. */
+const ICON_TINT: Record<string, string> = {
+  TrendingUp: "text-forest",
+  Globe: "text-teal",
+  CalendarCheck: "text-olive",
+  PhoneCall: "text-sage",
+  MessageCircle: "text-teal",
+  MapPin: "text-forest-light",
+  Instagram: "text-plum",
+  Palette: "text-gold",
+  Star: "text-gold-deep",
+  Users: "text-forest",
+};
+
 function ServiceIcon({ name, className }: { name: string; className?: string }) {
   const Icon = ICON_MAP[name] ?? Sparkles;
   return <Icon className={className} strokeWidth={1.7} />;
@@ -106,20 +120,23 @@ export function MarketplaceCatalog() {
         <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
           {/* Sidebar */}
           <aside className="sticky top-20 z-30 lg:top-24 lg:self-start">
-            <nav className="rounded-lg bg-primary p-3 shadow-float">
+            <nav className="rounded-lg border border-primary-foreground/15 bg-primary/85 p-3 shadow-float backdrop-blur-xl backdrop-saturate-150">
               {/* Mobile toggle — shows current choice, expands the menu */}
               <button
                 type="button"
                 onClick={() => setNavOpen((o) => !o)}
                 aria-expanded={navOpen}
                 aria-controls="marketplace-nav-list"
-                className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left lg:hidden"
+                className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors active:bg-primary-foreground/10 lg:hidden"
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-card text-primary">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border border-primary-foreground/20 bg-card/90 backdrop-blur">
                   {active ? (
-                    <ServiceIcon name={active.icon} className="h-4 w-4" />
+                    <ServiceIcon
+                      name={active.icon}
+                      className={`h-4 w-4 ${ICON_TINT[active.icon] ?? "text-primary"}`}
+                    />
                   ) : (
-                    <Home className="h-4 w-4" strokeWidth={1.8} />
+                    <Home className="h-4 w-4 text-forest" strokeWidth={1.8} />
                   )}
                 </span>
                 <span className="min-w-0 flex-1">
@@ -131,18 +148,23 @@ export function MarketplaceCatalog() {
                   </span>
                 </span>
                 <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-primary-foreground/70 transition-transform duration-200 ${navOpen ? "rotate-180" : ""}`}
+                  className={`h-5 w-5 shrink-0 text-primary-foreground/70 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${navOpen ? "rotate-180" : ""}`}
                   strokeWidth={1.8}
                 />
               </button>
 
               <div
                 id="marketplace-nav-list"
-                className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-200 ease-out lg:!grid-rows-[1fr] lg:opacity-100 ${
+                className={`grid overflow-hidden [transition:grid-template-rows_300ms_cubic-bezier(0.22,1,0.36,1),opacity_220ms_ease] will-change-[grid-template-rows] motion-reduce:transition-none lg:!grid-rows-[1fr] lg:opacity-100 ${
                   navOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 lg:opacity-100"
                 }`}
               >
-                <div className="min-h-0">
+                <div
+                  className={`min-h-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none lg:!translate-y-0 ${
+                    navOpen ? "translate-y-0" : "-translate-y-1"
+                  }`}
+                >
+
                   <div className="mt-2 h-px bg-primary-foreground/15 lg:mt-0" />
                   <div className="max-h-[55vh] overflow-y-auto py-2 lg:max-h-none lg:overflow-visible">
                     <SideItem
@@ -170,19 +192,22 @@ export function MarketplaceCatalog() {
                     </div>
                   </div>
                   <div className="mb-1 h-px bg-primary-foreground/15" />
-                  <div className="mt-2 rounded-md bg-primary-foreground/10 p-3">
-                    <p className="text-xs font-medium text-primary-foreground/80">Need Help?</p>
+                  <div className="mt-2 rounded-md border border-primary-foreground/15 bg-primary-foreground/10 p-3 backdrop-blur">
+                    <p className="flex items-center gap-1.5 text-xs font-medium text-primary-foreground/80">
+                      <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={2} /> Need Help?
+                    </p>
                     <p className="mt-1 text-[11px] leading-snug text-primary-foreground/60">
                       Not sure what to pick? We will guide you in 10 minutes.
                     </p>
                     <a
                       href="/contact"
-                      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card text-xs font-semibold text-primary transition hover:-translate-y-0.5 hover:shadow-card"
+                      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card/90 text-xs font-semibold text-primary backdrop-blur transition hover:-translate-y-0.5 hover:shadow-card"
                     >
-                      <HeadphonesIcon className="h-4 w-4" strokeWidth={1.8} />
+                      <HeadphonesIcon className="h-4 w-4 text-teal" strokeWidth={1.8} />
                       Talk to Expert
                     </a>
                   </div>
+
                 </div>
               </div>
             </nav>
@@ -274,23 +299,32 @@ function SideItem({
       aria-current={active ? "true" : undefined}
       className={`flex w-full shrink-0 items-center gap-3 rounded-md px-3 py-2.5 text-left text-[13px] font-medium whitespace-nowrap transition-all duration-200 lg:whitespace-normal ${
         active
-          ? "bg-card text-primary shadow-soft"
-          : "text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+          ? "border border-primary-foreground/25 bg-card/90 text-primary shadow-soft backdrop-blur"
+          : "border border-transparent text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
       }`}
     >
       <span
         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-sm transition-colors ${
-          active ? "bg-accent text-primary" : "bg-primary-foreground/10"
+          active
+            ? "bg-accent"
+            : "bg-primary-foreground/10 ring-1 ring-primary-foreground/10 ring-inset"
         }`}
       >
         {Icon ? (
-          <Icon className="h-4 w-4" strokeWidth={1.8} />
+          <Icon
+            className={`h-4 w-4 ${active ? "text-forest" : "text-primary-foreground/90"}`}
+            strokeWidth={1.8}
+          />
         ) : (
-          <ServiceIcon name={iconName ?? ""} className="h-4 w-4" />
+          <ServiceIcon
+            name={iconName ?? ""}
+            className={`h-4 w-4 ${active ? (ICON_TINT[iconName ?? ""] ?? "text-forest") : "text-primary-foreground/90"}`}
+          />
         )}
       </span>
       {label}
     </button>
+
   );
 }
 
@@ -312,8 +346,8 @@ function OverviewPanel({ onPick }: { onPick: (id: string) => void }) {
             onClick={() => onPick(s.id)}
             className="group flex items-start gap-3 rounded-md border border-border bg-background p-4 text-left transition-all duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card"
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent text-primary">
-              <ServiceIcon name={s.icon} className="h-5 w-5" />
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent/80 ring-1 ring-border ring-inset backdrop-blur">
+              <ServiceIcon name={s.icon} className={`h-5 w-5 ${ICON_TINT[s.icon] ?? "text-primary"}`} />
             </span>
             <span className="min-w-0">
               <span className="block text-sm font-semibold text-foreground">{s.navLabel}</span>
@@ -349,8 +383,8 @@ function ServicePanel({
       <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
         <div className="bg-gradient-hero-soft p-6 sm:p-9">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-soft">
-              <ServiceIcon name={service.icon} className="h-7 w-7" />
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-border bg-card/70 shadow-soft backdrop-blur-md">
+              <ServiceIcon name={service.icon} className={`h-7 w-7 ${ICON_TINT[service.icon] ?? "text-primary"}`} />
             </span>
             <div className="min-w-0">
               <h2 className="text-2xl leading-tight sm:text-4xl">{service.heroTitle}</h2>
