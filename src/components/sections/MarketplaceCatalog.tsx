@@ -239,7 +239,7 @@ export function MarketplaceCatalog() {
           >
             <ShoppingBag className="h-5 w-5" strokeWidth={1.8} />
             {cart.length > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-success px-1 text-[10px] font-bold text-primary-foreground shadow-soft">
+              <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-forest-light px-1 text-[10px] font-bold text-primary-foreground shadow-soft">
                 {cart.length}
               </span>
             )}
