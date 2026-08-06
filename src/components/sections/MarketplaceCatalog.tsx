@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Globe,
   Megaphone,
@@ -26,6 +26,24 @@ import {
 } from "lucide-react";
 import { useCart, inr } from "@/lib/cart-store";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
+import imgWebsite from "@/assets/mp-website.jpg";
+import imgAds from "@/assets/mp-ads.jpg";
+import imgChat from "@/assets/mp-chat.jpg";
+import imgSalon from "@/assets/mp-salon.jpg";
+
+/** Banner photo shown at the top of each service panel. */
+const HERO_IMAGE: Record<string, string> = {
+  website: imgWebsite,
+  calls: imgAds,
+  "more-customers": imgAds,
+  instagram: imgAds,
+  whatsapp: imgChat,
+  bookings: imgChat,
+  records: imgChat,
+  google: imgSalon,
+  branding: imgSalon,
+  reviews: imgSalon,
+};
 
 /** Sidebar presentation: plain-language label + one-line description per service. */
 type NavMeta = { label: string; desc: string; icon: LucideIcon; tint: string };
