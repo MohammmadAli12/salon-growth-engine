@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Globe,
   Megaphone,
@@ -24,8 +24,26 @@ import {
   Truck,
   type LucideIcon,
 } from "lucide-react";
-import { useCart, inr } from "@/lib/cart-store";
+import { useCart } from "@/lib/cart-store";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
+import imgWebsite from "@/assets/mp-website.jpg";
+import imgAds from "@/assets/mp-ads.jpg";
+import imgChat from "@/assets/mp-chat.jpg";
+import imgSalon from "@/assets/mp-salon.jpg";
+
+/** Banner photo shown at the top of each service panel. */
+const HERO_IMAGE: Record<string, string> = {
+  website: imgWebsite,
+  calls: imgAds,
+  "more-customers": imgAds,
+  instagram: imgAds,
+  whatsapp: imgChat,
+  bookings: imgChat,
+  records: imgChat,
+  google: imgSalon,
+  branding: imgSalon,
+  reviews: imgSalon,
+};
 
 /** Sidebar presentation: plain-language label + one-line description per service. */
 type NavMeta = { label: string; desc: string; icon: LucideIcon; tint: string };
@@ -38,7 +56,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-teal",
   },
   calls: {
-    label: "Advertisement",
+    label: "Get More Customers",
     desc: "Get more calls from nearby people",
     icon: Megaphone,
     tint: "text-gold",
@@ -50,7 +68,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-forest-light",
   },
   google: {
-    label: "Google Visibility",
+    label: "Show My Salon on Google",
     desc: "Show your salon on Google Maps",
     icon: MapPin,
     tint: "text-teal",
@@ -62,7 +80,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-olive",
   },
   instagram: {
-    label: "Instagram Growth",
+    label: "Instagram Promotion",
     desc: "Posts and reels made for you",
     icon: Instagram,
     tint: "text-plum",
@@ -86,7 +104,7 @@ const NAV_META: Record<string, NavMeta> = {
     tint: "text-forest",
   },
   reviews: {
-    label: "Customer Reviews",
+    label: "Get More Reviews",
     desc: "More 5-star reviews on Google",
     icon: Star,
     tint: "text-gold",
@@ -101,8 +119,8 @@ const NAV_ORDER = [
   "google",
   "bookings",
   "instagram",
+  "reviews",
   "branding",
-  "records",
 ];
 
 function metaFor(id: string): NavMeta {
@@ -369,11 +387,49 @@ function ServicePanel({
 }) {
   const meta = metaFor(service.id);
   const Icon = meta.icon;
+  const { cart } = useCart();
+  const inCart = cart.map((c) => c.serviceId);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    setSlide(0);
+    trackRef.current?.scrollTo({ left: 0 });
+  }, [service.id]);
+
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.firstElementChild as HTMLElement | null;
+    const step = card ? card.offsetWidth + 16 : el.clientWidth;
+    setSlide(Math.round(el.scrollLeft / step));
+  };
+
+  const goTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
 
   return (
     <div>
       {/* Hero */}
       <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+        <div className="relative h-44 overflow-hidden sm:h-64 lg:h-72">
+          <img
+            src={HERO_IMAGE[service.id] ?? imgSalon}
+            alt={service.heroTitle}
+            width={1200}
+            height={800}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-forest-deep/15 to-transparent" />
+          <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-card/85 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-primary uppercase backdrop-blur-md sm:left-6">
+            <Icon className={`h-3.5 w-3.5 ${meta.tint}`} strokeWidth={2} /> {meta.label}
+          </span>
+        </div>
+
         <div className="grid items-center gap-6 bg-gradient-hero-soft p-6 sm:p-9 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold tracking-wide text-accent-foreground uppercase">
@@ -420,13 +476,32 @@ function ServicePanel({
             Swipe to compare. Prices are final — no hidden charges.
           </p>
         </div>
-        <p className="hidden shrink-0 items-center gap-1 text-xs text-muted-foreground sm:flex">
-          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} /> swipe
-          <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
-        </p>
+        <div className="hidden shrink-0 items-center gap-2 sm:flex">
+          <button
+            type="button"
+            aria-label="Previous plan"
+            onClick={() => goTo(Math.max(0, slide - 1))}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-soft transition hover:-translate-y-0.5 hover:shadow-card disabled:opacity-40"
+            disabled={slide === 0}
+          >
+            <ArrowLeft className="h-4 w-4" strokeWidth={2} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next plan"
+            onClick={() => goTo(Math.min(service.tiers.length - 1, slide + 1))}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-soft transition hover:-translate-y-0.5 hover:shadow-card disabled:opacity-40"
+            disabled={slide >= service.tiers.length - 1}
+          >
+            <ArrowRight className="h-4 w-4" strokeWidth={2} />
+          </button>
+        </div>
       </div>
 
-      <div className="no-scrollbar -mx-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-5 pb-4 sm:mx-0 sm:px-0">
+      <div
+        ref={trackRef}
+        onScroll={onScroll}
+        className="no-scrollbar -mx-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-5 pb-4 sm:mx-0 sm:px-0">
         {service.tiers.map((t, i) => {
           const key = `${service.id}:${t.id}`;
           const saved = wishlist.includes(key);
@@ -473,17 +548,44 @@ function ServicePanel({
                 type="button"
                 onClick={() => onAdd(service, t)}
                 className={`mt-7 inline-flex h-13 w-full items-center justify-center gap-2 rounded-md py-3.5 text-[15px] font-semibold transition-all duration-200 hover:scale-[1.02] ${
-                  t.popular
-                    ? "bg-gradient-button text-primary-foreground shadow-card hover:shadow-float"
-                    : "border border-border bg-background text-foreground hover:border-primary/40 hover:shadow-card"
+                  inCart.includes(key)
+                    ? "bg-accent text-primary"
+                    : t.popular
+                      ? "bg-gradient-button text-primary-foreground shadow-card hover:shadow-float"
+                      : "border border-border bg-background text-foreground hover:border-primary/40 hover:shadow-card"
                 }`}
               >
-                <ShoppingBag className="h-4 w-4" strokeWidth={1.8} /> Add to Cart
+                {inCart.includes(key) ? (
+                  <>
+                    <Check className="h-4 w-4" strokeWidth={2.4} /> Added to cart
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag className="h-4 w-4" strokeWidth={1.8} /> Add to Cart
+                  </>
+                )}
               </button>
             </article>
           );
         })}
       </div>
+
+      {/* Pagination dots */}
+      {service.tiers.length > 1 && (
+        <div className="mt-1 flex justify-center gap-2 lg:hidden">
+          {service.tiers.map((t, i) => (
+            <button
+              key={t.id}
+              type="button"
+              aria-label={`Show plan ${i + 1}`}
+              onClick={() => goTo(i)}
+              className={`h-2 rounded-full transition-all duration-200 ${
+                i === slide ? "w-6 bg-primary" : "w-2 bg-border"
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Trust badges */}
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
