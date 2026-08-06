@@ -387,11 +387,48 @@ function ServicePanel({
 }) {
   const meta = metaFor(service.id);
   const Icon = meta.icon;
+  const { cart } = useCart();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    setSlide(0);
+    trackRef.current?.scrollTo({ left: 0 });
+  }, [service.id]);
+
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.firstElementChild as HTMLElement | null;
+    const step = card ? card.offsetWidth + 16 : el.clientWidth;
+    setSlide(Math.round(el.scrollLeft / step));
+  };
+
+  const goTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
 
   return (
     <div>
       {/* Hero */}
       <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+        <div className="relative h-44 overflow-hidden sm:h-64 lg:h-72">
+          <img
+            src={HERO_IMAGE[service.id] ?? imgSalon}
+            alt={service.heroTitle}
+            width={1200}
+            height={800}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-forest-deep/15 to-transparent" />
+          <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-card/85 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-primary uppercase backdrop-blur-md sm:left-6">
+            <Icon className={`h-3.5 w-3.5 ${meta.tint}`} strokeWidth={2} /> {meta.label}
+          </span>
+        </div>
+
         <div className="grid items-center gap-6 bg-gradient-hero-soft p-6 sm:p-9 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold tracking-wide text-accent-foreground uppercase">
