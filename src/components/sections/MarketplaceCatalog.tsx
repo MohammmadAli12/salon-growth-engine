@@ -265,6 +265,42 @@ export function MarketplaceCatalog() {
         </div>
       </div>
 
+      {/* Auto-scrolling service ribbon (right → left, pauses on hover) */}
+      <div className="border-b border-border/70 bg-card/50">
+        <div
+          className="relative overflow-hidden py-3"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          }}
+        >
+          <div className="service-marquee flex w-max gap-2.5">
+            {[...ordered, ...ordered].map((s, i) => {
+              const m = metaFor(s.id);
+              const RIcon = m.icon;
+              return (
+                <button
+                  key={`${s.id}-${i}`}
+                  type="button"
+                  onClick={() => pickItem(s.id)}
+                  className={`flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 text-[13px] font-medium whitespace-nowrap transition ${
+                    activeId === s.id
+                      ? "border-primary/40 bg-accent text-primary shadow-soft"
+                      : "border-border bg-card text-foreground/85 hover:border-primary/30 hover:shadow-soft"
+                  }`}
+                >
+                  <RIcon className={`h-4 w-4 ${m.tint}`} strokeWidth={1.8} />
+                  {m.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+
       <div className="mx-auto w-full max-w-7xl px-4 pt-6 pb-24 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
           {/* Desktop sidebar */}
