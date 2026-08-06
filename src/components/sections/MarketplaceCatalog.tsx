@@ -296,23 +296,32 @@ function SideItem({
       aria-current={active ? "true" : undefined}
       className={`flex w-full shrink-0 items-center gap-3 rounded-md px-3 py-2.5 text-left text-[13px] font-medium whitespace-nowrap transition-all duration-200 lg:whitespace-normal ${
         active
-          ? "bg-card text-primary shadow-soft"
-          : "text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+          ? "border border-primary-foreground/25 bg-card/90 text-primary shadow-soft backdrop-blur"
+          : "border border-transparent text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
       }`}
     >
       <span
         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-sm transition-colors ${
-          active ? "bg-accent text-primary" : "bg-primary-foreground/10"
+          active
+            ? "bg-accent"
+            : "bg-primary-foreground/10 ring-1 ring-primary-foreground/10 ring-inset"
         }`}
       >
         {Icon ? (
-          <Icon className="h-4 w-4" strokeWidth={1.8} />
+          <Icon
+            className={`h-4 w-4 ${active ? "text-forest" : "text-primary-foreground/90"}`}
+            strokeWidth={1.8}
+          />
         ) : (
-          <ServiceIcon name={iconName ?? ""} className="h-4 w-4" />
+          <ServiceIcon
+            name={iconName ?? ""}
+            className={`h-4 w-4 ${active ? (ICON_TINT[iconName ?? ""] ?? "text-forest") : "text-primary-foreground/90"}`}
+          />
         )}
       </span>
       {label}
     </button>
+
   );
 }
 
