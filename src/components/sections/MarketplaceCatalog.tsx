@@ -1,421 +1,393 @@
 import { useMemo, useState } from "react";
+import {
+  Home,
+  TrendingUp,
+  Globe,
+  CalendarCheck,
+  PhoneCall,
+  MessageCircle,
+  MapPin,
+  Instagram,
+  Palette,
+  Star,
+  Users,
+  Search,
+  Check,
+  ShoppingBag,
+  Heart,
+  ArrowRight,
+  Sparkles,
+  HeadphonesIcon,
+  type LucideIcon,
+} from "lucide-react";
 import { useCart, inr } from "@/lib/cart-store";
-import { CAT_META, ICONS, HEART_ICON, BAG_ICON, SERVICES, type Service } from "@/lib/marketplace-catalog";
+import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
 
-function Svg({ html }: { html: string }) {
-  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+const ICON_MAP: Record<string, LucideIcon> = {
+  TrendingUp,
+  Globe,
+  CalendarCheck,
+  PhoneCall,
+  MessageCircle,
+  MapPin,
+  Instagram,
+  Palette,
+  Star,
+  Users,
+};
+
+function ServiceIcon({ name, className }: { name: string; className?: string }) {
+  const Icon = ICON_MAP[name] ?? Sparkles;
+  return <Icon className={className} strokeWidth={1.7} />;
 }
 
-const CATS = [
-  { id: "all", label: "All services" },
-  { id: "web", label: "Website" },
-  { id: "seo", label: "SEO" },
-  { id: "ads", label: "Ads" },
-  { id: "social", label: "Social" },
-  { id: "whatsapp", label: "Chat" },
-];
-
-function chipStyle(cat: string) {
-  const meta = CAT_META[cat];
-  return { background: meta?.soft ?? "var(--sage)", color: meta?.color ?? "var(--forest-deep)" };
-}
-
-const priceNum = (p: string) => Number(p.replace(/[₹,]/g, ""));
-
-/** Full SalonGrow marketplace: hero, filters, search, service grid and plan sheet. */
 export function MarketplaceCatalog() {
-  const { cart, wishlist, addItem, toggleWish, showToast, setCartOpen, discount, total } = useCart();
-  const [cat, setCat] = useState("all");
+  const [activeId, setActiveId] = useState<string>("home");
   const [query, setQuery] = useState("");
-  const [openService, setOpenService] = useState<Service | null>(null);
-  const [selectedTier, setSelectedTier] = useState<number | null>(null);
-  const [compare, setCompare] = useState(false);
+  const { cart, wishlist, addItem, toggleWish, showToast, setCartOpen, total } = useCart();
 
-  const filtered = useMemo(() => {
+  const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return SERVICES.filter((s) => {
-      const inCat = cat === "all" || s.cat === cat;
-      const inQuery =
-        !q ||
-        s.name.toLowerCase().includes(q) ||
-        s.desc.toLowerCase().includes(q) ||
-        s.tiers.some((t) => t.features.some((f) => f.toLowerCase().includes(q)));
-      return inCat && inQuery;
-    });
-  }, [cat, query]);
-
-  const suggestions = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    return SERVICES.filter((s) => s.name.toLowerCase().includes(q)).slice(0, 5);
+    if (!q) return SIMPLE_SERVICES;
+    return SIMPLE_SERVICES.filter(
+      (s) =>
+        s.navLabel.toLowerCase().includes(q) ||
+        s.heroTitle.toLowerCase().includes(q) ||
+        s.benefits.some((b) => b.toLowerCase().includes(q)),
+    );
   }, [query]);
 
-  const count = cart.length;
+  const active = SIMPLE_SERVICES.find((s) => s.id === activeId) ?? null;
 
-  function openDetail(s: Service) {
-    setOpenService(s);
-    setCompare(false);
-    const existing = cart.find((c) => c.serviceId === s.id);
-    setSelectedTier(existing ? s.tiers.findIndex((t) => t.label === existing.tier) : null);
-  }
-
-  function handleAdd() {
-    if (!openService || selectedTier === null) return;
-    const t = openService.tiers[selectedTier]!;
+  const handleAdd = (service: SimpleService, tier: SimpleTier) => {
     addItem({
-      serviceId: openService.id,
-      name: openService.name,
-      tier: t.label,
-      price: priceNum(t.price),
-      period: t.period,
+      serviceId: `${service.id}:${tier.id}`,
+      name: service.navLabel,
+      tier: tier.label,
+      price: tier.price,
+      period: tier.period,
     });
-    showToast(`Added ${openService.name} — ${t.label} plan`);
-    setOpenService(null);
-  }
-
-  const allFeatures = openService
-    ? Array.from(new Set(openService.tiers.flatMap((t) => t.features)))
-    : [];
+    showToast(`Added ${service.navLabel} — ${tier.label}`);
+  };
 
   return (
-    <>
-      {/* HERO */}
-      <div className="hero">
-        <div
-          className="hero-particle"
-          style={{ width: 70, height: 70, top: "8%", left: "8%", animationDuration: "16s" }}
-        />
-        <div
-          className="hero-particle"
-          style={{
-            width: 40,
-            height: 40,
-            top: "60%",
-            left: "82%",
-            animationDuration: "12s",
-            animationDelay: "-3s",
-          }}
-        />
-        <div
-          className="hero-particle"
-          style={{
-            width: 90,
-            height: 90,
-            top: "70%",
-            left: "12%",
-            animationDuration: "18s",
-            animationDelay: "-6s",
-          }}
-        />
-        <div className="hero-inner">
-          <div className="hero-badge">✦ Salon Digital Marketing Services</div>
-          <h1 className="disp">
-            Grow your salon
-            <br />
-            with <em>proven</em> services
+    <div className="min-h-screen bg-background">
+      <div className="mx-auto w-full max-w-7xl px-4 pt-24 pb-28 sm:px-6 lg:px-8">
+        {/* Search */}
+        <div className="mb-6">
+          <h1 className="mb-2 text-3xl leading-tight sm:text-4xl">
+            What do you want for your salon?
           </h1>
-          <p>
-            Pick the services you need, choose a plan that fits your budget, and start growing
-            today.
+          <p className="mb-5 max-w-2xl text-sm text-muted-foreground sm:text-base">
+            Pick one thing on the left. We explain it in simple words and show you the price.
           </p>
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <div className="num disp">500+</div>
-              <div className="lbl">Salons served</div>
-            </div>
-            <div className="hero-stat">
-              <div className="num disp">₹2Cr+</div>
-              <div className="lbl">Revenue generated</div>
-            </div>
-            <div className="hero-stat">
-              <div className="num disp">4.9★</div>
-              <div className="lbl">Avg rating</div>
-            </div>
+          <div className="relative max-w-xl">
+            <Search
+              className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+              strokeWidth={1.8}
+            />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search — website, bookings, Google, WhatsApp…"
+              aria-label="Search services"
+              className="h-12 w-full rounded-md border border-border bg-card pr-4 pl-11 text-sm text-foreground shadow-soft outline-none transition placeholder:text-muted-foreground focus:border-primary/40 focus:ring-4 focus:ring-primary/10"
+            />
           </div>
         </div>
-      </div>
 
-      {/* FILTERS */}
-      <div className="filter-wrap">
-        {CATS.map((c) => (
-          <div
-            key={c.id}
-            className={`ftab${cat === c.id ? " active" : ""}`}
-            onClick={() => setCat(c.id)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") setCat(c.id);
-            }}
-          >
-            {c.id !== "all" ? <Svg html={ICONS[serviceIconFor(c.id)] ?? ""} /> : null}
-            {c.label}
-          </div>
-        ))}
-      </div>
-
-      {/* PROGRESS */}
-      <div className="progress-strip">
-        <div className="progress-track">
-          <div
-            className="progress-fill"
-            style={{ width: `${Math.min(100, Math.round((count / SERVICES.length) * 100))}%` }}
-          />
-        </div>
-        <div className="progress-text">
-          {count} of {SERVICES.length} services added
-        </div>
-      </div>
-
-      {/* SEARCH */}
-      <div className="search-wrap">
-        <div className="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="7" />
-            <path d="M21 21l-4.3-4.3" strokeLinecap="round" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search services..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            aria-label="Search services"
-          />
-        </div>
-        <div className={`search-suggest${suggestions.length ? " show" : ""}`}>
-          {suggestions.map((s) => (
-            <div key={s.id} className="suggest-item" onClick={() => openDetail(s)}>
-              <Svg html={ICONS[s.id] ?? ""} />
-              {s.name}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SERVICE GRID */}
-      <div className="services-grid">
-        {filtered.length === 0 ? (
-          <div className="empty-state" style={{ gridColumn: "1/-1" }}>
-            <div className="ei">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="7" />
-                <path d="M21 21l-4.3-4.3" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div>No services found</div>
-          </div>
-        ) : (
-          filtered.map((s) => {
-            const inCart = cart.find((c) => c.serviceId === s.id);
-            const meta = CAT_META[s.cat];
-            return (
+        <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
+          {/* Sidebar */}
+          <aside className="lg:sticky lg:top-24 lg:self-start">
+            <nav className="rounded-lg bg-primary p-3 shadow-float">
+              <SideItem
+                icon={Home}
+                label="Marketplace"
+                active={activeId === "home"}
+                onClick={() => setActiveId("home")}
+              />
+              <div className="my-2 h-px bg-primary-foreground/15" />
               <div
-                key={s.id}
-                className={`svc-card${inCart ? " has-item" : ""}`}
-                style={{ ["--accent" as string]: meta?.color ?? "var(--forest)" }}
-                onClick={() => openDetail(s)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") openDetail(s);
-                }}
+                className="no-scrollbar flex gap-2 overflow-x-auto pb-1 lg:block lg:space-y-1 lg:overflow-visible lg:pb-0"
+                role="list"
               >
-                <button
-                  className={`wish-btn${wishlist.includes(s.id) ? " active" : ""}`}
-                  aria-label={`Save ${s.name}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleWish(s.id);
-                  }}
-                >
-                  <Svg html={HEART_ICON} />
-                </button>
-                {inCart ? <div className="added-badge">In cart</div> : null}
-                <div className="svc-icon" style={chipStyle(s.cat)}>
-                  <Svg html={ICONS[s.id] ?? ""} />
-                </div>
-                <div className="svc-name disp">{s.name}</div>
-                <div className="svc-desc">{s.desc}</div>
-                <div className="svc-from">
-                  From <b>{s.tiers[0]!.price}</b>
-                </div>
-                <button className={`svc-btn${inCart ? " added" : ""}`} tabIndex={-1}>
-                  {inCart ? "✓ In cart" : "View plans"}
-                </button>
-              </div>
-            );
-          })
-        )}
-      </div>
-
-      {/* DETAIL SHEET */}
-      <div
-        className={`overlay${openService ? " open" : ""}`}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) setOpenService(null);
-        }}
-      >
-        <div className="sheet">
-          {openService ? (
-            <>
-              <div className="sheet-handle" />
-              <div className="sheet-header">
-                <div className="sheet-icon" style={chipStyle(openService.cat)}>
-                  <Svg html={ICONS[openService.id] ?? ""} />
-                </div>
-                <div>
-                  <div className="sheet-title disp">{openService.name}</div>
-                  <div className="sheet-sub">{openService.desc}</div>
-                </div>
-                <button
-                  className="close-btn"
-                  onClick={() => setOpenService(null)}
-                  aria-label="Close plans"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="tiers-wrap">
-                <div className="tiers-row-head">
-                  <div className="tiers-label">Choose your plan</div>
-                  <button className="compare-toggle" onClick={() => setCompare((v) => !v)}>
-                    ⇄ {compare ? "Plan cards" : "Compare plans"}
-                  </button>
-                </div>
-
-                {compare ? (
-                  <div className="compare-wrap show">
-                    <div className="compare-scroll">
-                      <table className="compare-table">
-                        <thead>
-                          <tr>
-                            <th>Feature</th>
-                            {openService.tiers.map((t) => (
-                              <th key={t.label}>
-                                {t.label}
-                                <div className="cth-price">
-                                  {t.price} {t.period}
-                                </div>
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {allFeatures.map((f) => (
-                            <tr key={f}>
-                              <td>{f}</td>
-                              {openService.tiers.map((t) => (
-                                <td key={t.label}>
-                                  {t.features.includes(f) ? (
-                                    <span className="chk">✓</span>
-                                  ) : (
-                                    <span className="dash">—</span>
-                                  )}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="tier-cards">
-                    {openService.tiers.map((t, i) => (
-                      <div
-                        key={t.label}
-                        className={`tier-card${selectedTier === i ? " selected" : ""}`}
-                        onClick={() => setSelectedTier(i)}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") setSelectedTier(i);
-                        }}
-                      >
-                        {i === 1 ? <div className="popular-tag">Most popular</div> : null}
-                        <div className="tier-check">✓</div>
-                        <div className="tier-dots">
-                          {[0, 1, 2].map((d) => (
-                            <div key={d} className={`tdot${d <= i ? " on" : ""}`} />
-                          ))}
-                        </div>
-                        <div
-                          className="tier-badge"
-                          style={{ background: t.badge, color: t.badgeText }}
-                        >
-                          {t.label}
-                        </div>
-                        <div className="tier-price disp">{t.price}</div>
-                        <div className="tier-period">{t.period}</div>
-                        <ul className="tier-features">
-                          {t.features.map((f) => (
-                            <li key={f}>{f}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
+                {results.map((s) => (
+                  <SideItem
+                    key={s.id}
+                    iconName={s.icon}
+                    label={s.navLabel}
+                    active={activeId === s.id}
+                    onClick={() => setActiveId(s.id)}
+                  />
+                ))}
+                {results.length === 0 && (
+                  <p className="px-3 py-4 text-xs text-primary-foreground/70">
+                    Nothing matched. Try “website” or “Google”.
+                  </p>
                 )}
               </div>
-
-              {/* ALSO ADD */}
-              <div className="also-add" style={{ display: "block" }}>
-                <div className="also-label">Frequently added together</div>
-                <div className="also-row">
-                  {SERVICES.filter(
-                    (s) => s.id !== openService.id && !cart.some((c) => c.serviceId === s.id),
-                  )
-                    .slice(0, 4)
-                    .map((s) => (
-                      <div key={s.id} className="also-chip" onClick={() => openDetail(s)}>
-                        <Svg html={ICONS[s.id] ?? ""} />
-                        {s.name}
-                        <span className="also-plus">+</span>
-                      </div>
-                    ))}
-                </div>
+              <div className="my-2 h-px bg-primary-foreground/15" />
+              <div className="rounded-md bg-primary-foreground/10 p-3">
+                <p className="text-xs font-medium text-primary-foreground/80">Need Help?</p>
+                <p className="mt-1 text-[11px] leading-snug text-primary-foreground/60">
+                  Not sure what to pick? We will guide you in 10 minutes.
+                </p>
+                <a
+                  href="/contact"
+                  className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-sm bg-card text-xs font-semibold text-primary transition hover:-translate-y-0.5 hover:shadow-card"
+                >
+                  <HeadphonesIcon className="h-4 w-4" strokeWidth={1.8} />
+                  Talk to Expert
+                </a>
               </div>
+            </nav>
+          </aside>
 
-              <button className="add-to-cart-btn" disabled={selectedTier === null} onClick={handleAdd}>
-                {selectedTier === null
-                  ? "Select a plan to add →"
-                  : `Add to cart · ${openService.tiers[selectedTier]!.price}`}
-              </button>
-            </>
-          ) : null}
-        </div>
-      </div>
+          {/* Right panel */}
+          <section
+            key={activeId}
+            className="min-w-0 animate-[panel-in_260ms_cubic-bezier(0.22,1,0.36,1)_both]"
+          >
+            {active ? (
+              <ServicePanel
+                service={active}
+                onAdd={handleAdd}
+                wishlist={wishlist}
+                toggleWish={toggleWish}
+              />
+            ) : (
+              <OverviewPanel onPick={setActiveId} />
+            )}
 
-      {/* BOTTOM CART BAR */}
-      <div className={`cart-bar${count > 0 ? " visible" : ""}`}>
-        <div className="cart-bar-left">
-          <div className="cart-bar-icon">
-            <Svg html={BAG_ICON} />
-          </div>
-          <div>
-            <div className="cart-bar-count">
-              {count} item{count > 1 ? "s" : ""}
-              {discount > 0 ? ` · saving ${inr(discount)}` : ""}
+            {/* Bottom CTA */}
+            <div className="mt-8 rounded-lg border border-border bg-gradient-hero-soft p-7 text-center shadow-soft sm:p-10">
+              <h2 className="text-2xl sm:text-3xl">Need help deciding?</h2>
+              <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+                Tell us about your salon. We will suggest only what you actually need — nothing extra.
+              </p>
+              <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                <a
+                  href="/contact"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-gradient-button px-6 text-sm font-semibold text-primary-foreground shadow-card transition hover:-translate-y-0.5 hover:shadow-float"
+                >
+                  Talk to an Expert <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                </a>
+                <a
+                  href="/contact"
+                  className="inline-flex h-12 items-center justify-center rounded-md border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:-translate-y-0.5 hover:shadow-card"
+                >
+                  Book Free Consultation
+                </a>
+              </div>
             </div>
-            <div className="cart-bar-total">{inr(total)}</div>
+          </section>
+        </div>
+      </div>
+
+      {/* Cart bar */}
+      {cart.length > 0 && (
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/80 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+            <div className="min-w-0">
+              <p className="truncate text-xs text-muted-foreground">
+                {cart.length} {cart.length === 1 ? "item" : "items"} selected
+              </p>
+              <p className="text-lg font-semibold text-foreground numeric">{inr(total)}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCartOpen(true)}
+              className="inline-flex h-11 items-center gap-2 rounded-md bg-gradient-button px-5 text-sm font-semibold text-primary-foreground shadow-card transition hover:-translate-y-0.5 hover:shadow-float"
+            >
+              <ShoppingBag className="h-4 w-4" strokeWidth={1.8} /> View cart
+            </button>
           </div>
         </div>
-        <button className="view-cart-btn" onClick={() => setCartOpen(true)}>
-          View cart
-        </button>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
 
-function serviceIconFor(cat: string) {
-  const map: Record<string, string> = {
-    web: "website",
-    seo: "local-seo",
-    ads: "google-ads",
-    social: "insta-ads",
-    whatsapp: "whatsapp",
-  };
-  return map[cat] ?? "website";
+function SideItem({
+  icon: Icon,
+  iconName,
+  label,
+  active,
+  onClick,
+}: {
+  icon?: LucideIcon;
+  iconName?: string;
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-current={active ? "true" : undefined}
+      className={`flex w-full shrink-0 items-center gap-3 rounded-md px-3 py-2.5 text-left text-[13px] font-medium whitespace-nowrap transition-all duration-200 lg:whitespace-normal ${
+        active
+          ? "bg-card text-primary shadow-soft"
+          : "text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+      }`}
+    >
+      <span
+        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-sm transition-colors ${
+          active ? "bg-accent text-primary" : "bg-primary-foreground/10"
+        }`}
+      >
+        {Icon ? (
+          <Icon className="h-4 w-4" strokeWidth={1.8} />
+        ) : (
+          <ServiceIcon name={iconName ?? ""} className="h-4 w-4" />
+        )}
+      </span>
+      {label}
+    </button>
+  );
+}
+
+function OverviewPanel({ onPick }: { onPick: (id: string) => void }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-6 shadow-card sm:p-8">
+      <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold tracking-wide text-accent-foreground uppercase">
+        <Sparkles className="h-3.5 w-3.5" strokeWidth={2} /> Salon marketplace
+      </span>
+      <h2 className="mt-4 text-2xl sm:text-3xl">Everything your salon needs to grow</h2>
+      <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+        No technical words. Choose what you want, see the price, add it to your cart. We do the rest.
+      </p>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {SIMPLE_SERVICES.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            onClick={() => onPick(s.id)}
+            className="group flex items-start gap-3 rounded-md border border-border bg-background p-4 text-left transition-all duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent text-primary">
+              <ServiceIcon name={s.icon} className="h-5 w-5" />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-foreground">{s.navLabel}</span>
+              <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">
+                {s.benefits[0]}
+              </span>
+            </span>
+            <ArrowRight
+              className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary"
+              strokeWidth={1.8}
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ServicePanel({
+  service,
+  onAdd,
+  wishlist,
+  toggleWish,
+}: {
+  service: SimpleService;
+  onAdd: (s: SimpleService, t: SimpleTier) => void;
+  wishlist: string[];
+  toggleWish: (id: string) => void;
+}) {
+  return (
+    <div>
+      {/* Hero */}
+      <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+        <div className="bg-gradient-hero-soft p-6 sm:p-9">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-soft">
+              <ServiceIcon name={service.icon} className="h-7 w-7" />
+            </span>
+            <div className="min-w-0">
+              <h2 className="text-2xl leading-tight sm:text-4xl">{service.heroTitle}</h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                {service.heroText}
+              </p>
+              <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+                {service.benefits.map((b) => (
+                  <li key={b} className="flex items-center gap-2 text-sm text-foreground">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Check className="h-3 w-3" strokeWidth={2.6} />
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Pricing */}
+      <h3 className="mt-8 mb-4 text-lg">Choose what suits you</h3>
+      <div
+        className={`grid gap-4 ${service.tiers.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}
+      >
+        {service.tiers.map((t, i) => {
+          const key = `${service.id}:${t.id}`;
+          const saved = wishlist.includes(key);
+          return (
+            <article
+              key={t.id}
+              style={{ animationDelay: `${i * 60}ms` }}
+              className={`relative flex animate-[panel-in_320ms_cubic-bezier(0.22,1,0.36,1)_both] flex-col rounded-lg border bg-card p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-float ${
+                t.popular ? "border-primary/40 shadow-card" : "border-border shadow-soft"
+              }`}
+            >
+              {t.popular && (
+                <span className="absolute -top-3 left-5 rounded-full bg-primary px-3 py-1 text-[10px] font-bold tracking-wide text-primary-foreground uppercase">
+                  ⭐ Most popular
+                </span>
+              )}
+              <button
+                type="button"
+                aria-label={saved ? "Remove from saved" : "Save for later"}
+                onClick={() => toggleWish(key)}
+                className={`absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-border transition ${
+                  saved ? "bg-accent text-primary" : "bg-background text-muted-foreground"
+                }`}
+              >
+                <Heart className="h-4 w-4" strokeWidth={1.8} fill={saved ? "currentColor" : "none"} />
+              </button>
+
+              <p className="mt-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                {t.label}
+              </p>
+              <p className="mt-2 flex items-end gap-1">
+                <span className="text-3xl font-semibold text-foreground numeric">{t.priceNote}</span>
+                <span className="pb-1 text-xs text-muted-foreground">{t.period}</span>
+              </p>
+              <ul className="mt-5 space-y-2.5 border-t border-border pt-5">
+                {t.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-foreground/90">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={2.2} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => onAdd(service, t)}
+                className={`mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 ${
+                  t.popular
+                    ? "bg-gradient-button text-primary-foreground shadow-card hover:shadow-float"
+                    : "border border-border bg-background text-foreground hover:border-primary/40 hover:shadow-card"
+                }`}
+              >
+                <ShoppingBag className="h-4 w-4" strokeWidth={1.8} /> Add to Cart
+              </button>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
