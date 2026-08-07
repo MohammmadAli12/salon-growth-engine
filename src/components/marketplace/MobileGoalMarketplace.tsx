@@ -10,6 +10,14 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useCart, inr } from "@/lib/cart-store";
+import imgWebsite from "@/assets/goals/website.jpg";
+import imgBookings from "@/assets/goals/bookings.jpg";
+import imgCalls from "@/assets/goals/calls.jpg";
+import imgWhatsapp from "@/assets/goals/whatsapp.jpg";
+import imgGoogle from "@/assets/goals/google.jpg";
+import imgInstagram from "@/assets/goals/instagram.jpg";
+import imgCustomers from "@/assets/goals/customers.jpg";
+import imgReviews from "@/assets/goals/reviews.jpg";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
 
 /** Goal-first mobile marketplace: users choose an outcome, not a technology. */
@@ -89,6 +97,63 @@ const GOALS: Goal[] = [
   },
 ];
 
+/** Per-goal art, category accent (palette tokens only) and audience chips. */
+const META: Record<
+  string,
+  { img: string; accent: string; audience: string[]; pills?: string[] }
+> = {
+  website: {
+    img: imgWebsite,
+    accent: "--forest",
+    audience: ["New Salon", "Home Salon", "Beauty Studio"],
+    pills: ["Online Booking", "Google Maps", "WhatsApp Button"],
+  },
+  bookings: {
+    img: imgBookings,
+    accent: "--teal",
+    audience: ["Busy Salon", "Spa", "Multi-staff"],
+    pills: ["24/7 Bookings", "Fewer No-shows", "Saves Time"],
+  },
+  calls: { img: imgCalls, accent: "--rust", audience: ["Local Salon", "New Area"] },
+  whatsapp: { img: imgWhatsapp, accent: "--forest-light", audience: ["Repeat Clients"] },
+  google: { img: imgGoogle, accent: "--gold", audience: ["Walk-in Salon"] },
+  instagram: { img: imgInstagram, accent: "--plum", audience: ["Studio", "Makeup Artist"] },
+  reviews: { img: imgReviews, accent: "--gold-deep", audience: ["Every Salon"] },
+  "more-customers": { img: imgCustomers, accent: "--olive", audience: ["Growing Salon"] },
+};
+
+const STEPS = ["Goal", "Plan", "Checkout"] as const;
+
+function StepBar({ step }: { step: number }) {
+  return (
+    <div className="flex items-center gap-2 rounded-[20px] border border-border bg-card px-4 py-3">
+      {STEPS.map((label, i) => (
+        <div key={label} className="flex min-w-0 flex-1 items-center gap-2">
+          <span
+            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[12px] font-bold ${
+              i <= step
+                ? "bg-gradient-button text-primary-foreground"
+                : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {i < step ? <Check className="h-3.5 w-3.5" strokeWidth={2.6} /> : i + 1}
+          </span>
+          <span
+            className={`truncate text-[13px] font-semibold ${
+              i <= step ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
+            {label}
+          </span>
+          {i < STEPS.length - 1 && (
+            <span className="h-px min-w-3 flex-1 bg-border" aria-hidden="true" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const svc = (id: string) => SIMPLE_SERVICES.find((s) => s.id === id);
 
 export function MobileGoalMarketplace() {
@@ -106,6 +171,12 @@ export function MobileGoalMarketplace() {
         g.keywords.some((k) => k.includes(q)),
     );
   }, [query]);
+
+  const FEATURED_IDS = ["website", "bookings"];
+  const featured = results.filter((g) => FEATURED_IDS.includes(g.serviceId));
+  const rest = results.filter((g) => !FEATURED_IDS.includes(g.serviceId));
+
+
 
   useEffect(() => {
     document.body.style.overflow = openGoal ? "hidden" : "";
@@ -161,62 +232,158 @@ export function MobileGoalMarketplace() {
         </div>
       </div>
 
-      <div className="px-4 pt-6 pb-40">
-        <h1 className="text-[26px] leading-tight">What do you want for your salon?</h1>
+      <div className="px-4 pt-5 pb-40">
+        <StepBar step={0} />
+
+        <h1 className="mt-5 text-[26px] leading-tight">👋 Welcome! What do you want today?</h1>
         <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-          Pick your goal. We will show you simple plans — no technical words.
+          Pick a goal. We will show you simple plans — no technical words.
         </p>
 
-        <div className="mt-6 space-y-3.5">
-          {results.map((g) => (
-            <button
-              key={g.serviceId}
-              type="button"
-              onClick={() => setOpenGoal(g)}
-              className="flex w-full items-start gap-4 rounded-[24px] border border-border bg-accent/60 p-5 text-left shadow-soft transition-all duration-200 active:scale-[0.98] active:border-primary active:bg-card"
-            >
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-card text-[26px] shadow-soft">
-                {g.emoji}
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[18px] leading-snug font-semibold text-foreground">
-                  {g.title}
-                </span>
-                <span className="mt-1 block text-[15px] leading-snug text-muted-foreground">
-                  {g.desc}
-                </span>
-              </span>
-            </button>
-          ))}
-          {results.length === 0 && (
-            <p className="rounded-[20px] border border-border bg-card p-6 text-center text-[15px] text-muted-foreground">
-              Nothing matched. Try “website”, “bookings” or “Instagram”.
-            </p>
-          )}
-        </div>
+        {featured.length > 0 && (
+          <>
+            <h2 className="mt-7 flex items-center gap-2 text-[15px] font-semibold tracking-wide text-foreground uppercase">
+              ⭐ Recommended for you
+            </h2>
+            <div className="mt-3 space-y-4">
+              {featured.map((g, i) => {
+                const m = META[g.serviceId];
+                const s = svc(g.serviceId);
+                const pills = m?.pills ?? s?.benefits.slice(0, 3) ?? [];
+                return (
+                  <button
+                    key={g.serviceId}
+                    type="button"
+                    onClick={() => setOpenGoal(g)}
+                    style={{ borderLeftColor: `var(${m?.accent ?? "--forest"})` }}
+                    className="block w-full overflow-hidden rounded-[26px] border border-l-[5px] border-border bg-gradient-to-b from-accent/70 via-card to-card p-0 text-left shadow-card transition-all duration-200 active:scale-[0.985]"
+                  >
+                    <span className="relative block aspect-[16/9] w-full overflow-hidden">
+                      <img
+                        src={m?.img}
+                        alt={g.title}
+                        loading={i === 0 ? "eager" : "lazy"}
+                        className="h-full w-full object-cover"
+                      />
+                      <span style={{ position: "absolute", top: 12, left: 12 }} className="rounded-full bg-gradient-button px-3 py-1 text-[11px] font-bold tracking-wide text-primary-foreground uppercase">
+                        {i === 0 ? "Most Popular" : "Salon Favourite"}
+                      </span>
+                      <span style={{ position: "absolute", bottom: 12, left: 12 }} className="flex h-11 w-11 items-center justify-center rounded-[16px] bg-card text-[22px] shadow-card">
+                        {g.emoji}
+                      </span>
+                    </span>
+                    <span className="block px-5 pt-4 pb-5">
+                      <span className="block text-[21px] leading-snug font-semibold text-foreground">
+                        {g.title}
+                      </span>
+                      <span className="mt-1.5 block text-[15px] leading-snug text-muted-foreground">
+                        {g.desc}
+                      </span>
+                      <span className="mt-3 flex flex-wrap gap-2">
+                        {pills.map((p) => (
+                          <span
+                            key={p}
+                            className="flex items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1 text-[12px] font-medium text-foreground"
+                          >
+                            <Check
+                              className="h-3 w-3"
+                              strokeWidth={2.6}
+                              style={{ color: `var(${m?.accent ?? "--forest"})` }}
+                            />
+                            {p}
+                          </span>
+                        ))}
+                      </span>
+                      {m?.audience?.length ? (
+                        <span className="mt-3 block text-[12.5px] text-muted-foreground">
+                          Perfect for: {m.audience.join(" · ")}
+                        </span>
+                      ) : null}
+                      <span className="mt-4 flex items-center justify-center gap-1.5 rounded-[16px] bg-gradient-button px-4 py-3 text-[15px] font-semibold text-primary-foreground">
+                        View Plans <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {rest.length > 0 && (
+          <>
+            <h2 className="mt-8 text-[15px] font-semibold tracking-wide text-foreground uppercase">
+              More services
+            </h2>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              {rest.map((g) => {
+                const m = META[g.serviceId];
+                return (
+                  <button
+                    key={g.serviceId}
+                    type="button"
+                    onClick={() => setOpenGoal(g)}
+                    style={{ borderLeftColor: `var(${m?.accent ?? "--forest"})` }}
+                    className="flex flex-col overflow-hidden rounded-[20px] border border-l-[4px] border-border bg-card text-left shadow-soft transition-all duration-200 active:scale-[0.97]"
+                  >
+                    <span className="relative block aspect-[16/10] w-full overflow-hidden">
+                      <img
+                        src={m?.img}
+                        alt={g.title}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                      <span style={{ position: "absolute", bottom: 8, left: 8 }} className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-card text-[16px] shadow-soft">
+                        {g.emoji}
+                      </span>
+                    </span>
+                    <span className="flex flex-1 flex-col px-3.5 pt-2.5 pb-3.5">
+                      <span className="block text-[15px] leading-snug font-semibold text-foreground">
+                        {g.title}
+                      </span>
+                      <span className="mt-1 block text-[13px] leading-snug text-muted-foreground">
+                        {g.desc}
+                      </span>
+                      <span className="mt-2.5 flex items-center gap-1 text-[13px] font-semibold text-primary">
+                        View Plans <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.2} />
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {results.length === 0 && (
+          <p className="mt-6 rounded-[20px] border border-border bg-card p-6 text-center text-[15px] text-muted-foreground">
+            Nothing matched. Try “website”, “bookings” or “Instagram”.
+          </p>
+        )}
       </div>
 
-      {/* Sticky cart bar */}
+      {/* Floating cart */}
       {cart.length > 0 && !openGoal && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 px-4 pt-3 pb-[max(0.85rem,env(safe-area-inset-bottom))] shadow-float backdrop-blur-xl">
-          <button
-            type="button"
-            onClick={() => setCartOpen(true)}
-            className="flex w-full items-center gap-3 rounded-[18px] bg-gradient-button px-4 py-3.5 text-primary-foreground transition duration-200 active:scale-[0.98]"
-          >
-            <ShoppingBag className="h-5 w-5 shrink-0" strokeWidth={1.8} />
-            <span className="min-w-0 flex-1 text-left">
-              <span className="block text-[15px] font-semibold">
-                {cart.length} Service{cart.length === 1 ? "" : "s"} Added
-              </span>
-              <span className="numeric block text-[13px] opacity-80">{inr(total)}</span>
+        <button
+          type="button"
+          onClick={() => setCartOpen(true)}
+          className="fixed right-4 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 flex items-center gap-3 rounded-full bg-gradient-button pr-5 pl-3 py-2.5 text-primary-foreground shadow-float transition duration-200 active:scale-95"
+        >
+          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-card/20">
+            <ShoppingBag className="h-5 w-5" strokeWidth={1.9} />
+            <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-card px-1 text-[10px] font-bold text-primary">
+              {cart.length}
             </span>
-            <span className="flex shrink-0 items-center gap-1 text-[15px] font-semibold">
-              Checkout <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+          </span>
+          <span className="text-left">
+            <span className="block text-[13px] font-semibold">
+              {cart.length} Service{cart.length === 1 ? "" : "s"}
             </span>
-          </button>
-        </div>
+            <span className="numeric block text-[13px] opacity-85">{inr(total)}</span>
+          </span>
+        </button>
       )}
+
 
       {/* Goal bottom sheet */}
       <div
