@@ -241,3 +241,24 @@
   .home .preview-head{flex-direction:column;align-items:flex-start;gap:10px}
   .home .bento,.home .bento-row3{overflow:visible}
 }
+
+/* COMMUNITY THREAD FEED (reddit-style) */
+.home .thread-feed{display:flex;flex-direction:column;gap:10px}
+.home .thread-post{display:grid;grid-template-columns:40px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:0 14px 30px -28px var(--shadow);transition:transform .2s,box-shadow .2s,border-color .2s}
+.home .thread-post:hover,.home .thread-post:active{transform:translateY(-3px);box-shadow:0 22px 40px -28px var(--shadow);border-color:rgba(30,89,64,.3)}
+.home .tp-vote{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;background:var(--cream-deep);border-radius:8px;padding:8px 0;height:fit-content}
+.home .tp-vote b{font-size:11px;color:var(--forest-deep);line-height:1}
+.home .tp-vote em{font-style:normal;font-size:12px;font-weight:800;color:var(--espresso)}
+.home .tp-main{display:flex;flex-direction:column;min-width:0}
+.home .tp-meta{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--espresso-soft)}
+.home .tp-av{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--forest-light),var(--forest-deep));color:#fff;font-style:normal;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.home .tp-title{font-size:16px;line-height:1.25;font-weight:600;color:var(--espresso);margin:7px 0 4px}
+.home .tp-body{font-size:12.5px;line-height:1.55;color:var(--espresso-soft)}
+.home .tp-foot{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:11px;font-weight:700;color:var(--espresso-soft)}
+.home .tp-chip{background:var(--cream-deep);border-radius:99px;padding:4px 9px;color:var(--forest-deep);font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.home .tp-open{margin-left:auto;color:var(--forest-deep);display:inline-flex;gap:5px}
+.home .tp-open span{transition:transform .2s}
+.home .thread-post:hover .tp-open span,.home .thread-post:active .tp-open span{transform:translateX(4px)}
+.home .thread-more{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px dashed rgba(30,89,64,.35);border-radius:8px;padding:12px;font-size:12px;font-weight:800;color:var(--forest-deep);background:transparent}
+.home .thread-more:hover{background:var(--cream-deep)}
+@media(max-width:520px){.home .thread-post{padding:12px 13px;grid-template-columns:34px 1fr;gap:10px}.home .tp-title{font-size:15px}}

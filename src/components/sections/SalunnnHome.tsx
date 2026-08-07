@@ -575,7 +575,7 @@ export function SalunnnHome() {
             <div className="section-head">
               <div className="eyebrow">Community</div>
               <h2 className="disp">A room that already feels in motion</h2>
-              <p>Live prompts, owner threads, city meetups and people worth following.</p>
+              <p>Live prompts, owner threads and city meetups — read what worked before you spend.</p>
             </div>
             <Link to="/community" className="section-foot-link">
               Join the community <span>→</span>
