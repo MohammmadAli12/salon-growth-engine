@@ -294,6 +294,41 @@ const CHECK = (
 
 export function SalunnnHome() {
   const { cart } = useCart();
+  const goalDeckRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto-slide the marketplace goal cards; pauses while the user interacts.
+  useEffect(() => {
+    const el = goalDeckRef.current;
+    if (!el) return;
+    let paused = false;
+    const pause = () => {
+      paused = true;
+      window.setTimeout(() => {
+        paused = false;
+      }, 6000);
+    };
+    el.addEventListener("pointerdown", pause);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("wheel", pause, { passive: true });
+    const id = window.setInterval(() => {
+      if (paused) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max < 12) return; // desktop grid: nothing to scroll
+      const step = el.firstElementChild
+        ? (el.firstElementChild as HTMLElement).offsetWidth + 14
+        : el.clientWidth * 0.8;
+      const next = el.scrollLeft + step >= max - 8 ? 0 : el.scrollLeft + step;
+      el.scrollTo({ left: next, behavior: "smooth" });
+    }, 3500);
+    return () => {
+      window.clearInterval(id);
+      el.removeEventListener("pointerdown", pause);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("wheel", pause);
+    };
+  }, []);
+
+
 
   return (
     <div className="home">
