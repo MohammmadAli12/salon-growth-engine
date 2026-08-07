@@ -15,9 +15,9 @@ export function AppPreview() {
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <div>
           <SectionHeading
-            eyebrow="Salunnn App"
+            eyebrow="Salon Genie App"
             title="Run the whole salon from one app"
-            description="The Salunnn app connects your marketing to your calendar, so every campaign is measured against real appointments and revenue."
+            description="The Salon Genie app connects your marketing to your calendar, so every campaign is measured against real appointments and revenue."
           />
           <ul className="mt-8 space-y-3">
             {appFeatures.map((feature) => (

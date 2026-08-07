@@ -294,6 +294,41 @@ const CHECK = (
 
 export function SalunnnHome() {
   const { cart } = useCart();
+  const goalDeckRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto-slide the marketplace goal cards; pauses while the user interacts.
+  useEffect(() => {
+    const el = goalDeckRef.current;
+    if (!el) return;
+    let paused = false;
+    const pause = () => {
+      paused = true;
+      window.setTimeout(() => {
+        paused = false;
+      }, 6000);
+    };
+    el.addEventListener("pointerdown", pause);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("wheel", pause, { passive: true });
+    const id = window.setInterval(() => {
+      if (paused) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max < 12) return; // desktop grid: nothing to scroll
+      const step = el.firstElementChild
+        ? (el.firstElementChild as HTMLElement).offsetWidth + 14
+        : el.clientWidth * 0.8;
+      const next = el.scrollLeft + step >= max - 8 ? 0 : el.scrollLeft + step;
+      el.scrollTo({ left: next, behavior: "smooth" });
+    }, 3500);
+    return () => {
+      window.clearInterval(id);
+      el.removeEventListener("pointerdown", pause);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("wheel", pause);
+    };
+  }, []);
+
+
 
   return (
     <div className="home">
@@ -392,7 +427,7 @@ export function SalunnnHome() {
           </div>
 
           {/* Desktop: goal-first deck */}
-          <div className="goal-deck">
+          <div className="goal-deck" ref={goalDeckRef}>
             {HOME_GOALS.map((g) => {
               const Icon = g.icon;
               return (
@@ -441,7 +476,7 @@ export function SalunnnHome() {
         <div className="wrap">
           <div className="why-grid">
             <div>
-              <div className="eyebrow">Why Salunnn</div>
+              <div className="eyebrow">Why Salon Genie</div>
               <h2
                 className="disp"
                 style={{
@@ -621,7 +656,7 @@ export function SalunnnHome() {
         <div className="wrap">
           <div className="app-grid">
             <div>
-              <div className="eyebrow">Salunnn app</div>
+              <div className="eyebrow">Salon Genie app</div>
               <h2
                 className="disp"
                 style={{
@@ -634,7 +669,7 @@ export function SalunnnHome() {
                 Run the whole salon from one app
               </h2>
               <p style={{ fontSize: 14, color: "var(--espresso-soft)", lineHeight: 1.7 }}>
-                The Salunnn app connects your marketing to your calendar, so every campaign is
+                The Salon Genie app connects your marketing to your calendar, so every campaign is
                 measured against real appointments and revenue.
               </p>
               <ul className="app-bullets">

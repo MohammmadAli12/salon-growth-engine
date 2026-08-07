@@ -5,13 +5,13 @@ import { LegalBody } from "@/components/layout/LegalBody";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy | Salunnn" },
+      { title: "Privacy Policy | Salon Genie" },
       {
         name: "description",
         content:
-          "How Salunnn collects, uses, stores and protects salon and client data across its marketing services and app.",
+          "How Salon Genie collects, uses, stores and protects salon and client data across its marketing services and app.",
       },
-      { property: "og:title", content: "Privacy Policy | Salunnn" },
+      { property: "og:title", content: "Privacy Policy | Salon Genie" },
       { property: "og:description", content: "Our data collection, use and retention practices." },
       { property: "og:url", content: "/privacy" },
     ],
@@ -43,7 +43,7 @@ const sections = [
   },
   {
     t: "Your rights",
-    b: "You can request access, correction, export or deletion of your data at any time by writing to hello@salunnn.com.",
+    b: "You can request access, correction, export or deletion of your data at any time by writing to hello@salongenie.com.",
   },
 ];
 

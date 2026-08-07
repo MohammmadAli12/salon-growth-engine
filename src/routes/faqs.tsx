@@ -13,13 +13,13 @@ import {
 export const Route = createFileRoute("/faqs")({
   head: () => ({
     meta: [
-      { title: "FAQs — Salon Marketing Questions Answered | Salunnn" },
+      { title: "FAQs — Salon Marketing Questions Answered | Salon Genie" },
       {
         name: "description",
         content:
           "Answers on launch timelines, ad spend, contracts, ownership of accounts and buying single salon marketing services.",
       },
-      { property: "og:title", content: "FAQs — Salon Marketing Questions Answered | Salunnn" },
+      { property: "og:title", content: "FAQs — Salon Marketing Questions Answered | Salon Genie" },
       {
         property: "og:description",
         content: "Timelines, pricing, contracts and ownership — the questions owners ask most.",

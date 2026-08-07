@@ -12,13 +12,13 @@ const openings = [
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Careers at Salunnn — Build the Salon Growth Platform" },
+      { title: "Careers at Salon Genie — Build the Salon Growth Platform" },
       {
         name: "description",
         content:
-          "Open roles at Salunnn across growth, product, brand and client success. Remote-friendly, India-based team.",
+          "Open roles at Salon Genie across growth, product, brand and client success. Remote-friendly, India-based team.",
       },
-      { property: "og:title", content: "Careers at Salunnn — Build the Salon Growth Platform" },
+      { property: "og:title", content: "Careers at Salon Genie — Build the Salon Growth Platform" },
       {
         property: "og:description",
         content: "Join the team building the growth engine for salons.",
@@ -53,7 +53,7 @@ function Careers() {
                 </p>
               </div>
               <a
-                href="mailto:careers@salunnn.com"
+                href="mailto:careers@salongenie.com"
                 className="text-sm font-semibold text-primary transition-opacity hover:opacity-80"
               >
                 Apply via email
@@ -62,7 +62,7 @@ function Careers() {
           ))}
         </ul>
         <p className="mt-8 text-sm text-muted-foreground">
-          Nothing fits? Write to careers@salunnn.com with what you'd want to own.
+          Nothing fits? Write to careers@salongenie.com with what you'd want to own.
         </p>
       </Section>
     </>

@@ -82,14 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Salunnn — AI-Powered Salon Growth Platform" },
+      { title: "Salon Genie — AI-Powered Salon Growth Platform" },
       {
         name: "description",
         content:
-          "Salunnn helps salons get more clients, increase revenue and automate their business with AI, websites, SEO and ads.",
+          "Salon Genie helps salons get more clients, increase revenue and automate their business with AI, websites, SEO and ads.",
       },
-      { name: "author", content: "Salunnn" },
-      { property: "og:site_name", content: "Salunnn" },
+      { name: "author", content: "Salon Genie" },
+      { property: "og:site_name", content: "Salon Genie" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -105,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..600&family=Inter:wght@400;500;600;700;800&display=swap",
       },
 
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
 

@@ -13,7 +13,7 @@ export function CommunityPreview() {
           <SectionHeading
             eyebrow="Community"
             title="A network of salon owners who share what works"
-            description="Join owner circles, swap playbooks and get group pricing from vendors — free for every Salunnn client."
+            description="Join owner circles, swap playbooks and get group pricing from vendors — free for every Salon Genie client."
           />
           <Link
             to="/community"

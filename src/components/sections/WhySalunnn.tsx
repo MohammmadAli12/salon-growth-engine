@@ -7,7 +7,7 @@ export function WhySalunnn() {
     <Section className="bg-card">
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <SectionHeading
-          eyebrow="Why Salunnn"
+          eyebrow="Why Salon Genie"
           title="One partner for the whole growth engine"
           description="Most salons juggle a web developer, an ads freelancer and a content person who never talk to each other. We run it as one system, measured on bookings."
         />

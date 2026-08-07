@@ -14,13 +14,13 @@ const values = [
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Salunnn — The Salon Growth Team" },
+      { title: "About Salon Genie — The Salon Growth Team" },
       {
         name: "description",
         content:
-          "Salunnn is a salon-only growth platform combining marketing, software, learning, community and hiring for salon owners.",
+          "Salon Genie is a salon-only growth platform combining marketing, software, learning, community and hiring for salon owners.",
       },
-      { property: "og:title", content: "About Salunnn — The Salon Growth Team" },
+      { property: "og:title", content: "About Salon Genie — The Salon Growth Team" },
       {
         property: "og:description",
         content: "Why we build growth systems exclusively for salons.",
@@ -38,7 +38,7 @@ function About() {
       <PageHeader
         eyebrow="About"
         title="We build growth systems for salons only"
-        description="Salunnn started after watching great salons lose clients to worse salons with better marketing. So we built the whole engine — marketing, software, learning, community and hiring — in one place."
+        description="Salon Genie started after watching great salons lose clients to worse salons with better marketing. So we built the whole engine — marketing, software, learning, community and hiring — in one place."
       />
       <Section>
         <dl className="grid grid-cols-2 gap-4 md:grid-cols-4">

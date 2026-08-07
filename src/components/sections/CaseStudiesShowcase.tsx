@@ -84,7 +84,7 @@ const studies: StudyCard[] = [
       { value: "40 → 180", label: "Monthly bookings" },
       { value: "3 mo", label: "Launch to lift" },
     ],
-    quote: "\u201CSalunnn helped us streamline\u2026\u201D",
+    quote: "\u201CSalon Genie helped us streamline\u2026\u201D",
     author: "— Priya Sharma, Owner",
     avatar:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
@@ -266,7 +266,7 @@ export function CaseStudiesShowcase() {
               Your salon could be the next success story.
             </h2>
             <p className="text-xs text-muted-foreground">
-              Join hundreds of salon owners growing with Salunnn.
+              Join hundreds of salon owners growing with Salon Genie.
             </p>
           </div>
         </div>

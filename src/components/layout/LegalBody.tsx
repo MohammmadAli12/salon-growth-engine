@@ -14,7 +14,7 @@ export function LegalBody({ sections }: { sections: { t: string; b: string }[] }
           </article>
         ))}
         <p className="rounded-lg border border-border/70 bg-card p-5 text-sm leading-6 text-muted-foreground">
-          Questions about this document? Write to hello@salunnn.com and we'll respond within one
+          Questions about this document? Write to hello@salongenie.com and we'll respond within one
           working day.
         </p>
       </div>

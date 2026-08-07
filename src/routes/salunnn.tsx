@@ -16,13 +16,13 @@ const modules = [
 export const Route = createFileRoute("/salunnn")({
   head: () => ({
     meta: [
-      { title: "Salunnn App — Salon Management & AI Front Desk" },
+      { title: "Salon Genie App — Salon Management & AI Front Desk" },
       {
         name: "description",
         content:
-          "The Salunnn app runs bookings, clients, team, inventory and an AI front desk, connected to your marketing performance.",
+          "The Salon Genie app runs bookings, clients, team, inventory and an AI front desk, connected to your marketing performance.",
       },
-      { property: "og:title", content: "Salunnn App — Salon Management & AI Front Desk" },
+      { property: "og:title", content: "Salon Genie App — Salon Management & AI Front Desk" },
       {
         property: "og:description",
         content: "Bookings, clients, team, inventory and AI automation in one salon app.",
@@ -38,7 +38,7 @@ function SalunnnApp() {
   return (
     <>
       <PageHeader
-        eyebrow="Salunnn App"
+        eyebrow="Salon Genie App"
         title="The operating system for your salon"
         description="Marketing brings people in. The app makes sure they're booked, served, remembered and brought back."
       />

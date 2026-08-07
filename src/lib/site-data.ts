@@ -1,5 +1,5 @@
 /**
- * Static content for the Salunnn marketing site.
+ * Static content for the Salon Genie marketing site.
  * All copy lives here so sections stay presentational.
  */
 
@@ -270,7 +270,7 @@ export const newsroom = [
   {
     date: "12 Jul 2026",
     tag: "Product",
-    title: "Salunnn AI receptionist now answers calls in Hindi and Tamil",
+    title: "Salon Genie AI receptionist now answers calls in Hindi and Tamil",
     body: "Multilingual voice booking rolls out to every automation plan at no extra cost.",
   },
   {
@@ -282,7 +282,7 @@ export const newsroom = [
   {
     date: "09 Jun 2026",
     tag: "Marketplace",
-    title: "Packaged pricing arrives in the Salunnn marketplace",
+    title: "Packaged pricing arrives in the Salon Genie marketplace",
     body: "Every service now ships with a fixed scope, timeline and reporting cadence.",
   },
 ];
