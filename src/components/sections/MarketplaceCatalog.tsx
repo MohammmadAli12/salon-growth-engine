@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { useCart } from "@/lib/cart-store";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
+import { MobileGoalMarketplace } from "@/components/marketplace/MobileGoalMarketplace";
+
 import imgWebsite from "@/assets/mp-website.jpg";
 import imgAds from "@/assets/mp-ads.jpg";
 import imgChat from "@/assets/mp-chat.jpg";
