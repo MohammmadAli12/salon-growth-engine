@@ -332,7 +332,7 @@ function PriceSlider({
     const el = trackRef.current;
     if (!el) return;
     const card = el.firstElementChild as HTMLElement | null;
-    const step = card ? card.offsetWidth + 12 : el.clientWidth;
+    const step = card ? card.offsetWidth : el.clientWidth;
     setSlide(Math.round(el.scrollLeft / step));
   };
 
@@ -348,18 +348,17 @@ function PriceSlider({
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="no-scrollbar flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pt-2 pb-3"
+        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto pt-2 pb-3"
       >
         {service.tiers.map((t) => {
           const key = `${service.id}:${t.id}`;
           const added = inCart.includes(key);
           return (
+            <div key={t.id} className="w-full shrink-0 snap-start px-5">
             <article
-              key={t.id}
-              className={`flex w-[calc(100vw-2.5rem)] shrink-0 snap-start flex-col rounded-[24px] border bg-card p-5 ${
+              className={`flex h-full flex-col rounded-[24px] border bg-card p-5 ${
                 t.popular ? "border-primary shadow-card" : "border-border shadow-soft"
               }`}
-
             >
               <div className="flex items-center justify-between gap-2">
                 <p className="text-[17px] font-semibold text-foreground">{t.label}</p>
@@ -405,6 +404,7 @@ function PriceSlider({
                 )}
               </button>
             </article>
+            </div>
           );
         })}
       </div>
