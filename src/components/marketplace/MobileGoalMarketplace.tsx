@@ -560,6 +560,10 @@ function PriceSlider({
       <div
         ref={trackRef}
         onScroll={onScroll}
+        onPointerDown={() => setPaused(true)}
+        onPointerUp={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
+        onTouchEnd={() => setPaused(false)}
         className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto pt-2 pb-3"
       >
         {service.tiers.map((t) => {
