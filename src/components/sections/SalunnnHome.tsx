@@ -396,10 +396,14 @@ export function SalunnnHome() {
               const Icon = g.icon;
               return (
                 <Link key={g.title} to="/marketplace" className="goal-card">
-                  <span className="goal-ico">
-                    <Icon />
+                  <span className="goal-art">
+                    <span className="goal-ico">
+                      <Icon />
+                    </span>
+                    <img src={g.img} alt="" loading="lazy" width={1024} height={640} />
                   </span>
                   <h3>
+
                     <Icon />
                     {g.title}
                   </h3>
