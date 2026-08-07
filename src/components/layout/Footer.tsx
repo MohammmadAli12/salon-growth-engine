@@ -13,14 +13,14 @@ export function Footer() {
       <div className="mx-auto w-full max-w-6xl px-5 py-14 md:px-10">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="flex size-9 items-center justify-center rounded-md bg-gradient-hero">
-                <Sparkles className="size-4 text-primary-foreground" />
-              </span>
-              <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
-                Salon Genie
-              </span>
-            </div>
+            <img
+              src={brandWordmark.url}
+              alt="Salon Genie"
+              width={220}
+              height={92}
+              className="h-12 w-auto object-contain"
+              loading="lazy"
+            />
             <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
               The AI-powered growth platform for salons — websites, local search, ads, automation,
               learning, community and hiring in one place.
