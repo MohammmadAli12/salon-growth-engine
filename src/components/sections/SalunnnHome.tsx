@@ -313,7 +313,30 @@ export function SalunnnHome() {
             </p>
           </div>
 
+          {/* Desktop: goal-first deck */}
+          <div className="goal-deck">
+            {HOME_GOALS.map((g) => {
+              const Icon = g.icon;
+              return (
+                <Link key={g.title} to="/marketplace" className="goal-card">
+                  <span className="goal-ico">
+                    <Icon />
+                  </span>
+                  <h3>
+                    <Icon />
+                    {g.title}
+                  </h3>
+                  <p>{g.desc}</p>
+                  <span className="goal-cta">
+                    View Solutions <span>→</span>
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
           <div className="bento">
+
             {SERVICE_CARDS.map((c) => (
               <ServiceCard key={c.title} card={c} />
             ))}
