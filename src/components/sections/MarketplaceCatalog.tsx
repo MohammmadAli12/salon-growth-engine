@@ -218,7 +218,14 @@ export function MarketplaceCatalog() {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+    {/* Mobile: goal-based marketplace */}
+    <div className="lg:hidden">
+      <MobileGoalMarketplace />
+    </div>
+
+    <div className="hidden min-h-screen bg-background lg:block">
+
       {/* Pinned header: title + search + floating cart */}
       <div className="sticky top-16 z-40 border-b border-border/70 bg-card/75 backdrop-blur-xl backdrop-saturate-150">
         <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
