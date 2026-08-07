@@ -89,6 +89,63 @@ const GOALS: Goal[] = [
   },
 ];
 
+/** Per-goal art, category accent (palette tokens only) and audience chips. */
+const META: Record<
+  string,
+  { img: string; accent: string; audience: string[]; pills?: string[] }
+> = {
+  website: {
+    img: imgWebsite,
+    accent: "--forest",
+    audience: ["New Salon", "Home Salon", "Beauty Studio"],
+    pills: ["Online Booking", "Google Maps", "WhatsApp Button"],
+  },
+  bookings: {
+    img: imgBookings,
+    accent: "--teal",
+    audience: ["Busy Salon", "Spa", "Multi-staff"],
+    pills: ["24/7 Bookings", "Fewer No-shows", "Saves Time"],
+  },
+  calls: { img: imgCalls, accent: "--rust", audience: ["Local Salon", "New Area"] },
+  whatsapp: { img: imgWhatsapp, accent: "--forest-light", audience: ["Repeat Clients"] },
+  google: { img: imgGoogle, accent: "--gold", audience: ["Walk-in Salon"] },
+  instagram: { img: imgInstagram, accent: "--plum", audience: ["Studio", "Makeup Artist"] },
+  reviews: { img: imgReviews, accent: "--gold-deep", audience: ["Every Salon"] },
+  "more-customers": { img: imgCustomers, accent: "--olive", audience: ["Growing Salon"] },
+};
+
+const STEPS = ["Goal", "Plan", "Checkout"] as const;
+
+function StepBar({ step }: { step: number }) {
+  return (
+    <div className="flex items-center gap-2 rounded-[20px] border border-border bg-card px-4 py-3">
+      {STEPS.map((label, i) => (
+        <div key={label} className="flex min-w-0 flex-1 items-center gap-2">
+          <span
+            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[12px] font-bold ${
+              i <= step
+                ? "bg-gradient-button text-primary-foreground"
+                : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {i < step ? <Check className="h-3.5 w-3.5" strokeWidth={2.6} /> : i + 1}
+          </span>
+          <span
+            className={`truncate text-[13px] font-semibold ${
+              i <= step ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
+            {label}
+          </span>
+          {i < STEPS.length - 1 && (
+            <span className="h-px min-w-3 flex-1 bg-border" aria-hidden="true" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const svc = (id: string) => SIMPLE_SERVICES.find((s) => s.id === id);
 
 export function MobileGoalMarketplace() {
