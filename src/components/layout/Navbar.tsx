@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ChevronDown, Heart, Menu, ShoppingBag, X } from "lucide-react";
 import brandIcon from "@/assets/salon-genie-icon.png.asset.json";
-import brandWordmark from "@/assets/salon-genie-handwritten.png.asset.json";
+import brandWordmark from "@/assets/salon-genie-wordmark-hand.png.asset.json";
 
 import { moreNav, primaryNav } from "@/lib/site-data";
 import { GradientButton } from "./buttons";
@@ -48,7 +48,9 @@ export function Navbar() {
           <img
             src={brandWordmark.url}
             alt="Salon Genie"
-            className="block h-[30px] w-auto object-contain transition-transform duration-200 hover:scale-[1.02] md:h-9"
+            width={904}
+            height={191}
+            className="block h-7 w-auto max-w-[190px] shrink-0 object-contain transition-transform duration-200 hover:scale-[1.02] sm:h-8 sm:max-w-[220px] md:h-9 md:max-w-none"
           />
 
         </Link>
