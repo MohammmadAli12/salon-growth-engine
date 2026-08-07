@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ArrowUp,
@@ -501,5 +500,3 @@ export function CommunityPortal() {
     </div>
   );
 }
-
-export { Link };
