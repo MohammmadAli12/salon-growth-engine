@@ -58,7 +58,7 @@
 .home .icon-chip::before{content:'';position:absolute;inset:-7px;border-radius:16px;z-index:0;opacity:.85;background:radial-gradient(circle, var(--glow), transparent 72%)}
 
 /* SERVICES BENTO */
-.home .bento{display:grid;grid-template-columns:1fr;gap:14px}
+.home .bento{display:none;grid-template-columns:1fr;gap:14px}
 @media(min-width:720px){.home .bento{grid-template-columns:repeat(2,1fr)}}
 .home .bento-row3{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
 @media(min-width:820px){.home .bento-row3{grid-template-columns:repeat(3,1fr)}}
