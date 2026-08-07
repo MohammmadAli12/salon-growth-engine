@@ -52,66 +52,67 @@ type NavMeta = { label: string; desc: string; icon: LucideIcon; tint: string };
 
 const NAV_META: Record<string, NavMeta> = {
   website: {
-    label: "Get a Website",
+    label: "I need a website",
     desc: "Your own booking website",
     icon: Globe,
     tint: "text-teal",
   },
   calls: {
-    label: "Get More Customers",
+    label: "I need more calls",
     desc: "Get more calls from nearby people",
     icon: Megaphone,
     tint: "text-gold",
   },
   whatsapp: {
-    label: "WhatsApp Marketing",
+    label: "I want WhatsApp messages",
     desc: "Messages sent automatically",
     icon: MessageCircle,
     tint: "text-forest-light",
   },
   google: {
-    label: "Show My Salon on Google",
+    label: "I want to appear on Google",
     desc: "Show your salon on Google Maps",
     icon: MapPin,
     tint: "text-teal",
   },
   bookings: {
-    label: "Online Bookings",
+    label: "I want online bookings",
     desc: "Customers book without calling",
     icon: CalendarCheck,
     tint: "text-olive",
   },
   instagram: {
-    label: "Instagram Promotion",
+    label: "I want Instagram customers",
     desc: "Posts and reels made for you",
     icon: Instagram,
     tint: "text-plum",
   },
   branding: {
-    label: "Salon Branding",
+    label: "I want a salon brand",
     desc: "Logo, board and print design",
     icon: Palette,
     tint: "text-gold-deep",
   },
   records: {
-    label: "Customer Management",
+    label: "I want to manage customers",
     desc: "Keep every customer detail safe",
     icon: Users,
     tint: "text-forest",
   },
   "more-customers": {
-    label: "Get More Customers",
+    label: "I want more customers",
     desc: "We manage everything for you",
     icon: TrendingUp,
     tint: "text-forest",
   },
   reviews: {
-    label: "Get More Reviews",
+    label: "I want more reviews",
     desc: "More 5-star reviews on Google",
     icon: Star,
     tint: "text-gold",
   },
 };
+
 
 /** Order shown in the sidebar. */
 const NAV_ORDER = [
