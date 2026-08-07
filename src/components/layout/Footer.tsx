@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import brandWordmark from "@/assets/salon-genie-wordmark.png.asset.json";
 import { Sparkles } from "lucide-react";
 import { moreNav, primaryNav } from "@/lib/site-data";
 
