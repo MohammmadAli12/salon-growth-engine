@@ -331,7 +331,9 @@ function PriceSlider({
   const onScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    setSlide(Math.round(el.scrollLeft / el.clientWidth));
+    const card = el.firstElementChild as HTMLElement | null;
+    const step = card ? card.offsetWidth + 12 : el.clientWidth;
+    setSlide(Math.round(el.scrollLeft / step));
   };
 
   const goTo = (i: number) => {
@@ -346,7 +348,7 @@ function PriceSlider({
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pt-2 pb-3"
+        className="no-scrollbar flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pt-2 pb-3"
       >
         {service.tiers.map((t) => {
           const key = `${service.id}:${t.id}`;
