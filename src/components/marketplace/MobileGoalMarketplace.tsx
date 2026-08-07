@@ -354,9 +354,10 @@ function PriceSlider({
           return (
             <article
               key={t.id}
-              className={`flex w-full shrink-0 snap-start flex-col rounded-[24px] border bg-card p-5 ${
+              className={`flex w-[calc(100vw-2.5rem)] shrink-0 snap-start flex-col rounded-[24px] border bg-card p-5 ${
                 t.popular ? "border-primary shadow-card" : "border-border shadow-soft"
               }`}
+
             >
               <div className="flex items-center justify-between gap-2">
                 <p className="text-[17px] font-semibold text-foreground">{t.label}</p>
