@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { useCart } from "@/lib/cart-store";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
+import { MobileGoalMarketplace } from "@/components/marketplace/MobileGoalMarketplace";
+
 import imgWebsite from "@/assets/mp-website.jpg";
 import imgAds from "@/assets/mp-ads.jpg";
 import imgChat from "@/assets/mp-chat.jpg";
@@ -218,7 +220,14 @@ export function MarketplaceCatalog() {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+    {/* Mobile: goal-based marketplace */}
+    <div className="lg:hidden">
+      <MobileGoalMarketplace />
+    </div>
+
+    <div className="hidden min-h-screen bg-background lg:block">
+
       {/* Pinned header: title + search + floating cart */}
       <div className="sticky top-16 z-40 border-b border-border/70 bg-card/75 backdrop-blur-xl backdrop-saturate-150">
         <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
@@ -385,7 +394,9 @@ export function MarketplaceCatalog() {
       </div>
 
     </div>
+    </>
   );
+
 }
 
 function SideItem({
