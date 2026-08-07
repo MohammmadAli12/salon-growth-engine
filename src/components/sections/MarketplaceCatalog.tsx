@@ -392,7 +392,9 @@ export function MarketplaceCatalog() {
       </div>
 
     </div>
+    </>
   );
+
 }
 
 function SideItem({
