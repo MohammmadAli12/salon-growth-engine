@@ -34,10 +34,14 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-5 md:px-10">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <span className="flex size-9 items-center justify-center rounded-md bg-gradient-hero shadow-soft">
-            <Sparkles className="size-4 text-primary-foreground" />
-          </span>
+        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)} aria-label="Salon Genie home">
+          <img
+            src={brandIcon.url}
+            alt="Salon Genie"
+            width={36}
+            height={36}
+            className="size-9 rounded-md object-contain"
+          />
           <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
             Salon Genie
           </span>
