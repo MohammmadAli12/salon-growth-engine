@@ -613,43 +613,82 @@ export function SalunnnHome() {
               </div>
             </div>
 
-            <div className="card-deck mobile-snap">
+            <div className="thread-feed">
               {[
-                [
-                  "Upcoming meetup",
-                  "Bangalore Growth Circle",
-                  "Aug 15 / salon owners only / 38 seats requested.",
-                  "RSVP",
-                ],
-                [
-                  "Recent discussion",
-                  "How Xing Salon got 300 bookings",
-                  "23 replies, two ad screenshots and one WhatsApp script inside.",
-                  "Open thread",
-                ],
-                [
-                  "Upcoming webinar",
-                  "Local SEO clinic for salons",
-                  "Live profile teardown with a map-pack specialist.",
-                  "Save seat",
-                ],
-                [
-                  "Recent success",
-                  "Delhi owner fills 43 color slots",
-                  "The offer angle, landing page and follow-up sequence are shared.",
-                  "See notes",
-                ],
-              ].map(([meta, title, body, action]) => (
-                <Link to="/community" className="community-card" key={title}>
-                  <div className="meta">{meta}</div>
-                  <h4 className="disp">{title}</h4>
-                  <p>{body}</p>
-                  <span className="card-action">
-                    {action} <span>→</span>
+                {
+                  group: "salonowners",
+                  user: "aditi_k",
+                  time: "2h",
+                  votes: "184",
+                  title: "How Xing Salon got 300 bookings in one month",
+                  body: "Two ad screenshots and the exact WhatsApp follow-up script are in the thread.",
+                  replies: "23 replies",
+                  tag: "Case study",
+                  av: "AK",
+                },
+                {
+                  group: "localseo",
+                  user: "meera_s",
+                  time: "5h",
+                  votes: "96",
+                  title: "Map pack teardown: what actually moved my pin",
+                  body: "Photos weekly, service list rewritten, 40 reviews answered. Ranked #2 in 6 weeks.",
+                  replies: "41 replies",
+                  tag: "Playbook",
+                  av: "MS",
+                },
+                {
+                  group: "pricing",
+                  user: "rohit_p",
+                  time: "1d",
+                  votes: "212",
+                  title: "Holiday offers that do not discount the brand",
+                  body: "Bundle add-ons instead of cutting price. Owners are sharing their festive menus below.",
+                  replies: "58 replies",
+                  tag: "Discussion",
+                  av: "RP",
+                },
+                {
+                  group: "meetups",
+                  user: "lavanya_v",
+                  time: "1d",
+                  votes: "74",
+                  title: "Bangalore Growth Circle — Aug 15, 38 seats requested",
+                  body: "Salon owners only. Bring one number you want to fix and one offer that worked.",
+                  replies: "12 replies",
+                  tag: "Meetup",
+                  av: "LV",
+                },
+              ].map((p) => (
+                <Link to="/community" className="thread-post" key={p.title}>
+                  <span className="tp-vote">
+                    <b aria-hidden="true">▲</b>
+                    <em>{p.votes}</em>
+                  </span>
+                  <span className="tp-main">
+                    <span className="tp-meta">
+                      <i className="tp-av">{p.av}</i>
+                      <span>
+                        s/{p.group} · u/{p.user} · {p.time}
+                      </span>
+                    </span>
+                    <span className="tp-title disp">{p.title}</span>
+                    <span className="tp-body">{p.body}</span>
+                    <span className="tp-foot">
+                      <span className="tp-chip">{p.tag}</span>
+                      <span>{p.replies}</span>
+                      <span className="tp-open">
+                        Open thread <span>→</span>
+                      </span>
+                    </span>
                   </span>
                 </Link>
               ))}
+              <Link to="/community" className="thread-more">
+                See all discussions <span>→</span>
+              </Link>
             </div>
+
           </div>
         </div>
       </section>
