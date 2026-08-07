@@ -528,11 +528,13 @@ function PriceSlider({
 
   // Auto-advance the plan cards every 5s; pauses while the user is touching.
   useEffect(() => {
+    console.log('AUTO effect', paused, service.tiers.length);
     if (paused || service.tiers.length < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => {
       const el = trackRef.current;
       if (!el) return;
+      console.log('AUTO tick', slide);
       const next = (slide + 1) % service.tiers.length;
       const card = el.children[next] as HTMLElement | undefined;
       if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
