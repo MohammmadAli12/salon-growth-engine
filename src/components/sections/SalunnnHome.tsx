@@ -1,6 +1,65 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import {
+  CalendarCheck,
+  Globe,
+  Instagram,
+  MapPin,
+  MessageCircle,
+  PhoneCall,
+  Star,
+  TrendingUp,
+} from "lucide-react";
 import { useCart } from "@/lib/cart-store";
+
+/** Goal-first cards for the desktop marketplace preview. */
+const HOME_GOALS: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  desc: string;
+}[] = [
+  {
+    icon: Globe,
+    title: "I need a website",
+    desc: "Get a professional website that brings customers and bookings.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "I want online bookings",
+    desc: "Let customers book appointments 24/7 even while you sleep.",
+  },
+  {
+    icon: PhoneCall,
+    title: "I need more calls",
+    desc: "Get more phone calls from interested customers in your area.",
+  },
+  {
+    icon: MessageCircle,
+    title: "I want WhatsApp messages",
+    desc: "Automate replies and stay connected with customers on WhatsApp.",
+  },
+  {
+    icon: MapPin,
+    title: "I want to appear on Google",
+    desc: "Show your salon on Google and get discovered by nearby customers.",
+  },
+  {
+    icon: Instagram,
+    title: "I want Instagram customers",
+    desc: "Attract more followers and turn them into paying customers.",
+  },
+  {
+    icon: TrendingUp,
+    title: "I want more customers",
+    desc: "A managed growth plan that keeps new people walking in every month.",
+  },
+  {
+    icon: Star,
+    title: "I want more reviews",
+    desc: "Collect 5-star reviews so new customers trust you instantly.",
+  },
+];
+
 
 /** Animated count-up number, triggered when scrolled into view. */
 function Counter({
@@ -313,7 +372,30 @@ export function SalunnnHome() {
             </p>
           </div>
 
+          {/* Desktop: goal-first deck */}
+          <div className="goal-deck">
+            {HOME_GOALS.map((g) => {
+              const Icon = g.icon;
+              return (
+                <Link key={g.title} to="/marketplace" className="goal-card">
+                  <span className="goal-ico">
+                    <Icon />
+                  </span>
+                  <h3>
+                    <Icon />
+                    {g.title}
+                  </h3>
+                  <p>{g.desc}</p>
+                  <span className="goal-cta">
+                    View Solutions <span>→</span>
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
           <div className="bento">
+
             {SERVICE_CARDS.map((c) => (
               <ServiceCard key={c.title} card={c} />
             ))}
