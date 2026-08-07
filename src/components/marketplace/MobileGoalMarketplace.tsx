@@ -245,7 +245,6 @@ export function MobileGoalMarketplace() {
           <div className="service-marquee flex w-max gap-2">
             {[...GOALS, ...GOALS].map((g, i) => {
               const m = META[g.serviceId];
-              const RIcon = g.icon;
               return (
                 <button
                   key={`${g.serviceId}-${i}`}
@@ -254,7 +253,7 @@ export function MobileGoalMarketplace() {
                   className="flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[12.5px] font-medium whitespace-nowrap text-foreground/85 shadow-soft active:scale-95"
                   style={{ borderColor: `color-mix(in oklab, var(${m?.accent ?? "--forest"}) 30%, transparent)` }}
                 >
-                  <RIcon className="h-3.5 w-3.5 text-primary" strokeWidth={1.8} />
+                  <span aria-hidden>{g.emoji}</span>
                   {g.title}
                 </button>
               );
