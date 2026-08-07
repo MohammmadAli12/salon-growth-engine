@@ -10,6 +10,14 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useCart, inr } from "@/lib/cart-store";
+import imgWebsite from "@/assets/goals/website.jpg";
+import imgBookings from "@/assets/goals/bookings.jpg";
+import imgCalls from "@/assets/goals/calls.jpg";
+import imgWhatsapp from "@/assets/goals/whatsapp.jpg";
+import imgGoogle from "@/assets/goals/google.jpg";
+import imgInstagram from "@/assets/goals/instagram.jpg";
+import imgCustomers from "@/assets/goals/customers.jpg";
+import imgReviews from "@/assets/goals/reviews.jpg";
 import { SIMPLE_SERVICES, type SimpleService, type SimpleTier } from "@/lib/marketplace-simple";
 
 /** Goal-first mobile marketplace: users choose an outcome, not a technology. */
