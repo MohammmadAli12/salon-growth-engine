@@ -337,34 +337,49 @@ export function MarketplaceCatalog() {
       >
         <div
           onClick={() => setDrawerOpen(false)}
-          className={`absolute inset-0 bg-foreground/40 backdrop-blur-sm transition-opacity duration-[250ms] ${
+          className={`absolute inset-0 bg-foreground/60 backdrop-blur-[3px] transition-opacity duration-[250ms] ${
             drawerOpen ? "opacity-100" : "opacity-0"
           }`}
         />
         <div
-          className={`absolute inset-x-0 bottom-0 flex max-h-[72vh] flex-col rounded-t-[22px] bg-primary/95 shadow-float backdrop-blur-xl transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+          role="dialog"
+          aria-modal="true"
+          aria-label="Choose a service"
+          className={`absolute inset-x-0 bottom-0 flex max-h-[58vh] flex-col rounded-t-[24px] border-t border-primary-foreground/15 bg-primary/97 shadow-float backdrop-blur-xl transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
             drawerOpen ? "translate-y-0" : "translate-y-full"
           }`}
         >
-          <div className="flex justify-center pt-2.5 pb-1">
-            <span className="h-1.5 w-11 rounded-full bg-primary-foreground/30" />
-          </div>
-          <div className="flex items-center justify-between px-4 pt-1 pb-2">
-            <p className="text-sm font-semibold text-primary-foreground">Choose a service</p>
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(false)}
+            aria-label="Close menu"
+            className="flex justify-center pt-2.5 pb-1"
+          >
+            <span className="h-1.5 w-11 rounded-full bg-primary-foreground/35" />
+          </button>
+          <div className="flex items-center gap-2 px-3 pt-0.5 pb-2">
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(false)}
+              className="flex h-9 items-center gap-1.5 rounded-full bg-primary-foreground/10 pr-3 pl-2 text-[12px] font-semibold text-primary-foreground transition active:scale-95"
+            >
+              <ArrowLeft className="h-4 w-4" strokeWidth={2} />
+              Back
+            </button>
+            <p className="min-w-0 flex-1 truncate text-center text-[13px] font-semibold text-primary-foreground">
+              Choose a service
+            </p>
             <button
               type="button"
               onClick={() => setDrawerOpen(false)}
               aria-label="Close menu"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground active:scale-95"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground transition active:scale-95"
             >
               <X className="h-4 w-4" strokeWidth={2} />
             </button>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-3">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-[max(0.9rem,env(safe-area-inset-bottom))]">
             {navList}
-          </div>
-          <div className="border-t border-primary-foreground/15 px-3 pt-1 pb-[max(1rem,env(safe-area-inset-bottom))]">
-            {helpCard}
           </div>
         </div>
       </div>
