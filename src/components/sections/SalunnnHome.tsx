@@ -11,53 +11,71 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useCart } from "@/lib/cart-store";
+import goalWebsite from "@/assets/goals/website.jpg";
+import goalBookings from "@/assets/goals/bookings.jpg";
+import goalCalls from "@/assets/goals/calls.jpg";
+import goalWhatsapp from "@/assets/goals/whatsapp.jpg";
+import goalGoogle from "@/assets/goals/google.jpg";
+import goalInstagram from "@/assets/goals/instagram.jpg";
+import goalCustomers from "@/assets/goals/customers.jpg";
+import goalReviews from "@/assets/goals/reviews.jpg";
 
 /** Goal-first cards for the desktop marketplace preview. */
 const HOME_GOALS: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   desc: string;
+  img: string;
 }[] = [
   {
     icon: Globe,
     title: "I need a website",
     desc: "Get a professional website that brings customers and bookings.",
+    img: goalWebsite,
   },
   {
     icon: CalendarCheck,
     title: "I want online bookings",
     desc: "Let customers book appointments 24/7 even while you sleep.",
+    img: goalBookings,
   },
   {
     icon: PhoneCall,
     title: "I need more calls",
     desc: "Get more phone calls from interested customers in your area.",
+    img: goalCalls,
   },
   {
     icon: MessageCircle,
     title: "I want WhatsApp messages",
     desc: "Automate replies and stay connected with customers on WhatsApp.",
+    img: goalWhatsapp,
   },
   {
     icon: MapPin,
     title: "I want to appear on Google",
     desc: "Show your salon on Google and get discovered by nearby customers.",
+    img: goalGoogle,
   },
   {
     icon: Instagram,
     title: "I want Instagram customers",
     desc: "Attract more followers and turn them into paying customers.",
+    img: goalInstagram,
   },
   {
     icon: TrendingUp,
     title: "I want more customers",
     desc: "A managed growth plan that keeps new people walking in every month.",
+    img: goalCustomers,
   },
   {
     icon: Star,
     title: "I want more reviews",
     desc: "Collect 5-star reviews so new customers trust you instantly.",
+    img: goalReviews,
   },
+
 ];
 
 
