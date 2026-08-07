@@ -524,6 +524,21 @@ function PriceSlider({
   const inCart = cart.map((c) => c.serviceId);
   const trackRef = useRef<HTMLDivElement>(null);
   const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  // Auto-advance the plan cards every 5s; pauses while the user is touching.
+  useEffect(() => {
+    if (paused || service.tiers.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      const next = (slide + 1) % service.tiers.length;
+      const card = el.children[next] as HTMLElement | undefined;
+      if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, [paused, slide, service.tiers.length]);
 
   const onScroll = () => {
     const el = trackRef.current;
