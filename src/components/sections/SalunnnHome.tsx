@@ -392,7 +392,7 @@ export function SalunnnHome() {
           </div>
 
           {/* Desktop: goal-first deck */}
-          <div className="goal-deck">
+          <div className="goal-deck" ref={goalDeckRef}>
             {HOME_GOALS.map((g) => {
               const Icon = g.icon;
               return (
