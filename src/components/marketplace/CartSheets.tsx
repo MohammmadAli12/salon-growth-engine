@@ -176,6 +176,34 @@ export function CartSheets() {
               >
                 Proceed to checkout →
               </button>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                  gap: 8,
+                  padding: "12px 20px 4px",
+                }}
+              >
+                {["Secure Payment", "Expert Support", "Fast Delivery"].map((t) => (
+                  <div
+                    key={t}
+                    style={{
+                      border: "1px solid var(--line)",
+                      borderRadius: 14,
+                      padding: "10px 6px",
+                      textAlign: "center",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      lineHeight: 1.25,
+                      color: "var(--espresso-soft)",
+                      background: "var(--card)",
+                    }}
+                  >
+                    {t}
+                  </div>
+                ))}
+              </div>
+
             </>
           )}
         </div>
