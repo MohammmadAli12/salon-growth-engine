@@ -19,6 +19,7 @@ import goalGoogle from "@/assets/goals/google.jpg";
 import goalInstagram from "@/assets/goals/instagram.jpg";
 import goalCustomers from "@/assets/goals/customers.jpg";
 import goalReviews from "@/assets/goals/reviews.jpg";
+import { HomeCommunity } from "@/components/sections/HomeCommunity";
 
 /** Goal-first cards for the desktop marketplace preview. */
 const HOME_GOALS: {
