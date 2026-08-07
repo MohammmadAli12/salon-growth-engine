@@ -164,7 +164,7 @@ export function CommunityPortal() {
 
           {/* Highlight strip */}
           <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="relative overflow-hidden rounded-lg border border-border/70 bg-sage/50 p-4">
+            <div className="relative overflow-hidden rounded-lg border border-border/70 bg-sage/50 p-4 pr-24">
               <span className="flex size-9 items-center justify-center rounded-full bg-gold/15">
                 <Trophy className="size-5 text-gold" />
               </span>
