@@ -11,7 +11,7 @@ export function HiringPreview({ heading = true }: { heading?: boolean | undefine
         <SectionHeading
           eyebrow="Hiring"
           title="Find stylists, therapists and managers"
-          description="Salons on Salunnn post openings to a pool of professionals who already work in the industry."
+          description="Salons on Salon Genie post openings to a pool of professionals who already work in the industry."
         />
       ) : null}
 

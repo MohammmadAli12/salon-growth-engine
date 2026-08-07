@@ -4,13 +4,13 @@ import { CommunityPortal } from "@/components/sections/CommunityPortal";
 export const Route = createFileRoute("/community")({
   head: () => ({
     meta: [
-      { title: "Salunnn Owners Club — Salon Owner Community" },
+      { title: "Salon Genie Owners Club — Salon Owner Community" },
       {
         name: "description",
         content:
           "Ask questions, share wins and learn what's working from 300+ salon owners: discussions, live chat rooms, meetups and playbooks.",
       },
-      { property: "og:title", content: "Salunnn Owners Club — Salon Owner Community" },
+      { property: "og:title", content: "Salon Genie Owners Club — Salon Owner Community" },
       {
         property: "og:description",
         content: "Discussions, live chat rooms, meetups and playbooks for salon owners.",

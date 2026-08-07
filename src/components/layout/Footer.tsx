@@ -18,7 +18,7 @@ export function Footer() {
                 <Sparkles className="size-4 text-primary-foreground" />
               </span>
               <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
-                Salunnn
+                Salon Genie
               </span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
@@ -26,7 +26,7 @@ export function Footer() {
               learning, community and hiring in one place.
             </p>
             <p className="mt-6 text-sm text-muted-foreground">
-              hello@salunnn.com · Bengaluru, India
+              hello@salongenie.com · Bengaluru, India
             </p>
           </div>
 
@@ -65,7 +65,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Salunnn. All rights reserved.
+            © {new Date().getFullYear()} Salon Genie. All rights reserved.
           </p>
           <ul className="flex gap-5">
             {legal.map((item) => (

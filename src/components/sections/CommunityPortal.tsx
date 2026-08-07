@@ -139,7 +139,7 @@ export function CommunityPortal() {
           <div className="flex flex-col gap-5 border-b border-border/70 pb-6 md:flex-row md:items-start md:justify-between">
             <div>
               <h1 className="text-[30px] font-bold leading-tight text-foreground md:text-[38px]">
-                Salunnn Owners Club
+                Salon Genie Owners Club
               </h1>
               <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground md:text-base">
                 Ask, learn and share what's working in your salon.
@@ -492,7 +492,7 @@ export function CommunityPortal() {
               <Sparkles className="size-4 text-gold" />
             </span>
             <p className="text-sm leading-5 text-muted-foreground">
-              Free for every Salunnn client — no membership fee.
+              Free for every Salon Genie client — no membership fee.
             </p>
           </Card>
         </div>

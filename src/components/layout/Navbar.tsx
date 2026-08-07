@@ -39,7 +39,7 @@ export function Navbar() {
             <Sparkles className="size-4 text-primary-foreground" />
           </span>
           <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
-            Salunnn
+            Salon Genie
           </span>
         </Link>
 

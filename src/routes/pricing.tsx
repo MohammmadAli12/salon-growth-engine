@@ -10,13 +10,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Salon Marketing Pricing — Plans from ₹14,999/mo | Salunnn" },
+      { title: "Salon Marketing Pricing — Plans from ₹14,999/mo | Salon Genie" },
       {
         name: "description",
         content:
           "Transparent salon marketing plans: Starter, Growth and Scale. Fixed scope, monthly reporting, no lock-in after 90 days.",
       },
-      { property: "og:title", content: "Salon Marketing Pricing — Plans from ₹14,999/mo | Salunnn" },
+      { property: "og:title", content: "Salon Marketing Pricing — Plans from ₹14,999/mo | Salon Genie" },
       {
         property: "og:description",
         content: "Three plans for single-chair salons through to multi-outlet groups.",

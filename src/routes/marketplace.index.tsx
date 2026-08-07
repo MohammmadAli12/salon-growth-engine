@@ -4,13 +4,13 @@ import { MarketplaceCatalog } from "@/components/sections/MarketplaceCatalog";
 export const Route = createFileRoute("/marketplace/")({
   head: () => ({
     meta: [
-      { title: "Salon Marketing Marketplace — Browse Services | Salunnn" },
+      { title: "Salon Marketing Marketplace — Browse Services | Salon Genie" },
       {
         name: "description",
         content:
           "Browse salon growth services: websites, Google Profile, local SEO, Google Ads, Instagram Ads and WhatsApp API. Pick a plan and add it to your cart.",
       },
-      { property: "og:title", content: "Salon Marketing Marketplace — Browse Services | Salunnn" },
+      { property: "og:title", content: "Salon Marketing Marketplace — Browse Services | Salon Genie" },
       {
         property: "og:description",
         content: "A product catalog for salon growth. Pick a service, choose a plan, add to cart.",

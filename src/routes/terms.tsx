@@ -5,13 +5,13 @@ import { LegalBody } from "@/components/layout/LegalBody";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Service | Salunnn" },
+      { title: "Terms of Service | Salon Genie" },
       {
         name: "description",
         content:
-          "The terms governing Salunnn marketing services, marketplace purchases, the Salunnn app, billing and account ownership.",
+          "The terms governing Salon Genie marketing services, marketplace purchases, the Salon Genie app, billing and account ownership.",
       },
-      { property: "og:title", content: "Terms of Service | Salunnn" },
+      { property: "og:title", content: "Terms of Service | Salon Genie" },
       { property: "og:description", content: "Service scope, billing, ownership and termination." },
       { property: "og:url", content: "/terms" },
     ],
@@ -53,7 +53,7 @@ function Terms() {
       <PageHeader
         eyebrow="Legal"
         title="Terms of service"
-        description="Last updated 2 August 2026. These terms apply to all Salunnn services and marketplace purchases."
+        description="Last updated 2 August 2026. These terms apply to all Salon Genie services and marketplace purchases."
       />
       <LegalBody sections={sections} />
     </>

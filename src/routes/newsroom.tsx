@@ -7,16 +7,16 @@ import { newsroom } from "@/lib/site-data";
 export const Route = createFileRoute("/newsroom")({
   head: () => ({
     meta: [
-      { title: "Newsroom — Product & Company Updates | Salunnn" },
+      { title: "Newsroom — Product & Company Updates | Salon Genie" },
       {
         name: "description",
         content:
-          "Product releases, company milestones and marketplace updates from the Salunnn salon growth platform.",
+          "Product releases, company milestones and marketplace updates from the Salon Genie salon growth platform.",
       },
-      { property: "og:title", content: "Newsroom — Product & Company Updates | Salunnn" },
+      { property: "og:title", content: "Newsroom — Product & Company Updates | Salon Genie" },
       {
         property: "og:description",
-        content: "What's new in the Salunnn platform, product and marketplace.",
+        content: "What's new in the Salon Genie platform, product and marketplace.",
       },
       { property: "og:url", content: "/newsroom" },
     ],

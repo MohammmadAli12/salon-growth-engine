@@ -8,13 +8,13 @@ import { services } from "@/lib/site-data";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Book a Free Salon Growth Consultation | Salunnn" },
+      { title: "Book a Free Salon Growth Consultation | Salon Genie" },
       {
         name: "description",
         content:
           "Book a free 30-minute consultation: we audit your salon website, Google profile and booking flow and map the next 90 days.",
       },
-      { property: "og:title", content: "Book a Free Salon Growth Consultation | Salunnn" },
+      { property: "og:title", content: "Book a Free Salon Growth Consultation | Salon Genie" },
       {
         property: "og:description",
         content: "Tell us about your salon and we'll come back within one working day.",
@@ -135,7 +135,7 @@ function Contact() {
 
           <aside className="grid gap-3 self-start">
             {[
-              { icon: Mail, label: "Email", value: "hello@salunnn.com" },
+              { icon: Mail, label: "Email", value: "hello@salongenie.com" },
               { icon: Phone, label: "WhatsApp", value: "+91 90000 00000" },
               { icon: MapPin, label: "Office", value: "Indiranagar, Bengaluru" },
             ].map((item) => (

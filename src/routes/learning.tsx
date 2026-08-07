@@ -7,13 +7,13 @@ import { CtaBand } from "@/components/sections/CtaBand";
 export const Route = createFileRoute("/learning")({
   head: () => ({
     meta: [
-      { title: "Salon Marketing Courses & Training | Salunnn Learning" },
+      { title: "Salon Marketing Courses & Training | Salon Genie Learning" },
       {
         name: "description",
         content:
           "Practical courses for salon owners and teams: marketing foundations, Instagram, front-desk retention and hiring.",
       },
-      { property: "og:title", content: "Salon Marketing Courses & Training | Salunnn Learning" },
+      { property: "og:title", content: "Salon Marketing Courses & Training | Salon Genie Learning" },
       {
         property: "og:description",
         content: "Short, practical lessons drawn from campaigns we've run for real salons.",

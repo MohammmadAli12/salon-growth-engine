@@ -266,7 +266,7 @@ export function CaseStudiesShowcase() {
               Your salon could be the next success story.
             </h2>
             <p className="text-xs text-muted-foreground">
-              Join hundreds of salon owners growing with Salunnn.
+              Join hundreds of salon owners growing with Salon Genie.
             </p>
           </div>
         </div>

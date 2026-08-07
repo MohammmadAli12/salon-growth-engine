@@ -441,7 +441,7 @@ export function SalunnnHome() {
         <div className="wrap">
           <div className="why-grid">
             <div>
-              <div className="eyebrow">Why Salunnn</div>
+              <div className="eyebrow">Why Salon Genie</div>
               <h2
                 className="disp"
                 style={{
@@ -621,7 +621,7 @@ export function SalunnnHome() {
         <div className="wrap">
           <div className="app-grid">
             <div>
-              <div className="eyebrow">Salunnn app</div>
+              <div className="eyebrow">Salon Genie app</div>
               <h2
                 className="disp"
                 style={{
@@ -634,7 +634,7 @@ export function SalunnnHome() {
                 Run the whole salon from one app
               </h2>
               <p style={{ fontSize: 14, color: "var(--espresso-soft)", lineHeight: 1.7 }}>
-                The Salunnn app connects your marketing to your calendar, so every campaign is
+                The Salon Genie app connects your marketing to your calendar, so every campaign is
                 measured against real appointments and revenue.
               </p>
               <ul className="app-bullets">

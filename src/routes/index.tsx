@@ -5,13 +5,13 @@ import { SalunnnHome } from "@/components/sections/SalunnnHome";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Salunnn — Grow Your Salon with AI & Marketing" },
+      { title: "Salon Genie — Grow Your Salon with AI & Marketing" },
       {
         name: "description",
         content:
           "AI-powered salon growth platform: websites, Google SEO, local SEO, Instagram and Google Ads, WhatsApp API and automation for salon owners.",
       },
-      { property: "og:title", content: "Salunnn — Grow Your Salon with AI & Marketing" },
+      { property: "og:title", content: "Salon Genie — Grow Your Salon with AI & Marketing" },
       {
         property: "og:description",
         content:
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Salunnn",
+          name: "Salon Genie",
           description: "AI-powered salon growth platform.",
           url: "/",
           areaServed: "IN",

@@ -7,7 +7,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 export const Route = createFileRoute("/hiring")({
   head: () => ({
     meta: [
-      { title: "Salon Jobs & Hiring — Stylists, Therapists, Managers | Salunnn" },
+      { title: "Salon Jobs & Hiring — Stylists, Therapists, Managers | Salon Genie" },
       {
         name: "description",
         content:
@@ -15,11 +15,11 @@ export const Route = createFileRoute("/hiring")({
       },
       {
         property: "og:title",
-        content: "Salon Jobs & Hiring — Stylists, Therapists, Managers | Salunnn",
+        content: "Salon Jobs & Hiring — Stylists, Therapists, Managers | Salon Genie",
       },
       {
         property: "og:description",
-        content: "Open roles at salons on Salunnn, plus hiring support for owners.",
+        content: "Open roles at salons on Salon Genie, plus hiring support for owners.",
       },
       { property: "og:url", content: "/hiring" },
     ],
@@ -41,7 +41,7 @@ function Hiring() {
         <SectionHeading
           eyebrow="For owners"
           title="Hiring support, not a job board dump"
-          description="We publish your role to the Salunnn network, screen applicants against your service mix, and hand over a shortlist with trial-day notes."
+          description="We publish your role to the Salon Genie network, screen applicants against your service mix, and hand over a shortlist with trial-day notes."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {[
