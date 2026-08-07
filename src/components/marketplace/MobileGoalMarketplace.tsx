@@ -172,6 +172,12 @@ export function MobileGoalMarketplace() {
     );
   }, [query]);
 
+  const FEATURED_IDS = ["website", "bookings"];
+  const featured = results.filter((g) => FEATURED_IDS.includes(g.serviceId));
+  const rest = results.filter((g) => !FEATURED_IDS.includes(g.serviceId));
+
+
+
   useEffect(() => {
     document.body.style.overflow = openGoal ? "hidden" : "";
     return () => {
