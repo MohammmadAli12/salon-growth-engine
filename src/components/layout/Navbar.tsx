@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronDown, Heart, Menu, ShoppingBag, Sparkles, X } from "lucide-react";
+import { ChevronDown, Heart, Menu, ShoppingBag, X } from "lucide-react";
 import brandIcon from "@/assets/salon-genie-icon.png.asset.json";
 import { moreNav, primaryNav } from "@/lib/site-data";
 import { GradientButton } from "./buttons";
