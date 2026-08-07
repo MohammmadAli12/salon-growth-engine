@@ -19,6 +19,7 @@ import goalGoogle from "@/assets/goals/google.jpg";
 import goalInstagram from "@/assets/goals/instagram.jpg";
 import goalCustomers from "@/assets/goals/customers.jpg";
 import goalReviews from "@/assets/goals/reviews.jpg";
+import { HomeCommunity } from "@/components/sections/HomeCommunity";
 
 /** Goal-first cards for the desktop marketplace preview. */
 const HOME_GOALS: {
@@ -673,129 +674,8 @@ export function SalunnnHome() {
       </section>
 
       {/* COMMUNITY */}
-      <section className="section">
-        <div className="wrap">
-          <div className="preview-head">
-            <div className="section-head">
-              <div className="eyebrow">Community</div>
-              <h2 className="disp">A room that already feels in motion</h2>
-              <p>Live prompts, owner threads and city meetups — read what worked before you spend.</p>
-            </div>
-            <Link to="/community" className="section-foot-link">
-              Join the community <span>→</span>
-            </Link>
-          </div>
+      <HomeCommunity />
 
-          <div className="community-shell">
-            <div className="live-panel">
-              <div className="live-badge">
-                <i /> LIVE / 23 owners online
-              </div>
-              <h3 className="disp">
-                Today's discussion: holiday offers that do not discount the brand.
-              </h3>
-              <div className="community-stats">
-                <div>
-                  <Counter target={1000} suffix="+" />
-                  <span>Owners</span>
-                </div>
-                <div>
-                  <Counter target={500} suffix="+" />
-                  <span>Stylists</span>
-                </div>
-                <div>
-                  <Counter target={120} />
-                  <span>Experts</span>
-                </div>
-              </div>
-              <div className="avatar-row" aria-label="Top contributors">
-                {["AK", "MS", "RP", "LV", "+8"].map((a) => (
-                  <div className="avatar" key={a}>
-                    {a}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="thread-feed">
-              {[
-                {
-                  group: "salonowners",
-                  user: "aditi_k",
-                  time: "2h",
-                  votes: "184",
-                  title: "How Xing Salon got 300 bookings in one month",
-                  body: "Two ad screenshots and the exact WhatsApp follow-up script are in the thread.",
-                  replies: "23 replies",
-                  tag: "Case study",
-                  av: "AK",
-                },
-                {
-                  group: "localseo",
-                  user: "meera_s",
-                  time: "5h",
-                  votes: "96",
-                  title: "Map pack teardown: what actually moved my pin",
-                  body: "Photos weekly, service list rewritten, 40 reviews answered. Ranked #2 in 6 weeks.",
-                  replies: "41 replies",
-                  tag: "Playbook",
-                  av: "MS",
-                },
-                {
-                  group: "pricing",
-                  user: "rohit_p",
-                  time: "1d",
-                  votes: "212",
-                  title: "Holiday offers that do not discount the brand",
-                  body: "Bundle add-ons instead of cutting price. Owners are sharing their festive menus below.",
-                  replies: "58 replies",
-                  tag: "Discussion",
-                  av: "RP",
-                },
-                {
-                  group: "meetups",
-                  user: "lavanya_v",
-                  time: "1d",
-                  votes: "74",
-                  title: "Bangalore Growth Circle — Aug 15, 38 seats requested",
-                  body: "Salon owners only. Bring one number you want to fix and one offer that worked.",
-                  replies: "12 replies",
-                  tag: "Meetup",
-                  av: "LV",
-                },
-              ].map((p) => (
-                <Link to="/community" className="thread-post" key={p.title}>
-                  <span className="tp-vote">
-                    <b aria-hidden="true">▲</b>
-                    <em>{p.votes}</em>
-                  </span>
-                  <span className="tp-main">
-                    <span className="tp-meta">
-                      <i className="tp-av">{p.av}</i>
-                      <span>
-                        s/{p.group} · u/{p.user} · {p.time}
-                      </span>
-                    </span>
-                    <span className="tp-title disp">{p.title}</span>
-                    <span className="tp-body">{p.body}</span>
-                    <span className="tp-foot">
-                      <span className="tp-chip">{p.tag}</span>
-                      <span>{p.replies}</span>
-                      <span className="tp-open">
-                        Open thread <span>→</span>
-                      </span>
-                    </span>
-                  </span>
-                </Link>
-              ))}
-              <Link to="/community" className="thread-more">
-                See all discussions <span>→</span>
-              </Link>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       {/* LEARNING */}
       <section className="section" style={{ background: "var(--cream-deep)" }}>
