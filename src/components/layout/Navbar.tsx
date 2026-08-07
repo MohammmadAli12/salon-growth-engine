@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ChevronDown, Heart, Menu, ShoppingBag, X } from "lucide-react";
 import brandIcon from "@/assets/salon-genie-icon.png.asset.json";
+import brandWordmark from "@/assets/salon-genie-handwritten.png.asset.json";
+
 import { moreNav, primaryNav } from "@/lib/site-data";
 import { GradientButton } from "./buttons";
 import { cn } from "@/lib/utils";
@@ -43,9 +45,12 @@ export function Navbar() {
             height={36}
             className="size-9 rounded-md object-contain"
           />
-          <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
-            Salon Genie
-          </span>
+          <img
+            src={brandWordmark.url}
+            alt="Salon Genie"
+            className="block h-[30px] w-auto object-contain transition-transform duration-200 hover:scale-[1.02] md:h-9"
+          />
+
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
