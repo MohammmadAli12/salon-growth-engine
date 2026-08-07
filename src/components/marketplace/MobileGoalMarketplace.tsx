@@ -265,10 +265,10 @@ export function MobileGoalMarketplace() {
                         loading={i === 0 ? "eager" : "lazy"}
                         className="h-full w-full object-cover"
                       />
-                      <span className="absolute top-3 left-3 rounded-full bg-gradient-button px-3 py-1 text-[11px] font-bold tracking-wide text-primary-foreground uppercase">
+                      <span style={{ position: "absolute", top: 12, left: 12 }} className="rounded-full bg-gradient-button px-3 py-1 text-[11px] font-bold tracking-wide text-primary-foreground uppercase">
                         {i === 0 ? "Most Popular" : "Salon Favourite"}
                       </span>
-                      <span className="absolute bottom-3 left-3 flex h-11 w-11 items-center justify-center rounded-[16px] bg-card text-[22px] shadow-card">
+                      <span style={{ position: "absolute", bottom: 12, left: 12 }} className="flex h-11 w-11 items-center justify-center rounded-[16px] bg-card text-[22px] shadow-card">
                         {g.emoji}
                       </span>
                     </span>
@@ -333,7 +333,7 @@ export function MobileGoalMarketplace() {
                         loading="lazy"
                         className="h-full w-full object-cover"
                       />
-                      <span className="absolute bottom-2 left-2 flex h-8 w-8 items-center justify-center rounded-[12px] bg-card text-[16px] shadow-soft">
+                      <span style={{ position: "absolute", bottom: 8, left: 8 }} className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-card text-[16px] shadow-soft">
                         {g.emoji}
                       </span>
                     </span>
