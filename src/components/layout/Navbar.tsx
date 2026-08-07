@@ -43,9 +43,12 @@ export function Navbar() {
             height={36}
             className="size-9 rounded-md object-contain"
           />
-          <span className="font-display text-lg font-extrabold tracking-tight text-foreground">
-            Salon Genie
-          </span>
+          <img
+            src={brandWordmark.url}
+            alt="Salon Genie"
+            className="block h-[30px] w-auto object-contain transition-transform duration-200 hover:scale-[1.02] md:h-9"
+          />
+
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
