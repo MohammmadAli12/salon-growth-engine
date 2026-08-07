@@ -330,7 +330,7 @@ export function MarketplaceCatalog() {
         </div>
       </div>
 
-      {/* Mobile slide drawer */}
+      {/* Mobile bottom sheet picker */}
       <div
         className={`fixed inset-0 z-50 lg:hidden ${drawerOpen ? "" : "pointer-events-none"}`}
         aria-hidden={!drawerOpen}
@@ -342,25 +342,33 @@ export function MarketplaceCatalog() {
           }`}
         />
         <div
-          className={`absolute inset-y-0 left-0 flex w-[86%] max-w-[320px] flex-col bg-primary shadow-float transition-transform duration-[250ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-            drawerOpen ? "translate-x-0" : "-translate-x-full"
+          className={`absolute inset-x-0 bottom-0 flex max-h-[72vh] flex-col rounded-t-[22px] bg-primary/95 shadow-float backdrop-blur-xl transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+            drawerOpen ? "translate-y-0" : "translate-y-full"
           }`}
         >
-          <div className="flex items-center justify-between px-4 pt-5 pb-3">
+          <div className="flex justify-center pt-2.5 pb-1">
+            <span className="h-1.5 w-11 rounded-full bg-primary-foreground/30" />
+          </div>
+          <div className="flex items-center justify-between px-4 pt-1 pb-2">
             <p className="text-sm font-semibold text-primary-foreground">Choose a service</p>
             <button
               type="button"
               onClick={() => setDrawerOpen(false)}
               aria-label="Close menu"
-              className="flex h-9 w-9 items-center justify-center rounded-sm bg-primary-foreground/10 text-primary-foreground"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground active:scale-95"
             >
               <X className="h-4 w-4" strokeWidth={2} />
             </button>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-3">{navList}</div>
-          <div className="border-t border-primary-foreground/15 px-3 pt-1 pb-4">{helpCard}</div>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-3">
+            {navList}
+          </div>
+          <div className="border-t border-primary-foreground/15 px-3 pt-1 pb-[max(1rem,env(safe-area-inset-bottom))]">
+            {helpCard}
+          </div>
         </div>
       </div>
+
     </div>
   );
 }
