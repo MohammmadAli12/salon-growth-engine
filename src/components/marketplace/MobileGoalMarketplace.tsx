@@ -232,6 +232,37 @@ export function MobileGoalMarketplace() {
         </div>
       </div>
 
+      {/* Auto-scrolling service ribbon */}
+      <div className="border-b border-border/70 bg-card/50">
+        <div
+          className="relative overflow-hidden py-2.5"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 7%, black 93%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 7%, black 93%, transparent)",
+          }}
+        >
+          <div className="service-marquee flex w-max gap-2">
+            {[...GOALS, ...GOALS].map((g, i) => {
+              const m = META[g.serviceId];
+              const RIcon = g.icon;
+              return (
+                <button
+                  key={`${g.serviceId}-${i}`}
+                  type="button"
+                  onClick={() => setOpenGoal(g)}
+                  className="flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[12.5px] font-medium whitespace-nowrap text-foreground/85 shadow-soft active:scale-95"
+                  style={{ borderColor: `color-mix(in oklab, var(${m?.accent ?? "--forest"}) 30%, transparent)` }}
+                >
+                  <RIcon className="h-3.5 w-3.5 text-primary" strokeWidth={1.8} />
+                  {g.title}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
       <div className="px-4 pt-5 pb-40">
         <StepBar step={0} />
 
